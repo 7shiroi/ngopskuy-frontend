@@ -9,6 +9,7 @@ $theme-colors: (
 
 );
 @import "~bootstrap/scss/bootstrap";
+@import "./homepage.scss";
 .radius{
     border-radius: 15px;
 }
