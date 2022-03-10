@@ -1,7 +1,10 @@
 .radius{
     border-radius: 20px;
 }
-
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color:#FFEDDB;
+  }
 .input-underline{
     border-radius: unset;
     border-top: unset;
@@ -12,3 +15,8 @@
 .input-underline:focus{
     outline: unset;
 }
+
+.background-login{
+    background-image: url("/src/assets/images/login-image.png");
+}
+
