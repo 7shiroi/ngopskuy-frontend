@@ -1,6 +1,3 @@
-.radius{
-    border-radius: 20px;
-}
 
 .input-underline{
     border-radius: unset;
@@ -11,4 +8,9 @@
 }
 .input-underline:focus{
     outline: unset;
+}
+.background-login{
+    background-image: url("/src/assets/images/login-image.png");
+    background-repeat: no-repeat;
+    background-size:cover;
 }
