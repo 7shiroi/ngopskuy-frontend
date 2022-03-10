@@ -3,16 +3,18 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle'
 import './index.css';
-import './assets/style.css'
+import '../src/assets/style.css'
+import { Provider } from 'react-redux';
+import store from './redux/store'
 import App from './App';
 import './assets/sass/custom.scss'
 import reportWebVitals from './reportWebVitals';
 
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
