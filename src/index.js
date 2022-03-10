@@ -5,6 +5,7 @@ import 'bootstrap/dist/js/bootstrap.bundle'
 import './index.css';
 import './assets/style.css'
 import App from './App';
+import './assets/sass/custom.scss'
 import reportWebVitals from './reportWebVitals';
 
 
