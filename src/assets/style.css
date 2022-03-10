@@ -1,0 +1,13 @@
+.radius{
+    border-radius: 20px;
+}
+.input-underline{
+    border-radius: unset;
+    border-top: unset;
+    border-left: unset;
+    border-right: unset;
+    border-bottom: 1px grey solid;
+}
+.input-underline:focus{
+    outline: unset;
+}
