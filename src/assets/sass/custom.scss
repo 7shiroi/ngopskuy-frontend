@@ -1,0 +1,14 @@
+
+$theme-colors: (
+    "info": tomato,
+    "danger": teal,
+    "pallet-1":#483434,
+    "pallet-2":#6B4F4F,
+    "pallet-3":#EED6C4,
+    "pallet-4":#FFF3E4
+
+);
+@import "~bootstrap/scss/bootstrap";
+.radius{
+    border-radius: 20px;
+}
