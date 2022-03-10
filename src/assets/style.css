@@ -1,9 +1,8 @@
 .radius{
     border-radius: 20px;
 }
-body {
+div{
     font-family: 'Nunito', sans-serif;
-    background-color:#FFEDDB;
   }
 .input-underline{
     border-radius: unset;
@@ -19,4 +18,14 @@ body {
 .background-login{
     background-image: url("/src/assets/images/login-image.png");
 }
-
+.background-transparent{
+    color: black(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.bg-footer{
+    background-size: cover;
+    height: max-content;
+}
+.btn-forgot{
+    text-align: center;
+}

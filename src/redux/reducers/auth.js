@@ -40,6 +40,29 @@ const auth = (state = initialState, action) => {
             window.localStorage.removeItem('token')
             return { ...state }
         }
+        case 'REQUEST_RESET_PASSWORD_PENDING': {
+            state.error = false
+            state.isLoading = true
+            state.message = ''
+            return { ...state }
+        }
+        case 'REQUEST_RESET_PASSWORD_FULFILLED': {
+            const { data } = action.payload
+            state.isLoading = false
+            state.message = data.message
+            return { ...state }
+        }
+        case 'REQUEST_RESET_PASSWORD_REJECTED': {
+            const { data } = action.payload.response
+            state.isLoading = false
+            state.error = true
+            state.errorMsg = data.message
+            return { ...state }
+        }
+        case 'SET_EMAIL': {
+            state.email = action.payload.email
+            return { ...state }
+        }
         default: {
             return { ...state }
         }

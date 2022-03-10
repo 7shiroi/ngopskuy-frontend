@@ -11,4 +11,5 @@ $theme-colors: (
 @import "~bootstrap/scss/bootstrap";
 .radius{
     border-radius: 15px;
+    outline: unset;
 }
