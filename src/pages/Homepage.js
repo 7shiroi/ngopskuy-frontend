@@ -1,9 +1,9 @@
 import React from 'react'
 
 export const Homepage = () => {
-    return (
-        <div>Homepage</div>
-    )
+	return (
+		<div>Homepage</div>
+	)
 }
 
 export default Homepage
