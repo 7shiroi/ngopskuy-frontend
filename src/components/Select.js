@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 

@@ -5,7 +5,9 @@ import ButtonPlusMinus from '../components/ButtonPlusMinus'
 const TestComponent2 = () => {
 	return (
 		<Layout>
-			<ButtonPlusMinus></ButtonPlusMinus>
+			<div className='container'>
+				<ButtonPlusMinus></ButtonPlusMinus>
+			</div>
 		</Layout>
 	)
 }
