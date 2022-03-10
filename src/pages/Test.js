@@ -7,15 +7,17 @@ import Select from "../components/Select"
 export const Test = () => {
     return (
         <>
-            <Button block variant='pallet-1 radius' version={'input-normal'}> Login </Button>
-            <Input block placeholder="Username"></Input>
-            <InputUnderline block version="input-underline" placeholder="Username"></InputUnderline>
-            <Select block>
-                <option>opt1</option>
-                <option>opt1</option>
-                <option>opt1</option>
-                <option>opt1</option>
-            </Select>
+            <form>
+                <Button block variant='pallet-1 radius' version={'input-normal'}> Login </Button>
+                <Input label="Username :" block placeholder="Username"></Input>
+                <InputUnderline label="Username :" block version="input-underline" placeholder="Username"></InputUnderline>
+                <Select label="Username :" block>
+                    <option>opt1</option>
+                    <option>opt1</option>
+                    <option>opt1</option>
+                    <option>opt1</option>
+                </Select>
+            </form>
         </>
 
     )
