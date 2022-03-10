@@ -7,7 +7,7 @@ import Select from "../components/Select"
 export const Test = () => {
     return (
         <>
-            <Button block variant='danger' version={'input-normal'}> Login </Button>
+            <Button block variant='pallet-1 radius' version={'input-normal'}> Login </Button>
             <Input block placeholder="Username"></Input>
             <InputUnderline block version="input-underline" placeholder="Username"></InputUnderline>
             <Select block>
