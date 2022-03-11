@@ -1,37 +1,57 @@
-.radius{
+.radius {
     border-radius: 20px;
 }
-div{
+
+div {
     font-family: 'Nunito', sans-serif;
-  }
-.input-underline{
+}
+
+.input-underline {
     border-radius: unset;
     border-top: unset;
     border-left: unset;
     border-right: unset;
     border-bottom: 1px grey solid;
 }
-.input-underline:focus{
+
+.input-underline:focus {
     outline: unset;
 }
 
-.background-login{
+.background-login {
     background-image: url("/src/assets/images/login-image.png");
 }
-.bg-profile{
+
+.bg-profile {
     background-image: url("/src//assets/images/bg-profile.png");
 }
-.background-transparent{
+
+.background-transparent {
     color: black(255, 255, 255, 0.5);
     background-color: rgba(255, 255, 255, 0.5);
 }
-.bg-footer{
+
+.bg-footer {
     background-size: cover;
     height: max-content;
 }
-.btn-forgot{
+
+.btn-forgot {
     text-align: center;
 }
-.shadow-new{
+
+.shadow-new {
     box-shadow: 0 4rem 4rem rgba(black, .275)
+}
+
+.text {
+    font-size: 48px;
+}
+
+.bg-product {
+    background-color: #FAF8F6;
+}
+
+.underline {
+    background: #FAF8F6;
 }
