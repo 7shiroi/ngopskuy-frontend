@@ -19,4 +19,7 @@ $theme-colors: (
 .nav .nav-link.active{
     color: red;
 }
-
+.rounded-menu{
+    border-radius: 20px;
+    max-width: 220px;
+}
