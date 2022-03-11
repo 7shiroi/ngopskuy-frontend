@@ -1,4 +1,3 @@
-
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import Homepage from './pages/Homepage'
 import Test from './pages/Test'
@@ -6,6 +5,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import TestComponent2 from './pages/TestComponent2'
 
 export const App = () => {
   const dispatch = useDispatch()
@@ -35,4 +35,4 @@ export const App = () => {
 }
 
 
-export default App;
+export default App
