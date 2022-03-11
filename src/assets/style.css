@@ -18,6 +18,8 @@ body {
 
 .background-login{
     background-image: url("/src/assets/images/login-image.png");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .rb{
