@@ -5,6 +5,7 @@ import InputUnderline from '../components/InputUnderline'
 import Select from '../components/Select'
 import HistoryCard from '../components/HistoryCard'
 import SizeCard from '../components/SizeCard'
+import hazelnut from '../assets/images/hazelnut.png'
 
 export const Test = () => {
 	return (
@@ -19,7 +20,7 @@ export const Test = () => {
 					<option>opt1</option>
 					<option>opt1</option>
 				</Select>
-				<HistoryCard cardName={"Veggie Tomato Mix"} cardPrice={"IDR 34.000"} cardStatus={"Delivered"} />
+				<HistoryCard cardName={"Veggie Tomato Mix"} cardPrice={"IDR 34.000"} cardImage={hazelnut} cardStatus={"Delivered"} />
 				<div>
 					<SizeCard radioName={"R"} value="R" />
 					<SizeCard radioName={"L"} value="L" />
