@@ -3,8 +3,8 @@ import auth from './auth'
 import user from './user'
 
 const rootReducer = combineReducers({
-    auth,
-    user,
+	auth,
+	user,
 })
 
 export default rootReducer
