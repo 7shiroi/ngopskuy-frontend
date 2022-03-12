@@ -40,6 +40,24 @@ export const ForgotPassword = () => {
                             </Card.Text>
 
                         </div>
+                        {
+                            auth.errorMsg &&
+                            <div className="alert alert-warning fade show" role="alert">
+                                <strong>{auth.errorMsg[0]}</strong>
+                            </div>
+                        }
+                        {
+                            auth.errMsg &&
+                            <div className="alert alert-warning fade show" role="alert">
+                                <strong>{auth.errMsg}</strong>
+                            </div>
+                        }
+                        {
+                            auth.successMsg &&
+                            <div className="alert alert-success fade show" role="alert">
+                                <strong>{auth.successMsg}</strong>
+                            </div>
+                        }
                         <form onSubmit={(e) => onRequestOTP(e)}>
                             <div className='col-12 d-none d-md-block'>
                                 <Input name="email" version="background-transparent py-4 bg-pallet-4 outline-0 border-0"
