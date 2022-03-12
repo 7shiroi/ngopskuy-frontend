@@ -56,6 +56,24 @@ export const Profile = () => {
                 <Container>
                     <Form onSubmit={(e) => onEditProfile(e)}>
                         <Card>
+                            {
+                                token.errorMsg &&
+                                <div className="alert alert-warning fade show" role="alert">
+                                    <strong>{token.errorMsg[0]}</strong>
+                                </div>
+                            }
+                            {
+                                token.errMsg &&
+                                <div className="alert alert-warning fade show" role="alert">
+                                    <strong>{token.errMsg}</strong>
+                                </div>
+                            }
+                            {
+                                token.successMsg &&
+                                <div className="alert alert-success fade show" role="alert">
+                                    <strong>{token.successMsg}</strong>
+                                </div>
+                            }
                             <Row className='py-5'>
                                 <Col xl={3} className="px-5 d-flex flex-column justify-content-center">
                                     <Image src={auth.image ? auth.image : photo} roundedCircle ></Image>

@@ -98,7 +98,10 @@ const auth = (state = initialState, action) => {
             const { data } = action.payload.response
             state.isLoading = false
             state.error = true
-            state.errorMsg = data.message
+            state.errorMsg = data.error
+            console.log(state.errorMsg)
+            console.log(state.errMsg)
+            state.errMsg = data.message
             return { ...state }
         }
         default: {
