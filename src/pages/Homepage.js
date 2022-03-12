@@ -13,6 +13,8 @@ import netflix from '../assets/images/netflix.png'
 import spotify from '../assets/images/spotify.png'
 import { HiCheckCircle } from 'react-icons/hi'
 import Carousel from 'react-elastic-carousel'
+import NavbarHome from "../components/NavbarHome"
+import Footer from "../components/Footer"
 
 export const Homepage = () => {
 	const breakPoints = [
@@ -23,7 +25,7 @@ export const Homepage = () => {
 	]
 
 	return (
-		<>
+		<><NavbarHome />
 			<header className='home-head'>
 				<div className='overlay'>
 					<Container>
@@ -159,7 +161,7 @@ export const Homepage = () => {
 														</Col>
 														<Col sm={4}>
 															<Card.Text>
-                                                                Yessica Christy
+																Yessica Christy
 															</Card.Text>
 														</Col>
 														<Col sm={4}>
@@ -169,7 +171,7 @@ export const Homepage = () => {
 														</Col>
 													</Row>
 													<Card.Title>
-                                                        “Wow... I am very happy to spend my whole day here. the Wi-fi is good, and the coffee and meals tho. I like it here!! Very recommended!
+														“Wow... I am very happy to spend my whole day here. the Wi-fi is good, and the coffee and meals tho. I like it here!! Very recommended!
 													</Card.Title>
 												</Card.Body>
 												<Card.Footer className="text-muted">2 days ago</Card.Footer>
@@ -207,6 +209,7 @@ export const Homepage = () => {
 					</section>
 				</Container>
 			</main>
+			<Footer />
 		</>
 	)
 }
