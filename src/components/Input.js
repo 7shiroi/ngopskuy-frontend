@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/prop-types */
 
 import React from 'react'
-
 export const Input = ({ label = "", variant, block, placeholder, padding, version, ...rest }) => {
     return (
         <>
@@ -9,8 +10,7 @@ export const Input = ({ label = "", variant, block, placeholder, padding, versio
                 <input type="text" className={`py-2 px-4  radius ${version}`} placeholder={`${placeholder ? placeholder : ''}`} {...rest} />
             </div>
         </>
-
-    )
+	)
 }
 
 export default Input

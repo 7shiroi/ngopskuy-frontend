@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from 'react'
 
 export const InputUnderline = ({ label, variant, block, placeholder, padding, version, ...rest }) => {
