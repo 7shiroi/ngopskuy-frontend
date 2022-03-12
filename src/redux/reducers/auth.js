@@ -1,11 +1,12 @@
 const initialState = {
-	token: null,
-	userData: {},
-	userHistory: {},
-	isLoading: false,
-	isError: false,
-	errorMsg: '',
-	errMsg: ''
+    token: null,
+    userData: {},
+    userHistory: {},
+    isLoading: false,
+    isError: false,
+    errorMsg: '',
+    errMsg: '',
+    successMsg: ''
 }
 
 const auth = (state = initialState, action) => {
@@ -99,8 +100,27 @@ const auth = (state = initialState, action) => {
             state.isLoading = false
             state.error = true
             state.errorMsg = data.error
-            console.log(state.errorMsg)
-            console.log(state.errMsg)
+            state.errMsg = data.message
+            return { ...state }
+        }
+        case 'EDIT_PASSWORD_PENDING': {
+            state.error = false
+            state.isLoading = true
+            state.message = ''
+            return { ...state }
+        }
+        case 'EDIT_PASSWORD_FULFILLED': {
+            const { data } = action.payload
+            state.isLoading = false
+            state.message = data.message
+            state.successMsg = data.message
+            return { ...state }
+        }
+        case 'EDIT_PASSWORD_REJECTED': {
+            const { data } = action.payload.response
+            state.isLoading = false
+            state.error = true
+            state.errorMsg = data.error
             state.errMsg = data.message
             return { ...state }
         }

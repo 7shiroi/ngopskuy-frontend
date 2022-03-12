@@ -51,3 +51,14 @@ export const editProfile = (token, data) => {
         payload: http(token).patch('profile', params)
     })
 }
+
+export const editPassword = (token, data) => {
+    const params = new URLSearchParams()
+    params.append('oldPassword', data.oldPassword)
+    params.append('newPassword', data.newPassword)
+    params.append('confirmNewPassword', data.confirmNewPassword)
+    return ({
+        type: 'EDIT_PASSWORD',
+        payload: http(token).patch('profile/change_password', params)
+    })
+}
