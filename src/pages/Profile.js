@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Card, Container, Row, Col, Image, Form } from 'react-bootstrap'
 import photo from '../assets/images/photo.png'
-import Navbar from "../components/Navbar"
+import NavbarHome from "../components/NavbarHome"
 import Footer from "../components/Footer"
 import Button from "../components/Button"
 import { BiPencil } from "react-icons/bi"
@@ -51,7 +51,7 @@ export const Profile = () => {
     }
     return (
         <>
-            <Navbar />
+            <NavbarHome />
             <div className='bg-profile py-5 shadow'>
                 <Container>
                     <Form onSubmit={(e) => onEditProfile(e)}>
