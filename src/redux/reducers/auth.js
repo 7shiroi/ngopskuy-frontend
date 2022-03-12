@@ -21,6 +21,7 @@ const auth = (state = initialState, action) => {
             state.isLoading = false
             state.isError = false
             state.token = data.result
+
             if (!window.localStorage.getItem('token')) {
                 window.localStorage.setItem('token', state.token)
             }
@@ -32,6 +33,7 @@ const auth = (state = initialState, action) => {
             state.isError = true
             state.errorMsg = data.error
             state.errMsg = data.message
+
             return { ...state }
         }
         case 'AUTH_LOGOUT': {
@@ -44,13 +46,15 @@ const auth = (state = initialState, action) => {
             const { data } = action.payload
             state.isLoading = false
             state.message = data.message
+            state.successMsg = data.message
             return { ...state }
         }
         case 'REQUEST_RESET_PASSWORD_REJECTED': {
             const { data } = action.payload.response
             state.isLoading = false
             state.error = true
-            state.errorMsg = data.message
+            state.errorMsg = data.error
+            state.errMsg = data.message
             return { ...state }
         }
         case 'RESET_PASSWORD_PENDING': {
