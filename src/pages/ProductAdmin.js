@@ -4,21 +4,21 @@ import { Card, Container, Row, Col, Image } from 'react-bootstrap'
 import Button from '../components/Button'
 import InputUnderline from '../components/InputUnderline'
 import coffee from '../assets/images/coffee.png'
+import NavbarHome from '../components/NavbarHome'
+import Footer from '../components/Footer'
 
 const ProductAdmin = () => {
   return (
     <>
-    <header>
-        Header
-    </header>
+    <NavbarHome/>
      <div className='bg-product bg-gray-100 h-full'>
         <Container>
             <Row className='px-3 justify-content-md-between'>
-                <Col xl={5} className="px-5 d-flex flex-column justify-content-center">
-                    <div style={{fontSize:"20px", fontFamily:"Rubik"}} className="p-10 mt-5 ml-20 mx-5 py-5">
+                <Col xl={5} sm={12} className="px-5 d-flex flex-column justify-content-center">
+                    <div style={{fontSize:"20px", fontFamily:"Rubik"}} className="p-10 mt-5 ml-20 mx-5 py-5 nav-text">
                         <span>Favorite & Promo {""}</span><span className="text-yellow-800"> {">"} Cold Brew</span>
                     </div>
-                    <Image src={CoffeeLogo} alt="product-image" roundedCircle ></Image>
+                    <Image src={CoffeeLogo} alt="product-image" roundedCircle className='img-fluid'></Image>
                     <div style={{fontSize:"48px", fontFamily:"Poppins"}} className="mt-5 ml-20">
                         <p className="text-center text-4xl font-bold">Cold Brew</p>
                         <p className="text-center text-xl font-medium">IDR 30.000</p>
@@ -29,7 +29,7 @@ const ProductAdmin = () => {
                     <Button block variant='pallet-1 radius'> Delete Menu </Button>
                     </div>
                 </Col>
-                <Col xl={7} className="px-5 d-flex flex-column justify-content-center">
+                <Col xl={7} sm={12} className="px-5 d-flex flex-column justify-content-center">
                     <Container>
                         <Card style={{fontSize:"30px", fontFamily:"Poppins"}} className='text-center position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom mx-5 px-5 radius'>
                             <Card.Text >
@@ -98,6 +98,7 @@ const ProductAdmin = () => {
             </Card>
         </Container>
      </div>
+    <Footer />
     </>
   )
 }
