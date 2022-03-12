@@ -1,11 +1,11 @@
 const initialState = {
-    token: null,
-    userData: {},
-    userHistory: {},
-    isLoading: false,
-    isError: false,
-    errorMsg: '',
-    errMsg: ''
+	token: null,
+	userData: {},
+	userHistory: {},
+	isLoading: false,
+	isError: false,
+	errorMsg: '',
+	errMsg: ''
 }
 
 const auth = (state = initialState, action) => {

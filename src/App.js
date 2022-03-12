@@ -1,4 +1,3 @@
-
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import Homepage from './pages/Homepage'
 import Test from './pages/Test'
@@ -6,6 +5,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './pages/Profile'
 import React, { useEffect } from 'react'
+import TestComponent2 from './pages/TestComponent2'
 import { useDispatch, useSelector } from 'react-redux'
 import { ForgotPassword } from './pages/ForgotPassword'
 
@@ -34,6 +34,7 @@ export const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/test2' element={<TestComponent2 />} />
         <Route path='/forgotpassword' element={<ForgotPassword />} />
       </Routes>
     </BrowserRouter>
@@ -41,4 +42,4 @@ export const App = () => {
 }
 
 
-export default App;
+export default App
