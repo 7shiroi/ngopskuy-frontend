@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CoffeeLogo from "../assets/images/CoffeeLogo.png"
 import { Card, Container, Row, Col, Image } from 'react-bootstrap'
 import Button from '../components/Button'
@@ -6,34 +6,69 @@ import InputUnderline from '../components/InputUnderline'
 import coffee from '../assets/images/coffee.png'
 import NavbarHome from '../components/NavbarHome'
 import Footer from '../components/Footer'
+import { getProduct, deleteProduct } from '../redux/actions/product'
+import { connect, useDispatch, useSelector } from 'react-redux'
+import { useParams, useNavigate, Link } from 'react-router-dom'
+import NumberFormat from 'react-number-format'
+import SizeCard from '../components/SizeCard'
 
-const ProductAdmin = () => {
+const ProductAdmin = ({getProduct, deleteProduct}) => {
+    const {product} = useSelector(state => state)
+    const [control,setControl] = useState(false)
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const {id} = useParams()
+    console.log({id})
+
+    useEffect(()=>{
+        getProduct(id)
+    },[])
+
+    useEffect(()=>{
+        console.log(product)
+      },[product])
+
+    const goBack = () => {
+      window.history.back()
+    }
+
+    const goEdit = (id)=> {
+      navigate(`/edit-product-admin/${id}`)
+    }
+
+    const handleDelete = (id)=>{
+        dispatch(deleteProduct(id))
+        setControl(true)
+    }
   return (
     <>
-    <NavbarHome/>
+    <header className='text-center'>
+        Header
+    </header>
      <div className='bg-product bg-gray-100 h-full'>
         <Container>
+            <div onClick={goBack} style={{fontSize:"20px", fontFamily:"Rubik"}} className="p-10 mt-5 ml-20 mx-5 py-5 nav-text">
+                <span>Favorite & Promo {""}</span><span className="text-yellow-800"> {">"} {product.product?.name}</span>
+            </div>
             <Row className='px-3 justify-content-md-between'>
                 <Col xl={5} sm={12} className="px-5 d-flex flex-column justify-content-center">
-                    <div style={{fontSize:"20px", fontFamily:"Rubik"}} className="p-10 mt-5 ml-20 mx-5 py-5 nav-text">
-                        <span>Favorite & Promo {""}</span><span className="text-yellow-800"> {">"} Cold Brew</span>
-                    </div>
                     <Image src={CoffeeLogo} alt="product-image" roundedCircle className='img-fluid'></Image>
                     <div style={{fontSize:"48px", fontFamily:"Poppins"}} className="mt-5 ml-20">
-                        <p className="text-center text-4xl font-bold">Cold Brew</p>
-                        <p className="text-center text-xl font-medium">IDR 30.000</p>
+                        <p className="text-center text-4xl font-bold">{product.product?.name}</p>
+                        <p className="text-center text-xl font-medium"><NumberFormat value={product.product?.price} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} prefix={'IDR '} ></NumberFormat></p>
                     </div>
                     <div className="ml-20 mt-10 space-y-5">
-                    <Button block variant='pallet-2 radius'> Add to Cart </Button>
-                    <Button block variant='pallet-3 my-2 radius'> Edit Product </Button>
-                    <Button block variant='pallet-1 radius'> Delete Menu </Button>
+                        <Button block variant='pallet-2 radius'> Add to Cart </Button>
+                        <Button onClick={goEdit} block variant='pallet-3 my-2 radius'> Edit Product </Button>
+                        <Button onClick={handleDelete} block variant='pallet-1 radius'> Delete Menu </Button>
                     </div>
                 </Col>
                 <Col xl={7} sm={12} className="px-5 d-flex flex-column justify-content-center">
                     <Container>
                         <Card style={{fontSize:"30px", fontFamily:"Poppins"}} className='text-center position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom mx-5 px-5 radius'>
                             <Card.Text >
-                                Delivery only on Monday to friday at  1 - 7 pm 
+                                Delivery only on Monday to friday at {product.product?.delivery_hour_start} - {product.product?.delivery_hour_end} pm 
                             </Card.Text>
                             <br/>
                             <Card.Text>
@@ -43,6 +78,11 @@ const ProductAdmin = () => {
                             <Card.Text >
                                 Choose a size
                             </Card.Text>
+                            <div className="d-flex flex-row justify-content-md-center mb-5">
+                                <SizeCard radioName={"R"} value="R" />
+                                <SizeCard radioName={"L"} value="L" />
+					            <SizeCard radioName={"XL"} value="XL" />
+                            </div>
                         </Card>
                         <div className="mt-10 space-y-8">
                             <p className="text-center font-bold text-lg mt-4">Choose Delivery Methods</p>
@@ -98,9 +138,15 @@ const ProductAdmin = () => {
             </Card>
         </Container>
      </div>
-    <Footer />
+    <footer className='text-center'>
+        Footer
+    </footer>
     </>
   )
 }
 
-export default ProductAdmin
+const mapStateToProps = state => ({product: state.product})
+
+const mapDispatchToProps = {getProduct, deleteProduct}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductAdmin)
