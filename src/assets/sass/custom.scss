@@ -15,8 +15,9 @@ $theme-colors: (
 @import "./homepage.scss";
 .radius{
     border-radius: 15px;
+    outline: unset;
 }
+
 .nav .nav-link.active{
     color: red;
 }
-
