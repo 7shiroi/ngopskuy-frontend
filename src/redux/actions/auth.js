@@ -16,7 +16,7 @@ export const requestResetPassword = (email) => {
     params.append('email', email)
     return {
         type: 'REQUEST_RESET_PASSWORD',
-        payload: http().post('auth/forgotPassword', params),
+        payload: http().post('auth/forgot-password', params),
         extra: email,
     }
 }
@@ -28,6 +28,6 @@ export const resetPassword = (code, email, password, confirmPassword) => {
     params.append('confirmPassword', confirmPassword)
     return {
         type: 'RESET_PASSWORD',
-        payload: http().post('auth/forgotPassword', params)
+        payload: http().post('auth/forgot-password', params)
     }
 }

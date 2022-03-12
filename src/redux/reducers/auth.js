@@ -40,12 +40,6 @@ const auth = (state = initialState, action) => {
             window.localStorage.removeItem('token')
             return { ...state }
         }
-        case 'REQUEST_RESET_PASSWORD_PENDING': {
-            state.error = false
-            state.isLoading = true
-            state.message = ''
-            return { ...state }
-        }
         case 'REQUEST_RESET_PASSWORD_FULFILLED': {
             const { data } = action.payload
             state.isLoading = false
@@ -57,6 +51,12 @@ const auth = (state = initialState, action) => {
             state.isLoading = false
             state.error = true
             state.errorMsg = data.message
+            return { ...state }
+        }
+        case 'RESET_PASSWORD_PENDING': {
+            state.error = false
+            state.isLoading = true
+            state.message = ''
             return { ...state }
         }
         case 'SET_EMAIL': {

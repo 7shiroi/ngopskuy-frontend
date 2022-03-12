@@ -6,10 +6,25 @@ import BackgroundMobile from "../assets/images/forgot-mobile.png"
 import Button from "../components/Button"
 import Input from "../components/Input"
 import InputUnderline from "../components/InputUnderline"
+import { requestResetPassword } from '../redux/actions/auth'
+import { Navigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const ForgotPassword = () => {
+    const auth = useSelector(state => state.auth)
+    const dispatch = useDispatch()
+
+    const onRequestOTP = (e) => {
+        e.preventDefault()
+        const email = e.target.elements['email'].value
+        dispatch(requestResetPassword(email))
+        dispatch({
+            type: "SET_EMAIL",
+            payload: { email }
+        })
+    }
     return (
-        <>
+        <>{auth.token && <Navigate to='/' />}
             <Card className="bg-dark text-white">
                 <Card.Img src={Background} alt="Backround Footer" className='bg-footer d-none d-md-block' />
                 <Card.ImgOverlay className='d-flex flex-column container'>
@@ -25,19 +40,21 @@ export const ForgotPassword = () => {
                             </Card.Text>
 
                         </div>
-                        <div className='col-12 d-none d-md-block'>
-                            <Input version="background-transparent py-4 bg-pallet-4 outline-0 border-0"
-                                block placeholder="Enter your email adress to get link"></Input>
-                        </div>
-                        <div className='col-12 d-md-none'>
-                            <InputUnderline version="input-underline background-transparent py-4 "
-                                block placeholder="Enter your email adress to get link"></InputUnderline>
-                        </div>
-                        <div className='col-12 pt-4 d-flex justify-content-center'>
-                            <div className='col-12 col-lg-6 col-md-6 col-xl-4'>
-                                <Button block variant='pallet-1 radius btn-forgot px-5 py-4' padding="px-1" > Send Link</Button>
+                        <form onSubmit={(e) => onRequestOTP(e)}>
+                            <div className='col-12 d-none d-md-block'>
+                                <Input name="email" version="background-transparent py-4 bg-pallet-4 outline-0 border-0"
+                                    block placeholder="Enter your email adress to get link"></Input>
                             </div>
-                        </div>
+                            <div className='col-12 d-md-none'>
+                                <InputUnderline version="input-underline background-transparent py-4 "
+                                    block placeholder="Enter your email adress to get link"></InputUnderline>
+                            </div>
+                            <div className='col-12 pt-4 d-flex justify-content-center'>
+                                <div className='col-12 col-lg-6 col-md-6 col-xl-4'>
+                                    <Button type="submit" block variant='pallet-1 radius btn-forgot px-5 py-4' padding="px-1" > Send Link</Button>
+                                </div>
+                            </div>
+                        </form>
                         <div className='col-12 text-center mt-5 pt-5'>
                             <Card.Text as="h4" className='d-none d-md-block'>
                                 <b>Click Again if you didn’t receive any link in 2 minutes</b>
