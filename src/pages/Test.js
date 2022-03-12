@@ -19,11 +19,11 @@ export const Test = () => {
 					<option>opt1</option>
 					<option>opt1</option>
 				</Select>
-				<HistoryCard cardName={"Veggie Tomato Mix"} cardPrice={"IDR 34.000"} cardStatus={"Delivered"} />
+				<HistoryCard cardName={'Veggie Tomato Mix'} cardPrice={'IDR 34.000'} cardStatus={'Delivered'} />
 				<div>
-					<SizeCard radioName={"R"} value="R" />
-					<SizeCard radioName={"L"} value="L" />
-					<SizeCard radioName={"XL"} value="XL" />
+					<SizeCard radioName={'R'} value="R" />
+					<SizeCard radioName={'L'} value="L" />
+					<SizeCard radioName={'XL'} value="XL" />
 				</div>
 
 			</form>
