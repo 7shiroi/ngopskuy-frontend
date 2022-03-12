@@ -1,0 +1,22 @@
+.img-fit img{
+    border-radius: 50%;
+    object-fit: cover;
+}
+.clickDelete{
+    background-color: rgba(0,0,0,0);
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+.icon-trash, .icon-close{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.icon-close{
+    line-height: 30px;
+}
+.modal{
+    height: 100%;
+}

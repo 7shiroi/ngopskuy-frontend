@@ -2,9 +2,17 @@ import React from 'react'
 import Button from "../components/Button"
 import Input from "../components/Input"
 import InputUnderline from "../components/InputUnderline"
+import ModalDelete from '../components/ModalDelete'
 import Select from "../components/Select"
+import pic from "../assets/images/corndog-lezat.jpg"
 
 export const Test = () => {
+    const data = {
+        img: pic,
+        name: 'Corn dog',
+        price: 34000,
+        isDelivered: 'Delivered'
+    }
     return (
         <>
             <form>
@@ -18,6 +26,13 @@ export const Test = () => {
                     <option>opt1</option>
                 </Select>
             </form>
+            
+            <div className='row py-5' style={{backgroundColor: 'black'}}>
+                <div className='col-12 col-md-6 col-lg-4'>
+            <ModalDelete img={pic} product='Corn dog' price='40000' status='Delivered'></ModalDelete></div>
+            <div className='col-12 col-md-6 col-lg-3'>
+            </div>
+            </div>
         </>
 
     )
