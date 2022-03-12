@@ -24,8 +24,8 @@ const NewProduct = () => {
                     <div className="d-flex flex-column align-items-center">
                         <Image src={CoffeeLogo} alt="product-image" className='img-fluid' roundedCircle style={{ width: '18rem' }}></Image>
                     </div>                    
-                    <Button block variant='pallet-2 my-4 radius'> Take a Picture </Button>
-                    <Button block variant='pallet-3 radius'> Choose from Gallery </Button>
+                    <Button block variant='pallet-2 my-2 radius save-1'> Take a Picture </Button>
+                    <Button block variant='pallet-3 my-1 radius save-1'> Choose from Gallery </Button>
                     <p className='mt-4'>Delivery Hour : </p>
                     <Form.Select aria-label="Default select example" className='mt-3 form-control radius'>
                         <option>Select Start Hour</option>
@@ -87,8 +87,8 @@ const NewProduct = () => {
                                 </Button>
                             </Col>
                             <Col xl={12} className="ml-20 mt-10 space-y-5">
-                                <Button block variant='pallet-2 my-3 radius save-1'> Save Product </Button>
-                                <Button block variant='pallet-3 my-3 radius save-1'> Cancel </Button>
+                                <Button block variant='pallet-2 my-4 radius save-1'> Save Product </Button>
+                                <Button block variant='pallet-3 my-2 radius save-1'> Cancel </Button>
                             </Col>
                         </Row>
                     </Container>
