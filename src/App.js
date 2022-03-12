@@ -6,24 +6,26 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './pages/Profile'
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ForgotPassword } from './pages/ForgotPassword'
 
 export const App = () => {
+  const auth = useSelector(state => state.auth)
   const dispatch = useDispatch()
   useEffect(() => {
     const token = window.localStorage.getItem('token')
     if (token) {
       dispatch({
-        type: 'AUTH_LOGIN_FULFILLED',
+        type: "AUTH_LOGIN_FULFILLED",
         payload: {
           data: {
-            results: { token }
+            result: token
           }
         }
       })
     }
-  }, [])
+
+  }, [dispatch, auth.token])
   return (
     <BrowserRouter>
       <Routes>

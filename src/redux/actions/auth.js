@@ -31,3 +31,23 @@ export const resetPassword = (code, email, password, confirmPassword) => {
         payload: http().post('auth/forgotPassword', params)
     }
 }
+export const getProfile = (token) => {
+    return ({
+        type: 'GET_PROFILE',
+        payload: http(token).get('profile')
+    })
+}
+
+export const editProfile = (token, data) => {
+    const params = new URLSearchParams()
+    params.append('first_name', data.first_name)
+    params.append('last_name', data.last_name)
+    params.append('email', data.email)
+    params.append('address', data.address)
+    params.append('phone_number', data.phone_number)
+    params.append('birth_date', data.birth_date)
+    return ({
+        type: 'EDIT_PROFILE',
+        payload: http(token).patch('profile', params)
+    })
+}
