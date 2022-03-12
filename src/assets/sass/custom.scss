@@ -6,8 +6,13 @@ $theme-colors: (
     "pallet-2":#6B4F4F,
     "pallet-3":#EED6C4,
     "pallet-4":#FFF3E4
+    "primary":    #483434,
+    "secondary":  #6B4F4F,
+    "warning":    #FFF3E4,
+    "light":      #EED6C4,
 );
 @import "~bootstrap/scss/bootstrap";
+@import "./homepage.scss";
 .radius{
     border-radius: 15px;
     outline: unset;
@@ -25,3 +30,7 @@ $theme-colors: (
     width: 20px;
     height: 20px;
 }
+.nav .nav-link.active{
+    color: red;
+}
+
