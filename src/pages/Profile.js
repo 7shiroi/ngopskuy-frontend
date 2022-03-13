@@ -10,6 +10,7 @@ import { editProfile, getProfile } from '../redux/actions/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Helmets from '../components/Helmets'
+import { Navigate } from "react-router-dom"
 
 export const Profile = () => {
     const navigate = useNavigate()
@@ -25,14 +26,6 @@ export const Profile = () => {
             const token = window.localStorage.getItem('token')
             console.log(token)
             if (token) {
-                // dispatch({
-                //     type: "AUTH_LOGIN_FULFILLED",
-                //     payload: {
-                //         data: {
-                //             result: token
-                //         }
-                //     }
-                // })
                 console.log(auth?.gender === 'male')
                 dispatch(getProfile(token))
             } else {
@@ -56,6 +49,7 @@ export const Profile = () => {
     }
     return (
         <><Helmets children={"My Profile"} />
+            {auth.token && <Navigate to='/' />}
             <NavbarHome />
             <div className='bg-profile py-5 shadow'>
                 <Container>

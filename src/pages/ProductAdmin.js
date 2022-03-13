@@ -9,6 +9,7 @@ import { getProduct } from '../redux/actions/product'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
+import PromoCard from '../components/PromoCard'
 
 
 export const ProductAdmin = (props) => {
@@ -27,16 +28,17 @@ export const ProductAdmin = (props) => {
         <>
             <Helmets children={"Product Admin"} />
             <NavbarHome />
-            <section>
+            <section className='bg-pallet-4'>
                 <Container>
                     <Row>
-                        <Col sm={12} md={4}>
+                        <Col sm={12} md={4} className="my-5">
                             <Card.Text as="h3" className='text-center'>
                                 Promo for you
                             </Card.Text>
-                            <div>
+                            <div className="my-5">
                                 Coupons will be updated every weeks. Check them out!
                             </div>
+                            <PromoCard />
                             <div className='my-3'>Terms and Condition</div>
                             <ol>
                                 <li>
@@ -61,7 +63,7 @@ export const ProductAdmin = (props) => {
                                 defaultActiveKey="home"
                                 transition={false}
                                 id="noanim-tab-example"
-                                className="mb-3 bg-white text-pallet-1"
+                                className="mb-3 bg-pallet-4 text-pallet-1"
                                 rounded
                             >
                                 <Tab eventKey="home" title="Favorite And Promo">
