@@ -124,6 +124,27 @@ const auth = (state = initialState, action) => {
             state.errMsg = data.message
             return { ...state }
         }
+        case 'REQUEST_VERIFY_PENDING': {
+            state.error = false
+            state.isLoading = true
+            state.message = ''
+            return { ...state }
+        }
+        case 'REQUEST_VERIFY_FULFILLED': {
+            const { data } = action.payload
+            state.isLoading = false
+            state.message = data.message
+            state.successMsg = data.message
+            return { ...state }
+        }
+        case 'REQUEST_VERIFY_REJECTED': {
+            const { data } = action.payload.response
+            state.isLoading = false
+            state.error = true
+            state.errorMsg = data.error
+            state.errMsg = data.message
+            return { ...state }
+        }
         default: {
             return { ...state }
         }
