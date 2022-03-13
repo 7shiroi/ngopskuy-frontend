@@ -83,12 +83,12 @@ export const NavbarHome = () => {
 							</li>
 						}
 						{auth.token === null &&
-							<li className="d-flex justify-content-center row d-grid">
-								<div className=' d-flex align-items-center'>
+							<li className="d-flex align-item-center d-grid">
+								<div className=' d-flex justify-content-start'>
 									<Button onClick={goLogin} block variant='pallet-4 px-5 py-2 fs-5 rb text-pallet-1 fw-bold' padding='mx-1' >Login</Button>
 								</div>
-								<div className=' d-flex align-items-center'>
-									<Button onClick={goSignUp} block variant='pallet-1 px-5 py-2 fs-5 rb' padding='mx-1' >Sign Up</Button>
+								<div className=' d-flex justify-content-end'>
+									<Button onClick={goSignUp} block variant='pallet-1 px-5 py-0 fs-5 rb' padding='mx-1 py-0' >Sign Up</Button>
 								</div>
 							</li>
 						}
