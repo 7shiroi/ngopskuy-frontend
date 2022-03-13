@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
+import Layout from '../components/Layout';
 import ModalDelete from '../components/ModalDelete';
 import { getHistory, deleteHistory } from '../redux/actions/history';
 
@@ -11,7 +12,7 @@ export const History = ({getHistory, deleteHistory}) => {
         getHistory(token)
     },[getHistory, token])
     return (
-        // <Layout>
+        <Layout>
         <div className='history-bg'>
             <div className='container py-5'>
                 <div className='title-section text-center py-5 text-light'>
@@ -25,7 +26,7 @@ export const History = ({getHistory, deleteHistory}) => {
                     {hist.history.map((data, idx) => {
                         return (
                             <div key={data.id} className='col-12 col-md-6 col-lg-4 my-2'>
-                                <ModalDelete id={data.id} img={data.image} product={data.name} price={'40000'} status='Delivered'></ModalDelete>
+                                <ModalDelete id={data.id} img={data.image} product={data.name} price={'40000'} status={data.status}></ModalDelete>
                             </div>
                         )
                     })}
@@ -34,7 +35,7 @@ export const History = ({getHistory, deleteHistory}) => {
                     {console.log(!hist.isLoading)}
             </div>
         </div>
-        // </Layout>
+        </Layout>
     )
 }
 
