@@ -9,12 +9,13 @@ import { getProductAll } from '../redux/actions/productall'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
+import PromoCard from '../components/PromoCard'
 
 
-const ProductAllAdmin = ({getProductAll}) => {
+const ProductAllAdmin = ({ getProductAll }) => {
     const navigate = useNavigate()
     const auth = useSelector(state => state.auth.userData)
-    const {productall} = useSelector(state => state)
+    const { productall } = useSelector(state => state)
     const token = useSelector(state => state.auth)
 
     const dispatch = useDispatch()
@@ -22,15 +23,15 @@ const ProductAllAdmin = ({getProductAll}) => {
         (getProductAll(token))
     }, [])
 
-    const goToDetail = (id)=> {
+    const goToDetail = (id) => {
         navigate(`/product-admin/${id}`)
     }
 
-    const goToNewProduct = ()=> {
+    const goToNewProduct = () => {
         navigate('/new-product')
     }
 
-    const goToNewPromo = ()=> {
+    const goToNewPromo = () => {
         navigate('/new-promo')
     }
     return (
@@ -40,13 +41,14 @@ const ProductAllAdmin = ({getProductAll}) => {
             <section>
                 <Container>
                     <Row>
-                        <Col sm={12} md={4}>
+                        <Col sm={12} md={4} className="my-5">
                             <Card.Text as="h3" className='text-center'>
                                 Promo for you
                             </Card.Text>
-                            <div>
+                            <div className="my-5">
                                 Coupons will be updated every weeks. Check them out!
                             </div>
+                            <PromoCard />
                             <div className='my-3'>Terms and Condition</div>
                             <ol>
                                 <li>
@@ -63,7 +65,7 @@ const ProductAllAdmin = ({getProductAll}) => {
                                 </li>
                             </ol>
                             <Button block variant='pallet-1 py-3 my-3 mb-5  radius' version={'input-normal'}> Apply Coupon </Button>
-                            <Button onClick={()=>goToNewPromo()} block variant='pallet-3 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Promo </Button>
+                            <Button block variant='pallet-3 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Promo </Button>
                         </Col>
                         <Col sm={12} md={8} className="border-start border-end">
 
@@ -78,20 +80,21 @@ const ProductAllAdmin = ({getProductAll}) => {
                                     <Row class className="">
                                         {productall.product?.map((data, idx) => {
                                             return (
-                                            <Col key={String(data.id)} sm={12} md={4} onClick={()=>goToDetail(data.id)} style={{cursor: 'pointer'}}>
-                                                <CardMenu key={idx} newClass={"mx-5 my-5"}
-                                                    cardName={data?.name}
-                                                    cardPrice={data?.price}
-                                                    cardImage={data?.image || hazelnut}
-                                                    cardDiscount={"10%"} />
-                                            </Col>
-                                        )})}
+                                                <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
+                                                    <CardMenu key={idx} newClass={"mx-5 my-5"}
+                                                        cardName={data?.name}
+                                                        cardPrice={data?.price}
+                                                        cardImage={data?.image || hazelnut}
+                                                        cardDiscount={"10%"} />
+                                                </Col>
+                                            )
+                                        })}
                                     </Row>
                                 </Tab>
                                 <Tab eventKey="coffee" title="Coffeee">
                                     <Row class className="">
                                         {productall.product?.map((data, idx) => (
-                                            <Col key={String(data.id)} sm={12} md={4} onClick={()=>goToDetail(data.id)} style={{cursor: 'pointer'}}>
+                                            <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
                                                     cardPrice={data?.price}
@@ -104,7 +107,7 @@ const ProductAllAdmin = ({getProductAll}) => {
                                 <Tab eventKey="noncoffee" title="Non Coffee">
                                     <Row class className="">
                                         {productall.product?.map((data, idx) => (
-                                            <Col key={String(data.id)} sm={12} md={4} onClick={()=>goToDetail(data.id)} style={{cursor: 'pointer'}}>
+                                            <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
                                                     cardPrice={data?.price}
@@ -117,7 +120,7 @@ const ProductAllAdmin = ({getProductAll}) => {
                                 <Tab eventKey="foods" title="Foods">
                                     <Row class className="">
                                         {productall.product?.map((data, idx) => (
-                                            <Col key={String(data.id)} sm={12} md={4} onClick={()=>goToDetail(data.id)} style={{cursor: 'pointer'}}>
+                                            <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
                                                     cardPrice={data?.price}
@@ -130,7 +133,7 @@ const ProductAllAdmin = ({getProductAll}) => {
                                 <Tab eventKey="addon" title="Add-On">
                                     <Row class className="">
                                         {productall.product?.map((data, idx) => (
-                                            <Col key={String(data.id)} sm={12} md={4} onClick={()=>goToDetail(data.id)} style={{cursor: 'pointer'}}>
+                                            <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
                                                     cardPrice={data?.price}
@@ -145,7 +148,7 @@ const ProductAllAdmin = ({getProductAll}) => {
                                 *the price has been cutted by discount appears
                             </div>
                             <div className='mb-5'>
-                                <Button onClick={()=>goToNewProduct()} block variant='pallet-1 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Product </Button>
+                                <Button onClick={() => goToNewProduct()} block variant='pallet-1 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Product </Button>
                             </div>
                         </Col>
                     </Row>
@@ -156,8 +159,8 @@ const ProductAllAdmin = ({getProductAll}) => {
     )
 }
 
-const mapStateToProps = state => ({productall: state.productall})
+const mapStateToProps = state => ({ productall: state.productall })
 
-const mapDispatchToProps = {getProductAll}
+const mapDispatchToProps = { getProductAll }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductAllAdmin)
