@@ -4,10 +4,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from './Button'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import Logo from '../assets/images/Logo.png'
 import Navbar from 'react-bootstrap/Navbar'
+import Profile from '../assets/images/photo.png'
 
 export const NavbarHome = () => {
+	const auth = useSelector(state => state.auth)
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const goLogin = () => {
 		navigate(`/login`)
@@ -44,18 +48,43 @@ export const NavbarHome = () => {
 						<li className="nav-item mx-3">
 							<Link className='nav-link rb fs-5' aria-currrent='page' to='/history'>History</Link>
 						</li>
+						{auth.token &&
+							<li className="nav-item dropdown mx-auto">
+								<div className="nav-link dropdown-toggle img-profile-login" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+									aria-expanded="false">
+									<Link className="" to="/profil">
+										<img src={Profile} width="50"
+											height="50" alt="Avatar Logo" className=" rounded-pill" />
+									</Link>
+								</div>
+
+								<ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+									<li>
+										<hr className="dropdown-divider" />
+									</li>
+									<li>
+										<Link className="dropdown-item" to="/profile">Profile</Link>
+									</li>
+									<li>
+										<hr className="dropdown-divider" />
+									</li>
+
+									<li onClick={() => dispatch({ type: 'AUTH_LOGOUT' })} style={{ cursor: 'pointer' }} className="dropdown-item" to="/login">Logout</li>
+
+								</ul>
+							</li>
+						}
+						{auth.token === null &&
+							<li className="d-flex justify-content-center row d-grid">
+								<div className=' d-flex align-items-center'>
+									<Button onClick={goLogin} block variant='pallet-4 px-5 py-2 fs-5 rb text-pallet-1 fw-bold' padding='mx-1' >Login</Button>
+								</div>
+								<div className=' d-flex align-items-center'>
+									<Button onClick={goSignUp} block variant='pallet-1 px-5 py-2 fs-5 rb' padding='mx-1' >Sign Up</Button>
+								</div>
+							</li>
+						}
 					</ul>
-					<div className="d-flex">
-						<div className=' d-flex align-items-center'>
-							<Button onClick={goLogin} block variant='pallet-4 px-5 py-2 fs-5 rb text-pallet-1 fw-bold' padding='mx-1' >Login</Button>
-						</div>
-						<div className=' d-flex align-items-center'>
-							<Button onClick={goSignUp} block variant='pallet-1 px-5 py-2 fs-5 rb' padding='mx-1' >Sign Up</Button>
-						</div>
-						{/* <div className='w-100'>
-							<Button block variant='pallet-1 px-5 py-2 '>Sign Up</Button>
-						</div> */}
-					</div>
 				</div>
 			</div>
 		</nav>
