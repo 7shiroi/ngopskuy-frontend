@@ -3,23 +3,22 @@ import CurrencyFormat from 'react-currency-format'
 
 export const ModalCheckout = ({data}) => {
     return(
-        <div className="co-card bg-white p-3" style={{width: '300px'}}>
+        <div className="co-card bg-white p-5 text-dark">
             <h1 className='fs-3 my-4 text-center'>Order Summary</h1>
-            <div className="order-list border-bottom overflow-auto">
+            <div className="order-list border-bottom overflow-auto" style={{width: '100%'}}>
                 <div className="data-order">
                     {data.map((has, idx)=>{
                         return(
-                            <div className='d-flex my-3'>
-                                {console.log(has)}
-                                <div className='img-fit'>
+                            <div className='row my-3'>
+                                <div className='img-fit col-2'>
                                 <img src={has.image} alt='corndog' width='50' height='50' className='rounded'/>
                                 </div>
-                                <div className='detail'>
-                                    <p className='py-0 my-0'>{has.name}</p>
-                                    <p className='py-0 my-0'>X {has.qty}</p>
+                                <div className='detail col-10 position-relative ps-3'>
+                                    <p className='py-0 my-0'>{has.product_name}</p>
+                                    <p className='py-0 my-0'>X {has.quantity}</p>
                                     <p className='py-0 my-0'>{has.size}</p>
+                                    <p className='d-flex position-absolute top-100 end-0 translate-middle'>IDR <CurrencyFormat value={has.total_price} displayType={'text'} thousandSeparator={true} prefix={''} /></p>
                                 </div>
-                                <p className='my-auto'>IDR <CurrencyFormat value={has.price} displayType={'text'} thousandSeparator={true} prefix={''} /></p>
                             </div>
                         )
                     })}

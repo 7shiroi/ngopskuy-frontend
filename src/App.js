@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ForgotPassword } from './pages/ForgotPassword'
 import EditPassword from './pages/EditPassword'
 import History from './pages/History'
+import { Checkout } from './pages/Checkout'
 
 export const App = () => {
   const auth = useSelector(state => state.auth)
@@ -40,6 +41,7 @@ export const App = () => {
         <Route path='/forgotpassword' element={<ForgotPassword />} />
         <Route path='/profile/edit-password' element={<EditPassword />} />
         <Route path='/history' element={<History />} />
+        <Route path='/checkout' element={<Checkout />} />
       </Routes>
     </BrowserRouter>
   )

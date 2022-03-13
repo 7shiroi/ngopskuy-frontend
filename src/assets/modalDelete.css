@@ -21,7 +21,7 @@
     height: 100%;
 }
 .co-card{
-    width: 400px;
+    width: 100%;
     border-radius: 20px;
 }
 .order-list{
@@ -34,6 +34,16 @@
 
 .history-bg{
     background-image: url('../assets/images/background-history.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Poppins', sans-serif;
+}
+.c-out{
+    max-width: 300px;
+    height: 100%;
+}
+.checkout-bg{
+    background-image: url('../assets/images/background-checkout.png');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: 'Poppins', sans-serif;
