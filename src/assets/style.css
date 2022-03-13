@@ -55,3 +55,137 @@ div {
 .underline {
     background: #FAF8F6;
 }
+
+.form-control {
+    width: 398px;
+    height: 80px;
+    background-color: #DED0C1;
+}
+
+.form-control-1 {
+    width: 398px;
+    height: 60px;
+    background-color: #DED0C1;
+}
+
+.input {
+    font-size: 48px;
+}
+
+@media (max-width: 992px) {
+
+    .desc,
+    .nav-text {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .desc,
+    .nav-text {
+        text-align: center;
+    }
+
+    .column {
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    .input {
+        text-align: center;
+        margin: auto;
+    }
+}
+
+.checkout {
+    background: #6B4F4F !important;
+}
+
+.text-button {
+    font-size: 2rem !important;
+}
+
+.underline-1 {
+    font-size: 4rem;
+    width: 34rem !important;
+    background-color: #FAF8F6;
+    font-family: "Poppins";
+    font-weight: 900;
+}
+
+.underline-1::placeholder {
+    font-size: 3rem;
+}
+
+.underline-2 {
+    font-size: 3rem;
+    width: 34rem !important;
+    background-color: #FAF8F6;
+    font-family: "Poppins";
+    font-weight: 500;
+}
+
+.underline-3 {
+    font-size: 1rem;
+    width: 34rem !important;
+    background-color: #FAF8F6;
+    font-family: "Poppins";
+    font-weight: 400;
+}
+
+.save-1 {
+    height: 4rem !important;
+}
+
+.text-new-1 {
+    color: gray;
+    font-size: 1rem;
+}
+
+.rb {
+    font-family: 'Rubik', sans-serif;
+}
+
+.primary {
+    color: #483434;
+}
+
+.active {
+    color: #483434;
+}
+
+.pt-6 {
+    padding-top: 8rem;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0 !important;
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.fw-medium {
+    font-weight: 500;
+}
+
+.icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-none {
+    background-color: unset;
+    border: unset;
+}
+
+.pps {
+    font-family: 'Popins', sans-serif;
+}

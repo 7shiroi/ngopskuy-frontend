@@ -15,7 +15,7 @@ const productState = {
       case 'GET_PRODUCT_FULFILLED': {
         const {data} = action.payload
         console.log(data)
-        state.product = data.results
+        state.product = data.result
         state.pageInfo = data.info
         state.isLoading = false
         return {...state}
@@ -33,12 +33,48 @@ const productState = {
       case 'EDIT_PRODUCT_FULFILLED': {
         const {data} = action.payload
         console.log(data)
-        state.product = data.results
+        state.product = data.result
         state.pageInfo = data.info
         state.isLoading = false
         return {...state}
       }
       case 'EDIT_PRODUCT_REJECTED': {
+        state.isLoading = false
+        state.isError = true
+        return {...state}
+      }
+      case 'DELETE_PRODUCT_PENDING': {
+        state.isLoading = true
+        state.isError = false
+        return {...state}
+      }
+      case 'DELETE_PRODUCT_FULFILLED': {
+        const {data} = action.payload
+        console.log(data)
+        state.product = data
+        state.pageInfo = data.info
+        state.isLoading = false
+        return {...state}
+      }
+      case 'DELETE_PRODUCT_REJECTED': {
+        state.isLoading = false
+        state.isError = true
+        return {...state}
+      }
+      case 'POST_PRODUCT_PENDING': {
+        state.isLoading = true
+        state.isError = false
+        return {...state}
+      }
+      case 'POST_PRODUCT_FULFILLED': {
+        const {data} = action.payload
+        console.log(data)
+        state.product = data
+        state.pageInfo = data.info
+        state.isLoading = false
+        return {...state}
+      }
+      case 'POST_PRODUCT_REJECTED': {
         state.isLoading = false
         state.isError = true
         return {...state}

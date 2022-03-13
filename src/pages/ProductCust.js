@@ -6,14 +6,14 @@ import InputUnderline from '../components/InputUnderline'
 import coffee from '../assets/images/coffee.png'
 import NavbarHome from '../components/NavbarHome'
 import Footer from '../components/Footer'
-import { getProduct, deleteProduct } from '../redux/actions/product'
+import { getProduct } from '../redux/actions/product'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { useParams, useNavigate, Navigate } from 'react-router-dom'
 import NumberFormat from 'react-number-format'
 import SizeCard from '../components/SizeCard'
 import { increment, decrement } from '../redux/actions/buttons'
 
-const ProductAdmin = ({getProduct, deleteProduct}) => {
+const ProductCust = ({getProduct}) => {
     const {product} = useSelector(state => state)
     const [control,setControl] = useState(false)
     const [show,setShow] = useState(-1)
@@ -45,7 +45,8 @@ const ProductAdmin = ({getProduct, deleteProduct}) => {
 
     useEffect(()=>{
         if(control){
-           dispatch(getProduct(id))
+           const token = window.localStorage.getItem("token")
+           dispatch(getProduct)
            setControl(false)
            setShow(false)
            navigate('/product')
@@ -64,17 +65,9 @@ const ProductAdmin = ({getProduct, deleteProduct}) => {
       navigate(`/edit-product-admin/${id}`)
     }
 
-    const handleDelete = ()=>{
-        const token = window.localStorage.getItem("token")
-        dispatch(deleteProduct(token, id))
-        setControl(true)
-        navigate('/product')
-    }
   return (
     <>
-    <header className='text-center'>
-        Header
-    </header>
+     <NavbarHome /> 
      <div className='bg-product bg-gray-100 h-full'>
         <Container>
             <div onClick={goBack} style={{fontSize:"20px", fontFamily:"Rubik"}} className="p-10 ml-20 mx-5 py-5 nav-text">
@@ -89,8 +82,7 @@ const ProductAdmin = ({getProduct, deleteProduct}) => {
                     </div>
                     <div className="ml-20 mt-10 space-y-5">
                         <Button block variant='pallet-2 radius'> Add to Cart </Button>
-                        <Button onClick={goEdit} block variant='pallet-3 my-2 radius'> Edit Product </Button>
-                        <Button onClick={handleDelete} block variant='pallet-1 radius'> Delete Menu </Button>
+                        <Button block variant='pallet-3 my-2 radius'> Ask a Staff </Button>
                     </div>
                 </Col>
                 <Col xl={7} sm={12} className="px-5 d-flex flex-column justify-content-center">
@@ -167,15 +159,13 @@ const ProductAdmin = ({getProduct, deleteProduct}) => {
             </Card>
         </Container>
      </div>
-    <footer className='text-center'>
-        Footer
-    </footer>
+     <Footer />
     </>
   )
 }
 
 const mapStateToProps = state => ({product: state.product})
 
-const mapDispatchToProps = {getProduct, deleteProduct}
+const mapDispatchToProps = {getProduct}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductAdmin)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCust)

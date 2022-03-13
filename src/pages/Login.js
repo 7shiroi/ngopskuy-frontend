@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from "../components/Input"
 import Button from "../components/Button"
-import Navbar from "../components/Navbar"
+import NavbarHome from "../components/NavbarHome"
 import Footer from "../components/Footer"
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
@@ -24,7 +24,7 @@ export const Login = () => {
     }
     return (
         <> {auth.token && <Navigate to="/" />}
-            <Navbar />
+            <NavbarHome />
             <div className='container-fluid'>
                 <div className='row position-relative'>
                     <div className='col-6 background-login'></div>

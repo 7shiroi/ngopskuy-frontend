@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Container, Row, Col, Image } from 'react-bootstrap'
 import photo from '../assets/images/photo.png'
-import Navbar from "../components/Navbar"
+import NavbarHome from "../components/NavbarHome"
 import Footer from "../components/Footer"
 import Button from "../components/Button"
 import { BiPencil } from "react-icons/bi"
@@ -10,7 +10,7 @@ import InputUnderline from "../components/InputUnderline"
 export const Profile = () => {
     return (
         <>
-            <Navbar />
+            <NavbarHome />
             <div className='bg-profile py-5 shadow'>
                 <Container>
                     <Card>
@@ -87,7 +87,6 @@ export const Profile = () => {
                                     </Card>
                                 </Container>
                             </Col>
-
                         </Row>
                     </Card>
                 </Container>
