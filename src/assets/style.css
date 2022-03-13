@@ -161,10 +161,10 @@ div {
     padding-top: 8rem;
 }
 
-ul {
-.shadow-new{
+    .shadow-new{
     box-shadow: 0 4rem 4rem rgba(black, .275)
-}
+    }
+
 
 .rb{
     font-family: 'Rubik', sans-serif;
