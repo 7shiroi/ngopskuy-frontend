@@ -4,6 +4,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from './Button'
 import { useNavigate } from 'react-router-dom'
+import Logo from '../assets/images/Logo.png'
+import Navbar from 'react-bootstrap/Navbar'
 
 export const NavbarHome = () => {
 	const navigate = useNavigate()
@@ -15,8 +17,16 @@ export const NavbarHome = () => {
 	}
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-pallet-4">
-			<div className="container py-4">
-				<div className="navbar-brand rb fw-bold text-pallet-1" href="#">NgopSkuY</div>
+			<div className="container">
+				<Navbar.Brand href="/">
+					<img
+						src={Logo}
+						width="120"
+						height="120"
+						className="d-inline-block align-top"
+						alt="React Bootstrap logo"
+					/>
+				</Navbar.Brand>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon"></span>
 				</button>
