@@ -7,6 +7,7 @@ export const getProduct = (id)=> {
     }
 }
 
+<<<<<<< HEAD
 export const updateProduct = (token, id, image, name, description, price)=> {
     let formData = new FormData()
     formData.append("image", image);
@@ -38,4 +39,33 @@ export const newProduct = (token, name, description, price, deliveriHourStart, d
         type: 'POST_PRODUCT',
         payload: http(token).post('/product')
     }
+=======
+export const addProduct = (token, data) => {
+  const inputData = new FormData()
+  for (const key in data) {
+    inputData.append(key, data[key]);
+  }
+  return {
+    type: 'ADD_PRODUCT',
+    payload: http(token, true).post('/product')
+  }
+}
+
+export const editProduct = (token, id, data) => {
+  const inputData = new FormData()
+  for (const key in data) {
+    inputData.append(key, data[key]);
+  }
+  return {
+    type: 'EDIT_PRODUCT',
+    payload: http(token, true).patch('/product/:id')
+  }
+}
+
+export const deleteProduct = (token, id) => {
+  return {
+    type: 'DELETE_PRODUCT',
+    payload: http(token).patch('/product/delete/:id')
+  }
+>>>>>>> d3f648cccce3e913f24d2e86eed406e67ef43a72
 }
