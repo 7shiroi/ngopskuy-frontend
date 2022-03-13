@@ -28,6 +28,9 @@ $breadcrumb-divider: quote(">");
     width: 20px;
     height: 20px;
 }
+.dropdown-toggle::after {
+    display: none;
+  }
 .nav .nav-link.active{
     color: #483434;
     font-weight: bold;
@@ -55,4 +58,8 @@ $breadcrumb-divider: quote(">");
 .breadcrumb-item > a{
   color: grey;
   text-decoration: none;
+}
+
+.rounded-1{
+    border-radius: 1.2rem !important;
 }

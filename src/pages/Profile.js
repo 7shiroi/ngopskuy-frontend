@@ -60,7 +60,7 @@ export const Profile = () => {
                             {
                                 token.errorMsg &&
                                 <div className="alert alert-warning fade show" role="alert">
-                                    <strong>{token.errorMsg[0]}</strong>
+                                    <strong>{token.errorMsg}</strong>
                                 </div>
                             }
                             {

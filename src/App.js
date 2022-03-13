@@ -12,6 +12,7 @@ import { ForgotPassword } from './pages/ForgotPassword'
 import EditPassword from './pages/EditPassword'
 import VerifyEmail from './pages/VerifyEmail'
 import { ProductAdmin } from './pages/ProductAdmin'
+import EditPromo from './pages/EditPromo'
 
 
 export const App = () => {
@@ -45,6 +46,8 @@ export const App = () => {
         <Route path='/verifyemail' element={<VerifyEmail />} />
         <Route path='/profile/edit-password' element={<EditPassword />} />
         <Route path='/product-admin' element={<ProductAdmin />} />
+        <Route path='/editPromo' element={<EditPromo />} />
+
       </Routes>
     </BrowserRouter>
   )
