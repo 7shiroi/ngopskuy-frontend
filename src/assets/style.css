@@ -106,4 +106,5 @@ ul{
 }
 input[type='checkbox']{
     visibility: hidden;
+    appearance: none;
 }

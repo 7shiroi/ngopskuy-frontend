@@ -5,18 +5,113 @@ import imgPromo from '../assets/images/spagetti.png'
 import Helmets from '../components/Helmets'
 
 const EditPromo = () => {
-   const [checked, setChecked] = useState(false)
-   const [size,setSize] = useState(null)
+   const [checked1, setChecked1] = useState(false)
+   const [checked2, setChecked2] = useState(false)
+   const [checked3, setChecked3] = useState(false)
+   const [checked4, setChecked4] = useState(false)
+   const [checked5, setChecked5] = useState(false)
+   const [checked6, setChecked6] = useState(false)
+   const [checked7, setChecked7] = useState(false)
+   const [checked8, setChecked8] = useState(false)
+   const [checked9, setChecked9] = useState(false)
+   const [size1,setSize1] = useState(null)
+   const [size2,setSize2] = useState(null)
+   const [size3,setSize3] = useState(null)
+   const [size4,setSize4] = useState(null)
+   const [size5,setSize5] = useState(null)
+   const [size6,setSize6] = useState(null)
+   const [delivery1, setDelivery1] = useState(null)
+   const [delivery2, setDelivery2] = useState(null)
+   const [delivery3, setDelivery3] = useState(null)
 
-   const handleChange = () =>{
-      setChecked(!checked)
-      console.log(!checked)
-      if(!checked){
-         document.getElementById('test').setAttribute('class', 'icon-size bg-pallet-1 rounded-circle pps fw-bold d-flex align-items-center justify-content-center text-pallet-3 checked')
-         setSize('R')
+   const handleChange1 = ()=>{
+      setChecked1(!checked1)
+      if(!checked1){
+         setSize1('r')
+         document.getElementsByName('sizeR')[0].setAttribute('class', 'icon-size bg-pallet-1 rounded-circle pps fw-bold d-flex align-items-center justify-content-center text-pallet-3 fs-5')
       } else{
-         document.getElementById('test').setAttribute('class', 'icon-size bg-pallet-3 rounded-circle fs-3 pps fw-bold d-flex align-items-center justify-content-center')
-         setSize(null)
+         setSize1(null)
+         document.getElementsByName('sizeR')[0].setAttribute('class', 'icon-size bg-pallet-3 rounded-circle fs-5 pps fw-bold d-flex align-items-center justify-content-center')
+      }
+   }
+   const handleChange2 = ()=>{
+      setChecked2(!checked2)
+      if(!checked2){
+         setSize2('l')
+         document.getElementsByName('sizeL')[0].setAttribute('class', 'icon-size bg-pallet-1 rounded-circle pps fw-bold d-flex align-items-center justify-content-center text-pallet-3 fs-5')
+      } else{
+         setSize2(null)
+         document.getElementsByName('sizeL')[0].setAttribute('class', 'icon-size bg-pallet-3 rounded-circle fs-5 pps fw-bold d-flex align-items-center justify-content-center')
+      }
+   }
+   const handleChange3 = ()=>{
+      setChecked3(!checked3)
+      if(!checked3){
+         setSize3('xl')
+         document.getElementsByName('sizeXL')[0].setAttribute('class', 'icon-size bg-pallet-1 rounded-circle pps fw-bold d-flex align-items-center justify-content-center text-pallet-3 fs-5')
+      } else{
+         setSize3(null)
+         document.getElementsByName('sizeXL')[0].setAttribute('class', 'icon-size bg-pallet-3 rounded-circle fs-5 pps fw-bold d-flex align-items-center justify-content-center')
+      }
+   }
+   const handleChange4 = ()=>{
+      setChecked4(!checked4)
+      if(!checked4){
+         setSize4('250gr')
+         document.getElementsByName('size250')[0].setAttribute('class', 'icon-size bg-pallet-1 rounded-circle pps fw-bold d-flex align-items-center justify-content-center text-pallet-3 fs-5')
+      } else{
+         setSize4(null)
+         document.getElementsByName('size250')[0].setAttribute('class', 'icon-size bg-pallet-3 rounded-circle fs-5 pps fw-bold d-flex align-items-center justify-content-center')
+      }
+   }
+   const handleChange5 = ()=>{
+      setChecked5(!checked5)
+      if(!checked5){
+         setSize5('300gr')
+         document.getElementsByName('size300')[0].setAttribute('class', 'icon-size bg-pallet-1 rounded-circle pps fw-bold d-flex align-items-center justify-content-center text-pallet-3 fs-5')
+      } else{
+         setSize5(null)
+         document.getElementsByName('size300')[0].setAttribute('class', 'icon-size bg-pallet-3 rounded-circle fs-5 pps fw-bold d-flex align-items-center justify-content-center')
+      }
+   }
+   const handleChange6 = ()=>{
+      setChecked6(!checked6)
+      if(!checked6){
+         setSize6('500gr')
+         document.getElementsByName('size500')[0].setAttribute('class', 'icon-size bg-pallet-1 rounded-circle pps fw-bold d-flex align-items-center justify-content-center text-pallet-3 fs-5')
+      } else{
+         setSize6(null)
+         document.getElementsByName('size500')[0].setAttribute('class', 'icon-size bg-pallet-3 rounded-circle fs-5 pps fw-bold d-flex align-items-center justify-content-center')
+      }
+   }
+   const handleChange7 = ()=>{
+      setChecked7(!checked7)
+      if(!checked7){
+         setDelivery1('1')
+         document.getElementsByName('delivery1')[0].setAttribute('class', 'btn-pallet-1 w-100 py-3 rounded-1 rb fw-bold text-center')
+      } else{
+         setDelivery1(null)
+         document.getElementsByName('delivery1')[0].setAttribute('class', 'btn-pallet-3 w-100 py-3 rounded-1 rb fw-bold text-center')
+      }
+   }
+   const handleChange8 = ()=>{
+      setChecked8(!checked8)
+      if(!checked8){
+         setDelivery2('2')
+         document.getElementsByName('delivery2')[0].setAttribute('class', 'btn-pallet-1 w-100 py-3 rounded-1 rb fw-bold text-center')
+      } else{
+         setDelivery2(null)
+         document.getElementsByName('delivery2')[0].setAttribute('class', 'btn-pallet-3 w-100 py-3 rounded-1 rb fw-bold text-center')
+      }
+   }
+   const handleChange9 = ()=>{
+      setChecked9(!checked9)
+      if(!checked9){
+         setDelivery3('3')
+         document.getElementsByName('delivery3')[0].setAttribute('class', 'btn-pallet-1 w-100 py-3 rounded-1 rb fw-bold text-center')
+      } else{
+         setDelivery3(null)
+         document.getElementsByName('delivery3')[0].setAttribute('class', 'btn-pallet-3 w-100 py-3 rounded-1 rb fw-bold text-center')
       }
    }
    const onEdit = (event)=>{
@@ -28,7 +123,15 @@ const EditPromo = () => {
       const endDate = event.target.elements['endDate'].value
       const promoCode = event.target.elements['promoCode'].value
       const discount = event.target.elements['discount'].value
-      console.log( size, 'size' )
+      console.log( size1, 'size1' )
+      console.log( size2, 'size2' )
+      console.log( size3, 'size3' )
+      console.log( size4, 'size4' )
+      console.log( size5, 'size5' )
+      console.log( size6, 'size6' )
+      console.log( delivery1, 'delivery1' )
+      console.log( delivery2, 'delivery2' )
+      console.log( delivery3, 'delivery3' )
       const data = { name, price, description, startDate, endDate, promoCode, discount}
       console.log(data)
    }
@@ -90,23 +193,34 @@ const EditPromo = () => {
                         <div className='rb fw-bold fs-4 mb-3'>Description :</div>
                         <input className='border border-3 border-pallet-1 w-100 py-3 rounded-1 px-3 fs-5' placeholder='Description' name='description'/>
                      </div>
-                     {/* contoh bootstrap */}
-                     <label id='test' name='test' className='icon-size bg-pallet-3 rounded-circle fs-3 pps fw-bold d-flex align-items-center justify-content-center'>
-                        <input type='checkbox' checked={checked} onChange={handleChange}/>
-                        My value
-                     </label>
-                     <div> is 'My value' checked? {size}</div>
-                     {/* contoh asli */}
                      <div  className='mb-4'>
                         <div className='rb fw-bold fs-4 mb-3'>Input Product Size :</div>
                         <div className='rb mb-3 text-muted'>Click product size you want to use for this promo</div>
                         <div className='d-flex justify-content-between mb-5'>
-                           <div className='icon-size bg-pallet-3 rounded-circle fs-3 pps fw-bold d-flex align-items-center justify-content-center'>R</div>
-                           <div className='icon-size bg-pallet-3 rounded-circle fs-3 pps fw-bold d-flex align-items-center justify-content-center'>L</div>
-                           <div className='icon-size bg-pallet-3 rounded-circle fs-3 pps fw-bold d-flex align-items-center justify-content-center'>XL</div>
-                           <div className='icon-size bg-pallet-1 rounded-circle pps fw-bold d-flex align-items-center justify-content-center text-pallet-3'>250 gr</div>
-                           <div className='icon-size bg-pallet-1 rounded-circle pps fw-bold d-flex align-items-center justify-content-center text-pallet-3'>300 gr</div>
-                           <div className='icon-size bg-pallet-1 rounded-circle pps fw-bold d-flex align-items-center justify-content-center text-pallet-3'>500 gr</div>
+                           <label name='sizeR' className='icon-size bg-pallet-3 rounded-circle fs-5 pps fw-bold d-flex align-items-center justify-content-center'>
+                              <input type='checkbox' checked={checked1} onChange={handleChange1} />
+                              R
+                           </label>
+                           <label name='sizeL' className='icon-size bg-pallet-3 rounded-circle fs-5 pps fw-bold d-flex align-items-center justify-content-center'>
+                              <input type='checkbox' checked={checked2} onChange={handleChange2} />
+                              L
+                           </label>
+                           <label name='sizeXL' className='icon-size bg-pallet-3 rounded-circle fs-5 pps fw-bold d-flex align-items-center justify-content-center'>
+                              <input type='checkbox' checked={checked3} onChange={handleChange3} />
+                              XL
+                           </label>
+                           <label name='size250' className='icon-size bg-pallet-3 rounded-circle fs-5 pps fw-bold d-flex align-items-center justify-content-center'>
+                              <input type='checkbox' checked={checked4} onChange={handleChange4} />
+                              250 gr
+                           </label>
+                           <label name='size300' className='icon-size bg-pallet-3 rounded-circle fs-5 pps fw-bold d-flex align-items-center justify-content-center'>
+                              <input type='checkbox' checked={checked5} onChange={handleChange5} />
+                              300 gr
+                           </label>
+                           <label name='size500' className='icon-size bg-pallet-3 rounded-circle fs-5 pps fw-bold d-flex align-items-center justify-content-center'>
+                              <input type='checkbox' checked={checked6} onChange={handleChange6} />
+                              500gr
+                           </label>
                         </div>
                         
                      </div>
@@ -115,13 +229,22 @@ const EditPromo = () => {
                         <div className='rb mb-3 text-muted'>Click methods you want to use for this promo</div>
                         <div className='row justify-content-between'>
                            <div className='col col-4'>
-                              <button className='btn-pallet-1 w-100 py-3 rounded-1 rb fw-bold'>Home Delivery</button>
+                              <label name='delivery1' className='btn-pallet-1 w-100 py-3 rounded-1 rb fw-bold text-center'>
+                                 <input type='checkbox' checked={checked7} onChange={handleChange7}/>
+                                 Home Delivery
+                              </label>
                            </div>
                            <div className='col col-4'>
-                              <button className='btn-pallet-1 w-100 py-3 rounded-1 rb fw-bold'>Dine In</button>
+                              <label name='delivery2' className='btn-pallet-1 w-100 py-3 rounded-1 rb fw-bold text-center'>
+                                 <input type='checkbox' checked={checked8} onChange={handleChange8}/>
+                                 Dine In
+                              </label>
                            </div>
                            <div className='col col-4'>
-                              <button className='btn-pallet-3 w-100 py-3 rounded-1 rb fw-bold'>Take away</button>
+                              <label name='delivery3' className='btn-pallet-1 w-100 py-3 rounded-1 rb fw-bold text-center'>
+                                 <input type='checkbox' checked={checked9} onChange={handleChange9}/>
+                                 Take away
+                              </label>
                            </div>
                         </div>
                      </div>
