@@ -8,19 +8,20 @@ import { RiBankFill } from "react-icons/ri";
 import { BsFillCreditCard2FrontFill } from "react-icons/bs";
 import { GrDeliver } from "react-icons/gr";
 import Button from '../components/Button';
+import { useNavigate } from 'react-router-dom';
 
 export const Checkout = ({getUserTransaction}) => {
     const {transaction: trc} = useSelector(state => state)
     const token = window.localStorage.getItem('token')
+    const navigate = useNavigate()
     useEffect(() => {
         getUserTransaction(token)
     }, [getUserTransaction ,token])
-    // const onCO = () => {
-    //     trc.transaction.map((data, idx) => {
-    //         editTransaction(data)
-    //     })
+
+    const onCO = () => {
+        navigate('/history')
         
-    // }
+    }
     return(
         <Layout>
             <div className='checkout-bg pb-5'>
@@ -66,7 +67,9 @@ export const Checkout = ({getUserTransaction}) => {
                                       </label>
                                 </div>}></ModalCo>
                             </div>
+                            <div onClick={onCO}>
                             <Button block variant='pallet-1 radius' version={'input-normal'}>Confirm and Pay</Button>
+                            </div>
                         </div>
                         {console.log(trc)}
                     </div>}
