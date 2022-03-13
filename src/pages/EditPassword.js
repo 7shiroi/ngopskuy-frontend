@@ -37,6 +37,9 @@ export const EditPassword = () => {
         dispatch(editPassword(token.token, data))
         window.scrollTo(0, 0)
     }
+    const goCancel = () => {
+        window.history.back()
+    }
     return (
         <><Helmets children={"Edit Password"} />
             <NavbarHome />
@@ -75,7 +78,7 @@ export const EditPassword = () => {
                                         Do you want to save the change?
                                     </Card.Text>
                                     <Button type="submit" block variant='pallet-2 radius'> Save Change </Button>
-                                    <Button block variant='pallet-3 radius'> Cancel </Button>
+                                    <Button onClick={goCancel} block variant='pallet-3 radius'> Cancel </Button>
                                 </Col>
                                 <Col xl={9}>
                                     <Container>

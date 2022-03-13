@@ -14,12 +14,16 @@ import Helmets from '../components/Helmets'
 export const Profile = () => {
     const navigate = useNavigate()
     const auth = useSelector(state => state.auth.userData)
-    const token = useSelector(state => state.auth)
+    const tokens = useSelector(state => state.auth)
+    const goEditPass = () => {
+        navigate(`/profile/edit-password`)
+    }
 
     const dispatch = useDispatch()
     useEffect(() => {
         if (!auth.token) {
             const token = window.localStorage.getItem('token')
+            console.log(token)
             if (token) {
                 // dispatch({
                 //     type: "AUTH_LOGIN_FULFILLED",
@@ -47,7 +51,7 @@ export const Profile = () => {
         const birth_date = e.target.elements['birth_date'].value
 
         const data = { email, address, phone_number, first_name, last_name, birth_date }
-        dispatch(editProfile(token.token, data))
+        dispatch(editProfile(tokens.token, data))
         window.scrollTo(0, 0)
     }
     return (
@@ -58,21 +62,21 @@ export const Profile = () => {
                     <Form onSubmit={(e) => onEditProfile(e)}>
                         <Card>
                             {
-                                token.errorMsg &&
+                                tokens.errorMsg &&
                                 <div className="alert alert-warning fade show" role="alert">
-                                    <strong>{token.errorMsg}</strong>
+                                    <strong>{tokens.errorMsg}</strong>
                                 </div>
                             }
                             {
-                                token.errMsg &&
+                                tokens.errMsg &&
                                 <div className="alert alert-warning fade show" role="alert">
-                                    <strong>{token.errMsg}</strong>
+                                    <strong>{tokens.errMsg}</strong>
                                 </div>
                             }
                             {
-                                token.successMsg &&
+                                tokens.successMsg &&
                                 <div className="alert alert-success fade show" role="alert">
-                                    <strong>{token.successMsg}</strong>
+                                    <strong>{tokens.successMsg}</strong>
                                 </div>
                             }
                             <Row className='py-5'>
@@ -86,7 +90,7 @@ export const Profile = () => {
                                     </Card.Text>
                                     <Button block variant='pallet-2 radius'> Choose Photo </Button>
                                     <Button block variant='pallet-3 radius'> Remove Photo </Button>
-                                    <Button block variant='pallet-1 radius'> Edit Password </Button>
+                                    <Button onClick={goEditPass} block variant='pallet-1 radius'> Edit Password </Button>
                                     <Card.Text as="h3" className='text-center mt-3'>
                                         Do you want to save the change?
                                     </Card.Text>
