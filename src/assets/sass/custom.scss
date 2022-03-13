@@ -27,9 +27,20 @@ $theme-colors: (
     height: 20px;
 }
 .nav .nav-link.active{
-    color: red;
+    color: #483434;
+    font-weight: bold;
+    border-bottom: 2px solid #483434;
+}
+.nav-link{
+    color:grey;
 }
 .rounded-menu{
     border-radius: 20px;
-    max-width: 220px;
+    width: 100%;
+    height: width;
 }
+#img-object-home{
+    object-fit: cover;
+    width: 70%;
+    height: 300px;
+  }
