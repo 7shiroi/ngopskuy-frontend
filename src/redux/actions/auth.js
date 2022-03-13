@@ -11,9 +11,12 @@ export const login = (email, password) => {
     })
 }
 
-export const requestResetPassword = (email) => {
+export const requestResetPassword = (email, code, password, confirm_password) => {
     const params = new URLSearchParams()
     params.append('email', email)
+    params.append('code', code)
+    params.append('password', password)
+    params.append('confirm_password', confirm_password)
     return {
         type: 'REQUEST_RESET_PASSWORD',
         payload: http().post('auth/forgot-password', params),

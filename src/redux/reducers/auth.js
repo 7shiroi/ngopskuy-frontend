@@ -52,13 +52,17 @@ const auth = (state = initialState, action) => {
             const { data } = action.payload
             state.isLoading = false
             state.message = data.message
+            state.successMsg = data.message
+            state.errorMsg = ""
+            state.errMsg = ""
             return { ...state }
         }
         case 'REQUEST_RESET_PASSWORD_REJECTED': {
             const { data } = action.payload.response
             state.isLoading = false
             state.error = true
-            state.errorMsg = data.message
+            state.errorMsg = data.error
+            state.errMsg = data.message
             return { ...state }
         }
         case 'SET_EMAIL': {
