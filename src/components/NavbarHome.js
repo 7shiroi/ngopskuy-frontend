@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/aria-props */
 /* eslint-disable no-import-assign */
 /* eslint-disable no-redeclare */
 import React, { useEffect } from 'react'

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Col, Container, Form, Row, Image, Card } from 'react-bootstrap'
 
