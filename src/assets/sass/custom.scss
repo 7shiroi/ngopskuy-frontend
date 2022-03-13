@@ -6,10 +6,42 @@ $theme-colors: (
     "pallet-2":#6B4F4F,
     "pallet-3":#EED6C4,
     "pallet-4":#FFF3E4
-
 );
 // @import "pallete.scss";
 @import "~bootstrap/scss/bootstrap";
+@import "./homepage.scss";
 .radius{
-    border-radius: 20px;
+    border-radius: 15px;
+    outline: unset;
 }
+.form-check-input:checked{
+    background-color: #BF9270;
+    border-color: #BF9270;
+  }
+  .form-check-input:focus{
+    box-shadow: 0 0 0 0.4rem rgba(227, 183, 160,0.25);
+    /* box-shadow: 0 0 0 0.25rem rgba(227, 183, 160 / 25%); */
+    border-color: #BF9270;
+  }
+  input[type=radio] {
+    width: 20px;
+    height: 20px;
+}
+.nav .nav-link.active{
+    color: #483434;
+    font-weight: bold;
+    border-bottom: 2px solid #483434;
+}
+.nav-link{
+    color:grey;
+}
+.rounded-menu{
+    border-radius: 20px;
+    width: 100%;
+    height: width;
+}
+#img-object-home{
+    object-fit: cover;
+    width: 70%;
+    height: 300px;
+  }
