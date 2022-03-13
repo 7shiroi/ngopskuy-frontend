@@ -22,7 +22,6 @@ const auth = (state = initialState, action) => {
             state.isLoading = false
             state.isError = false
             state.token = data.result
-            console.log(data)
             if (!window.localStorage.getItem('token')) {
                 window.localStorage.setItem('token', state.token)
             }
