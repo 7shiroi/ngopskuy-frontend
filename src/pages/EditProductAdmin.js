@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import {FaRegTrashAlt} from 'react-icons/fa'
 import { useParams, useNavigate, Navigate, useSearchParams } from 'react-router-dom'
 import { connect, useDispatch, useSelector } from 'react-redux'
-import { getProduct, updateProduct } from '../redux/actions/product'
+import { getProduct, editProduct } from '../redux/actions/product'
 import InputUnderline from '../components/InputUnderline'
 import ButtonPlusMinus from '../components/ButtonPlusMinus'
 
@@ -28,7 +28,7 @@ const EditProductAdmin = ({getProduct}) => {
 
   useEffect(()=>{
     const token = window.localStorage.getItem("token")
-    updateProduct(token, id)
+    editProduct(token, id)
   },[])
 
   useEffect(()=>{
@@ -38,7 +38,7 @@ const EditProductAdmin = ({getProduct}) => {
   const editedProduct = (e) => {
       e.prevenDefault()
       const token = window.localStorage.getItem("token")
-      dispatch(updateProduct(token, id))
+      dispatch(editProduct(token, id))
   }
   return (
     <>
