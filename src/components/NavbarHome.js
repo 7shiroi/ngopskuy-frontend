@@ -1,6 +1,4 @@
-/* eslint-disable jsx-a11y/aria-props */
-/* eslint-disable no-import-assign */
-/* eslint-disable no-redeclare */
+
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Button from './Button'
@@ -23,6 +21,7 @@ export const NavbarHome = () => {
 	const goSignUp = () => {
 		navigate(`/signup`)
 	}
+
 	useEffect(() => {
 		const token = window.localStorage.getItem('token')
 		dispatch(getProfile(token))

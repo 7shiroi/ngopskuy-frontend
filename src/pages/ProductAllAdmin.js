@@ -5,39 +5,48 @@ import hazelnut from '../assets/images/hazelnut.png'
 import NavbarHome from '../components/NavbarHome'
 import Footer from '../components/Footer'
 import CardMenu from '../components/CardMenu'
-import { getProduct } from '../redux/actions/product'
-import { useDispatch, useSelector } from 'react-redux'
+import { getProductAll } from '../redux/actions/productall'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
-import PromoCard from '../components/PromoCard'
 
-export const ProductAdmin = (props) => {
+
+const ProductAllAdmin = ({getProductAll}) => {
     const navigate = useNavigate()
     const auth = useSelector(state => state.auth.userData)
-    const product = useSelector(state => state.product?.product)
-    const dataa = Array.from(product)
+    const {productall} = useSelector(state => state)
     const token = useSelector(state => state.auth)
-    console.log(dataa)
 
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getProduct(token))
+        (getProductAll(token))
     }, [])
+
+    const goToDetail = (id)=> {
+        navigate(`/product-admin/${id}`)
+    }
+
+    const goToNewProduct = ()=> {
+        navigate('/new-product')
+    }
+
+    const goToNewPromo = ()=> {
+        navigate('/new-promo')
+    }
     return (
         <>
             <Helmets children={"Product Admin"} />
             <NavbarHome />
-            <section className='bg-pallet-4'>
+            <section>
                 <Container>
                     <Row>
-                        <Col sm={12} md={4} className="my-5">
+                        <Col sm={12} md={4}>
                             <Card.Text as="h3" className='text-center'>
                                 Promo for you
                             </Card.Text>
-                            <div className="my-5">
+                            <div>
                                 Coupons will be updated every weeks. Check them out!
                             </div>
-                            <PromoCard />
                             <div className='my-3'>Terms and Condition</div>
                             <ol>
                                 <li>
@@ -54,7 +63,7 @@ export const ProductAdmin = (props) => {
                                 </li>
                             </ol>
                             <Button block variant='pallet-1 py-3 my-3 mb-5  radius' version={'input-normal'}> Apply Coupon </Button>
-                            <Button block variant='pallet-3 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Promo </Button>
+                            <Button onClick={()=>goToNewPromo()} block variant='pallet-3 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Promo </Button>
                         </Col>
                         <Col sm={12} md={8} className="border-start border-end">
 
@@ -62,26 +71,27 @@ export const ProductAdmin = (props) => {
                                 defaultActiveKey="home"
                                 transition={false}
                                 id="noanim-tab-example"
-                                className="mb-3 bg-pallet-4 text-pallet-1"
+                                className="mb-3 bg-white text-pallet-1"
                                 rounded
                             >
                                 <Tab eventKey="home" title="Favorite And Promo">
                                     <Row class className="">
-                                        {dataa?.map((data, idx) => (
-                                            <Col key={idx} sm={12} md={4}>
+                                        {productall.product?.map((data, idx) => {
+                                            return (
+                                            <Col key={String(data.id)} sm={12} md={4} onClick={()=>goToDetail(data.id)} style={{cursor: 'pointer'}}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
                                                     cardPrice={data?.price}
                                                     cardImage={data?.image || hazelnut}
                                                     cardDiscount={"10%"} />
                                             </Col>
-                                        ))}
+                                        )})}
                                     </Row>
                                 </Tab>
                                 <Tab eventKey="coffee" title="Coffeee">
                                     <Row class className="">
-                                        {dataa?.map((data, idx) => (
-                                            <Col key={idx} sm={12} md={4}>
+                                        {productall.product?.map((data, idx) => (
+                                            <Col key={String(data.id)} sm={12} md={4} onClick={()=>goToDetail(data.id)} style={{cursor: 'pointer'}}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
                                                     cardPrice={data?.price}
@@ -93,8 +103,8 @@ export const ProductAdmin = (props) => {
                                 </Tab>
                                 <Tab eventKey="noncoffee" title="Non Coffee">
                                     <Row class className="">
-                                        {dataa?.map((data, idx) => (
-                                            <Col key={idx} sm={12} md={4}>
+                                        {productall.product?.map((data, idx) => (
+                                            <Col key={String(data.id)} sm={12} md={4} onClick={()=>goToDetail(data.id)} style={{cursor: 'pointer'}}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
                                                     cardPrice={data?.price}
@@ -106,8 +116,8 @@ export const ProductAdmin = (props) => {
                                 </Tab>
                                 <Tab eventKey="foods" title="Foods">
                                     <Row class className="">
-                                        {dataa?.map((data, idx) => (
-                                            <Col key={idx} sm={12} md={4}>
+                                        {productall.product?.map((data, idx) => (
+                                            <Col key={String(data.id)} sm={12} md={4} onClick={()=>goToDetail(data.id)} style={{cursor: 'pointer'}}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
                                                     cardPrice={data?.price}
@@ -119,8 +129,8 @@ export const ProductAdmin = (props) => {
                                 </Tab>
                                 <Tab eventKey="addon" title="Add-On">
                                     <Row class className="">
-                                        {dataa?.map((data, idx) => (
-                                            <Col key={idx} sm={12} md={4}>
+                                        {productall.product?.map((data, idx) => (
+                                            <Col key={String(data.id)} sm={12} md={4} onClick={()=>goToDetail(data.id)} style={{cursor: 'pointer'}}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
                                                     cardPrice={data?.price}
@@ -135,7 +145,7 @@ export const ProductAdmin = (props) => {
                                 *the price has been cutted by discount appears
                             </div>
                             <div className='mb-5'>
-                                <Button block variant='pallet-1 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Product </Button>
+                                <Button onClick={()=>goToNewProduct()} block variant='pallet-1 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Product </Button>
                             </div>
                         </Col>
                     </Row>
@@ -145,3 +155,9 @@ export const ProductAdmin = (props) => {
         </>
     )
 }
+
+const mapStateToProps = state => ({productall: state.productall})
+
+const mapDispatchToProps = {getProductAll}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductAllAdmin)

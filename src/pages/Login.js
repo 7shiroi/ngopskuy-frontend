@@ -28,7 +28,6 @@ export const Login = () => {
 	return (
 		<> {auth.token && <Navigate to="/" />}
 			<Helmets children={"Login"} />
-
 			<div className='container-fluid'>
 				<div className='row position-relative'>
 					<div className='col-6 background-login'></div>

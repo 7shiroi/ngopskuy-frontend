@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-constant-condition */
-/* eslint-disable react/prop-types */
+
 import React, { useState } from 'react'
 import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 
