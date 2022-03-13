@@ -6,39 +6,33 @@ import Form from 'react-bootstrap/Form'
 import {FaRegTrashAlt} from 'react-icons/fa'
 import { useParams, useNavigate, Navigate, useSearchParams } from 'react-router-dom'
 import { connect, useDispatch, useSelector } from 'react-redux'
-import { getProduct, editProduct } from '../redux/actions/product'
+import { getProductById, editProduct } from '../redux/actions/product'
 import InputUnderline from '../components/InputUnderline'
 import ButtonPlusMinus from '../components/ButtonPlusMinus'
 
-const EditProductAdmin = ({getProduct}) => {
+const EditProductAdmin = () => {
 //   const [name, setName] = useState('');
 //   const [price, setPrice] = useState('');
 //   const [description, setDescription] = useState('');
-  const {product} = useSelector(state => state)
+  const auth = useSelector(state => state.auth)
+  const product = useSelector(state => state.product)
   const {id} = useParams()
-  console.log({id})
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  let [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(()=>{
-    getProduct(id)
+    dispatch(getProductById(id))
   },[])
 
-  useEffect(()=>{
-    const token = window.localStorage.getItem("token")
-    editProduct(token, id)
-  },[])
-
-  useEffect(()=>{
-    console.log(product)
-  },[product])
-  
-  const editedProduct = (e) => {
-      e.prevenDefault()
-      const token = window.localStorage.getItem("token")
-      dispatch(editProduct(token, id))
+  const handleEditProduct = (e) => {
+    e.preventDefault()
+    const data = {
+      name: e.target.elements['name'].value,
+      price: e.target.elements['price'].value,
+      description: e.target.elements['description'].value,
+    }
+    dispatch(editProduct(auth.token, id, data))
   }
   return (
     <>
@@ -62,11 +56,11 @@ const EditProductAdmin = ({getProduct}) => {
                     </div>
                 </Col>
                 <Col xl={6} sm={12} className="px-5 desc">
-                {product.length > 1 && <Navigate to='/product'/>}
-                <Form onChange={editedProduct}>
-                    <InputUnderline block version="input-underline underline-1" name='name' placeholder='input product name'></InputUnderline>
-                    <InputUnderline block version="input-underline underline-2" name='price' placeholder='input product price' ></InputUnderline>
-                    <InputUnderline block version="input-underline underline-3 text-wrap mt-3" name='description' placeholder='input product desc' ></InputUnderline>
+                {/* {product.length > 1 && <Navigate to='/product'/>} */}
+                <Form onSubmit={(e) => handleEditProduct(e)}>
+                    <InputUnderline block version="input-underline underline-1" name='name' placeholder='input product name' defaultValue={product.product?.name} />
+                    <InputUnderline block version="input-underline underline-2" name='price' placeholder='input product price' defaultValue={product.product?.price} />
+                    <InputUnderline block version="input-underline underline-3 text-wrap mt-3" name='description' placeholder='input product desc' defaultValue={product.product?.description}  />
                     <Form.Select aria-label="Default select example" className='mt-5 form-control radius'>
                         <option>Select Size</option>
                         <option value="R">R</option>
@@ -104,8 +98,4 @@ const EditProductAdmin = ({getProduct}) => {
   )
 }
 
-const mapStateToProps = state => ({product: state.product})
-
-const mapDispatchToProps = {getProduct}
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditProductAdmin)
+export default EditProductAdmin
