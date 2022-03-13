@@ -50,9 +50,9 @@ export const App = () => {
         <Route path='/forgotpassword' element={<ForgotPassword />} />
         <Route path='/verifyemail' element={<VerifyEmail />} />
         <Route path='/profile/edit-password' element={<EditPassword />} />
-        <Route path='/product-admin' element={<ProductAdmin />} />
+        {/* <Route path='/product-admin' element={<ProductAdmin />} /> */}
         <Route path='/editPromo' element={<EditPromo />} />
-        {/* <Route path='product-admin/:id' element={<ProductAdmin />} /> */}
+        <Route path='product-admin/:id' element={<ProductAdmin />} />
         <Route path='product-customer/:id' element={<ProductCust />} />
         <Route path='edit-product-admin/:id' element={<EditProductAdmin />} />
         <Route path='new-product' element={<NewProduct />} />

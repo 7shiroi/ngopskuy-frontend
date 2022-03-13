@@ -1,13 +1,13 @@
 import http from '../../helpers/http'
 
-export const getProduct = (token) => {
-  return ({
-    type: 'GET_PRODUCT',
-    payload: http(token).get('product')
-  })
-}
+// export const getProduct = (token) => {
+//   return ({
+//     type: 'GET_PRODUCT',
+//     payload: http(token).get('product')
+//   })
+// }
 
-export const getProductById = (id) => {
+export const getProduct = (id) => {
   return {
     type: 'GET_PRODUCT',
     payload: http().get(`/product/${id}`)
