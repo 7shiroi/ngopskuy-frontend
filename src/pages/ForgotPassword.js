@@ -115,3 +115,5 @@ export const ForgotPassword = () => {
 		</>
 	)
 }
+
+export default ForgotPassword
