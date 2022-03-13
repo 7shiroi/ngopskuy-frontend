@@ -2,12 +2,12 @@
 import React from 'react'
 
 export const Button = ({ children, block, padding, variant = 'info', ...rest }) => {
-	return (
-		< div className={block ? `d-grid ${padding ? padding : 'px-5 my-2'}` : `d-inline-block ${padding ? padding : 'px-5'}`} >
-			<button className={`btn py-2 radius btn-${variant} `} {...rest}>{children}</button>
-		</div >
+  return (
+    < div className={block ? `d-grid ${padding ? padding : ' my-2'}` : `d-inline-block ${padding ? padding : ''}`} >
+      <button className={`btn py-2 radius btn-${variant} `} {...rest}>{children}</button>
+    </div >
 
-	)
+  )
 }
 
 export default Button
