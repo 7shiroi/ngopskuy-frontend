@@ -11,6 +11,7 @@ import { requestVerify } from '../redux/actions/auth'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import NavbarHome from "../components/NavbarHome"
+import Helmets from '../components/Helmets'
 
 export const VerifyEmail = () => {
     const auth = useSelector(state => state.auth)
@@ -36,7 +37,8 @@ export const VerifyEmail = () => {
         window.scrollTo(0, 0)
     }
     return (
-        <><NavbarHome />
+        <>
+            <Helmets children={"Verify Email"} /><NavbarHome />
             <Card className="bg-dark text-white">
                 <Card.Img src={Background} alt="Backround Footer" className='bg-footer d-none d-md-block' />
                 <Card.ImgOverlay className='d-flex flex-column container'>

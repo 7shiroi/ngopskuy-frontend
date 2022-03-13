@@ -5,10 +5,12 @@ import InputUnderline from '../components/InputUnderline'
 import Select from '../components/Select'
 import HistoryCard from '../components/HistoryCard'
 import SizeCard from '../components/SizeCard'
+import Helmets from '../components/Helmets'
 
 export const Test = () => {
 	return (
 		<>
+			<Helmets children={"Test"} />
 			<form>
 				<Button block variant='pallet-1 radius' version={'input-normal'}> Login </Button>
 				<Input label="Username :" block placeholder="Username"></Input>

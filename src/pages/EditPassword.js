@@ -4,6 +4,7 @@ import photo from '../assets/images/photo.png'
 import NavbarHome from "../components/NavbarHome"
 import Footer from "../components/Footer"
 import Button from "../components/Button"
+import Helmets from '../components/Helmets'
 import { BiPencil } from "react-icons/bi"
 import InputUnderline from "../components/InputUnderline"
 import { editPassword, getProfile } from '../redux/actions/auth'
@@ -37,7 +38,7 @@ export const EditPassword = () => {
         window.scrollTo(0, 0)
     }
     return (
-        <>
+        <><Helmets children={"Edit Password"} />
             <NavbarHome />
             <div className='bg-profile py-5 shadow'>
                 <Container>

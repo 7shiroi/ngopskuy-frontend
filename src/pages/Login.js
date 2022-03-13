@@ -12,6 +12,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../redux/actions/auth'
+import Helmets from '../components/Helmets'
 
 export const Login = () => {
 	const auth = useSelector(state => state.auth)
@@ -25,6 +26,7 @@ export const Login = () => {
 	}
 	return (
 		<> {auth.token && <Navigate to="/" />}
+		<Helmets children={"Login"} />
 			<Navbar />
 			<div className='container-fluid'>
 				<div className='row position-relative'>

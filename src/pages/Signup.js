@@ -13,6 +13,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useDispatch, useSelector } from 'react-redux'
 import { userSignUp } from '../redux/actions/user'
+import Helmets from '../components/Helmets'
 
 export const Signup = () => {
 	const dispatch = useDispatch()
@@ -29,7 +30,7 @@ export const Signup = () => {
 		dispatch(userSignUp(first_name, last_name, email, password, confirm_password))
 	}
 	return (
-		<>
+		<><Helmets children={"Sign Up"} />
 			<Navbar />
 			<div className='container-fluid'>
 				<div className='row position-relative'>
