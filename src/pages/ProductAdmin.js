@@ -11,16 +11,33 @@ import { connect, useDispatch, useSelector } from 'react-redux'
 import { useParams, useNavigate, Navigate } from 'react-router-dom'
 import NumberFormat from 'react-number-format'
 import SizeCard from '../components/SizeCard'
+import { increment, decrement } from '../redux/actions/buttons'
 
 const ProductAdmin = ({getProduct, deleteProduct}) => {
     const {product} = useSelector(state => state)
     const [control,setControl] = useState(false)
     const [show,setShow] = useState(-1)
+    const buttons = useSelector(state=>state.buttons)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {id} = useParams()
     console.log({id})
+
+
+    useEffect(()=>{
+        console.log(buttons);
+    }, [buttons])
+    
+    const onIncrement = (e)=>{
+        e.preventDefault()
+        dispatch(increment())
+      }
+    
+      const onDecrement = (e)=>{
+        e.preventDefault()
+        dispatch(decrement())
+      }
 
     useEffect(()=>{
         getProduct(id)
@@ -133,13 +150,13 @@ const ProductAdmin = ({getProduct, deleteProduct}) => {
                         </Card.Body>
                     </Col>
                     <Col xl={4} md={12} className='d-flex flex-row justify-content-center'>
-                        <Button  variant='pallet-3  radius mt-5'>
+                        <Button onClick={onDecrement} variant='pallet-3  radius mt-5'>
                             -
                         </Button>
                         <div className="flex-grow text-black font-medium text-md rounded-lg mx-5 mt-5 py-2 w-32 align-items-center radius">
-                            2
+                            {buttons.value}
                         </div>
-                        <Button  variant='pallet-3  radius mt-5' >
+                        <Button onClick={onIncrement} variant='pallet-3  radius mt-5' >
                             +
                         </Button>
                     </Col>
