@@ -10,10 +10,10 @@ import ProductCust from './pages/ProductCust'
 import EditProductAdmin from './pages/EditProductAdmin'
 import NewProduct from './pages/NewProduct'
 import NewPromo from './pages/NewPromo'
-import Product from './pages/Product'
+import ProductAllAdmin from './pages/ProductAllAdmin'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { ForgotPassword } from './pages/ForgotPassword'
+import ForgotPassword from './pages/ForgotPassword'
 
 export const App = () => {
   const dispatch = useDispatch()
@@ -40,11 +40,11 @@ export const App = () => {
         <Route path='profile' element={<Profile />} />
         <Route path='forgotpassword' element={<ForgotPassword />} />
         <Route path='product-admin/:id' element={<ProductAdmin />} />
-        <Route path='product-customer' element={<ProductCust />} />
+        <Route path='product-customer/:id' element={<ProductCust />} />
         <Route path='edit-product-admin/:id' element={<EditProductAdmin />} />
         <Route path='new-product' element={<NewProduct />} />
         <Route path='new-promo' element={<NewPromo />} />
-        <Route path='product' element={<Product />} />
+        <Route path='product' element={<ProductAllAdmin />} />
       </Routes>
     </BrowserRouter>
   )

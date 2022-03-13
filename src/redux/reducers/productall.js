@@ -1,7 +1,7 @@
 const initialState = {
     isLoading: false,
     isError: false,
-    product: {},
+    productall: [],
     successMsg: '',
     errorMsg: ''
 }
