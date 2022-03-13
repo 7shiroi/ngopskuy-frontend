@@ -9,6 +9,7 @@ import TestComponent2 from './pages/TestComponent2'
 import { useDispatch, useSelector } from 'react-redux'
 import { ForgotPassword } from './pages/ForgotPassword'
 import EditPassword from './pages/EditPassword'
+import VerifyEmail from './pages/VerifyEmail'
 
 export const App = () => {
   const auth = useSelector(state => state.auth)
@@ -37,6 +38,7 @@ export const App = () => {
         <Route path='/profile' element={<Profile />} />
         <Route path='/test2' element={<TestComponent2 />} />
         <Route path='/forgotpassword' element={<ForgotPassword />} />
+        <Route path='/verifyemail' element={<VerifyEmail />} />
         <Route path='/profile/edit-password' element={<EditPassword />} />
       </Routes>
     </BrowserRouter>
