@@ -65,7 +65,7 @@ const ProductAllAdmin = ({ getProductAll }) => {
                                 </li>
                             </ol>
                             <Button block variant='pallet-1 py-3 my-3 mb-5  radius' version={'input-normal'}> Apply Coupon </Button>
-                            <Button block variant='pallet-3 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Promo </Button>
+                            <Button onClick={goToNewPromo} block variant='pallet-3 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Promo </Button>
                         </Col>
                         <Col sm={12} md={8} className="border-start border-end">
 

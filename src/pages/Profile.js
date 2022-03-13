@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Card, Container, Row, Col, Image, Form } from 'react-bootstrap'
 import photo from '../assets/images/photo.png'
 import NavbarHome from "../components/NavbarHome"
@@ -13,12 +13,36 @@ import Helmets from '../components/Helmets'
 import { Navigate } from "react-router-dom"
 
 export const Profile = () => {
+    const hiddenFileInput = useRef(null)
     const navigate = useNavigate()
     const auth = useSelector(state => state.auth.userData)
     const tokens = useSelector(state => state.auth)
+    const [datas, setDatas] = useState({})
     const goEditPass = () => {
         navigate(`/profile/edit-password`)
     }
+
+    const fileInputHandler = (e) => {
+        const reader = new FileReader();
+        const image = e.target.files[0];
+
+        const productImage = document.querySelector('#product-image');
+        reader.readAsDataURL(image);
+
+        reader.onload = (e) => {
+            productImage.src = e.target.result;
+            productImage.className += ' rounded-circle'
+        };
+        setDatas({
+            image: e.target.files[0]
+        });
+    };
+
+    const uploadFile = (e) => {
+        e.preventDefault()
+        hiddenFileInput.current.click()
+    }
+
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -42,8 +66,9 @@ export const Profile = () => {
         const first_name = e.target.elements['first_name'].value
         const last_name = e.target.elements['last_name'].value
         const birth_date = e.target.elements['birth_date'].value
-
-        const data = { email, address, phone_number, first_name, last_name, birth_date }
+        const image = datas.image
+        // console.log(image)
+        const data = { email, address, phone_number, first_name, last_name, birth_date, image }
         dispatch(editProfile(tokens.token, data))
         window.scrollTo(0, 0)
     }
@@ -75,14 +100,21 @@ export const Profile = () => {
                             }
                             <Row className='py-5'>
                                 <Col xl={3} className="px-5 d-flex flex-column justify-content-center">
-                                    <Image src={auth.image ? auth.image : photo} roundedCircle ></Image>
+                                    <Image id='product-image' src={auth.image || photo} roundedCircle ></Image>
                                     <Card.Text as="h3" className='text-center mt-3'>
                                         {auth.first_name}
                                     </Card.Text>
                                     <Card.Text as="h5" className='text-center'>
                                         {auth.email}
                                     </Card.Text>
-                                    <Button block variant='pallet-2 radius'> Choose Photo </Button>
+                                    <Button block variant='pallet-2 radius' onClick={(e) => uploadFile(e)}> Choose Photo </Button>
+                                    <input type="file"
+                                        ref={hiddenFileInput}
+                                        className='d-none'
+                                        name='image'
+                                        accept='image'
+                                        onChange={(e) => fileInputHandler(e)}
+                                    />
                                     <Button block variant='pallet-3 radius'> Remove Photo </Button>
                                     <Button onClick={goEditPass} block variant='pallet-1 radius'> Edit Password </Button>
                                     <Card.Text as="h3" className='text-center mt-3'>

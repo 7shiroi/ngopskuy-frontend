@@ -94,8 +94,6 @@ const NewProduct = () => {
       productImage.src = e.target.result;
       productImage.className += ' rounded-circle'
     };
-
-
     setData({
       image: e.target.files[0]
     });
