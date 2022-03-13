@@ -13,6 +13,7 @@ import Col from 'react-bootstrap/Col'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../redux/actions/auth'
 import Helmets from '../components/Helmets'
+import NavbarSign from '../components/NavbarSign'
 
 export const Login = () => {
 	const auth = useSelector(state => state.auth)
@@ -26,23 +27,23 @@ export const Login = () => {
 	}
 	return (
 		<> {auth.token && <Navigate to="/" />}
-		<Helmets children={"Login"} />
-			<Navbar />
+			<Helmets children={"Login"} />
 			<div className='container-fluid'>
 				<div className='row position-relative'>
 					<div className='col-6 background-login'></div>
-					<div className='col-6'>
+					<div className='col-6 border-top border-bottom border-pallet-1 bg-pallet-4'>
+						<NavbarSign />
 						{
 							auth.errorMsg &&
-                            <div className="alert alert-warning fade show" role="alert">
-                            	<strong>{auth.errorMsg[0]}</strong>
-                            </div>
+							<div className="alert alert-warning fade show" role="alert">
+								<strong>{auth.errorMsg}</strong>
+							</div>
 						}
 						{
 							auth.errMsg &&
-                            <div className="alert alert-warning fade show" role="alert">
-										 <strong>{auth.errMsg}</strong>
-                            </div>
+							<div className="alert alert-warning fade show" role="alert">
+								<strong>{auth.errMsg}</strong>
+							</div>
 						}
 						<Form onSubmit={onLogin} className='py-5'>
 							<Input name="email" label="Email :" block placeholder="Email"></Input>
@@ -59,7 +60,7 @@ export const Login = () => {
 									<Card.Body>
 										<Card.Title>Get your member card now!</Card.Title>
 										<Card.Text>
-                                            Let&lsquos;s join with our member and enjoy the deals.
+											Let&lsquos;s join with our member and enjoy the deals.
 										</Card.Text>
 									</Card.Body>
 								</Col>

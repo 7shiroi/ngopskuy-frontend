@@ -1,146 +1,182 @@
-import React, { useEffect } from 'react'
-import Helmets from '../components/Helmets'
-import { Card, Container, Row, Col, Tabs, Tab } from 'react-bootstrap'
-import hazelnut from '../assets/images/hazelnut.png'
+import React, { useEffect, useState } from 'react'
+import CoffeeLogo from "../assets/images/CoffeeLogo.png"
+import { Card, Container, Row, Col, Image } from 'react-bootstrap'
+import Button from '../components/Button'
+import InputUnderline from '../components/InputUnderline'
+import coffee from '../assets/images/coffee.png'
 import NavbarHome from '../components/NavbarHome'
 import Footer from '../components/Footer'
-import CardMenu from '../components/CardMenu'
-import { getProduct } from '../redux/actions/product'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import Button from '../components/Button'
+import { getProduct, deleteProduct } from '../redux/actions/product'
+import { connect, useDispatch, useSelector } from 'react-redux'
+import { useParams, useNavigate, Navigate } from 'react-router-dom'
+import NumberFormat from 'react-number-format'
+import SizeCard from '../components/SizeCard'
+import { increment, decrement } from '../redux/actions/buttons'
+import hazelnut from '../assets/images/hazelnut.png'
 
-
-export const ProductAdmin = (props) => {
-    const navigate = useNavigate()
-    const auth = useSelector(state => state.auth.userData)
-    const product = useSelector(state => state.product?.product)
-    const dataa = Array.from(product)
-    const token = useSelector(state => state.auth)
-    console.log(dataa)
+const ProductAdmin = ({ getProduct, deleteProduct }) => {
+    const { product } = useSelector(state => state)
+    const [control, setControl] = useState(false)
+    const [show, setShow] = useState(-1)
+    const buttons = useSelector(state => state.buttons)
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { id } = useParams()
+    console.log({ id })
+
+
     useEffect(() => {
-        dispatch(getProduct(token))
+        console.log(buttons);
+    }, [buttons])
+
+    const onIncrement = (e) => {
+        e.preventDefault()
+        dispatch(increment())
+    }
+
+    const onDecrement = (e) => {
+        e.preventDefault()
+        dispatch(decrement())
+    }
+
+    useEffect(() => {
+        getProduct(id)
     }, [])
+
+    useEffect(() => {
+        if (control) {
+            dispatch(getProduct(id))
+            setControl(false)
+            setShow(false)
+            navigate('/product')
+        }
+    }, [control])
+
+    useEffect(() => {
+        console.log(product)
+    }, [product])
+
+    const goBack = () => {
+        window.history.back()
+    }
+
+    const goEdit = () => {
+        navigate(`/edit-product-admin/${id}`)
+    }
+
+    const handleDelete = () => {
+        const token = window.localStorage.getItem("token")
+        dispatch(deleteProduct(token, id))
+        setControl(true)
+        navigate('/product')
+    }
     return (
         <>
-            <Helmets children={"Product Admin"} />
-            <NavbarHome />
-            <section>
+            <header className='text-center'>
+                Header
+            </header>
+            <div className='bg-product bg-gray-100 h-full'>
                 <Container>
-                    <Row>
-                        <Col sm={12} md={4}>
-                            <Card.Text as="h3" className='text-center'>
-                                Promo for you
-                            </Card.Text>
-                            <div>
-                                Coupons will be updated every weeks. Check them out!
+                    <div onClick={goBack} style={{ fontSize: "20px", fontFamily: "Rubik" }} className="p-10 ml-20 mx-5 py-5 nav-text">
+                        <span>Favorite & Promo {""}</span><span className="text-yellow-800"> {">"} {product.product?.name}</span>
+                    </div>
+                    <Row className='px-3 justify-content-md-between'>
+                        <Col xl={5} sm={12} className="px-5 d-flex flex-column justify-content-center">
+                            <Image src={product.product?.image || hazelnut} alt="product-image" roundedCircle className='img-fluid'></Image>
+                            <div style={{ fontSize: "48px", fontFamily: "Poppins" }} className="mt-5 ml-20">
+                                <p className="text-center text-4xl font-bold">{product.product?.name}</p>
+                                <p className="text-center text-xl font-medium"><NumberFormat value={product.product?.price} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} prefix={'IDR '} ></NumberFormat></p>
                             </div>
-                            <div className='my-3'>Terms and Condition</div>
-                            <ol>
-                                <li>
-                                    You can only apply 1 coupon per day
-                                </li>
-                                <li>
-                                    It only for dine in
-                                </li>
-                                <li>
-                                    Buy 1 get 1 only for new user
-                                </li>
-                                <li>
-                                    Should make member card to apply coupon
-                                </li>
-                            </ol>
-                            <Button block variant='pallet-1 py-3 my-3 mb-5  radius' version={'input-normal'}> Apply Coupon </Button>
-                            <Button block variant='pallet-3 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Promo </Button>
+                            <div className="ml-20 mt-10 space-y-5">
+                                <Button block variant='pallet-2 radius'> Add to Cart </Button>
+                                <Button onClick={goEdit} block variant='pallet-3 my-2 radius'> Edit Product </Button>
+                                <Button onClick={handleDelete} block variant='pallet-1 radius'> Delete Menu </Button>
+                            </div>
                         </Col>
-                        <Col sm={12} md={8} className="border-start border-end">
-
-                            <Tabs
-                                defaultActiveKey="home"
-                                transition={false}
-                                id="noanim-tab-example"
-                                className="mb-3 bg-white text-pallet-1"
-                                rounded
-                            >
-                                <Tab eventKey="home" title="Favorite And Promo">
-                                    <Row class className="">
-                                        {dataa?.map((data, idx) => (
-                                            <Col key={idx} sm={12} md={4}>
-                                                <CardMenu key={idx} newClass={"mx-5 my-5"}
-                                                    cardName={data?.name}
-                                                    cardPrice={data?.price}
-                                                    cardImage={data?.image || hazelnut}
-                                                    cardDiscount={"10%"} />
-                                            </Col>
-                                        ))}
-                                    </Row>
-                                </Tab>
-                                <Tab eventKey="coffee" title="Coffeee">
-                                    <Row class className="">
-                                        {dataa?.map((data, idx) => (
-                                            <Col key={idx} sm={12} md={4}>
-                                                <CardMenu key={idx} newClass={"mx-5 my-5"}
-                                                    cardName={data?.name}
-                                                    cardPrice={data?.price}
-                                                    cardImage={data?.image || hazelnut}
-                                                    cardDiscount={"10%"} />
-                                            </Col>
-                                        ))}
-                                    </Row>
-                                </Tab>
-                                <Tab eventKey="noncoffee" title="Non Coffee">
-                                    <Row class className="">
-                                        {dataa?.map((data, idx) => (
-                                            <Col key={idx} sm={12} md={4}>
-                                                <CardMenu key={idx} newClass={"mx-5 my-5"}
-                                                    cardName={data?.name}
-                                                    cardPrice={data?.price}
-                                                    cardImage={data?.image || hazelnut}
-                                                    cardDiscount={"10%"} />
-                                            </Col>
-                                        ))}
-                                    </Row>
-                                </Tab>
-                                <Tab eventKey="foods" title="Foods">
-                                    <Row class className="">
-                                        {dataa?.map((data, idx) => (
-                                            <Col key={idx} sm={12} md={4}>
-                                                <CardMenu key={idx} newClass={"mx-5 my-5"}
-                                                    cardName={data?.name}
-                                                    cardPrice={data?.price}
-                                                    cardImage={data?.image || hazelnut}
-                                                    cardDiscount={"10%"} />
-                                            </Col>
-                                        ))}
-                                    </Row>
-                                </Tab>
-                                <Tab eventKey="addon" title="Add-On">
-                                    <Row class className="">
-                                        {dataa?.map((data, idx) => (
-                                            <Col key={idx} sm={12} md={4}>
-                                                <CardMenu key={idx} newClass={"mx-5 my-5"}
-                                                    cardName={data?.name}
-                                                    cardPrice={data?.price}
-                                                    cardImage={data?.image || hazelnut}
-                                                    cardDiscount={"10%"} />
-                                            </Col>
-                                        ))}
-                                    </Row>
-                                </Tab>
-                            </Tabs>
-                            <div>
-                                *the price has been cutted by discount appears
-                            </div>
-                            <div className='mb-5'>
-                                <Button block variant='pallet-1 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Product </Button>
-                            </div>
+                        <Col xl={7} sm={12} className="px-5 d-flex flex-column justify-content-center">
+                            <Container>
+                                <Card style={{ fontSize: "24px", fontFamily: "Poppins" }} className='text-center position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom mx-5 px-5 radius'>
+                                    <Card.Text className='mt-5'>
+                                        Delivery only on Monday to friday at {product.product?.delivery_hour_start} - {product.product?.delivery_hour_end} pm
+                                    </Card.Text>
+                                    <br />
+                                    <Card.Text>
+                                        Cold brewing is a method of brewing that combines ground coffee and cool water and uses time instead of heat to extract the flavor. It is brewed in small batches and steeped for as long as 48 hours.
+                                    </Card.Text>
+                                    <br />
+                                    <Card.Text >
+                                        Choose a size
+                                    </Card.Text>
+                                    <div className="d-flex flex-row justify-content-md-center mb-5">
+                                        <SizeCard radioName={"R"} value="R" />
+                                        <SizeCard radioName={"L"} value="L" />
+                                        <SizeCard radioName={"XL"} value="XL" />
+                                    </div>
+                                </Card>
+                                <div className="mt-10 space-y-8">
+                                    <p className="text-center font-bold text-lg mt-4">Choose Delivery Methods</p>
+                                    <div className="d-flex flex-row justify-content-md-center py-3 ml-20 mt-10 space-y-5">
+                                        <Button variant='pallet-2'  >
+                                            Dine in
+                                        </Button>
+                                        <Button variant='pallet-3 mx-5' >
+                                            Door Delivery
+                                        </Button>
+                                        <Button variant='pallet-1'>
+                                            Pickup
+                                        </Button>
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-md-center align-items-left">
+                                    <p className='mt-3'>Set Time: </p>
+                                    <InputUnderline block version="input-underline underline" placeholder='Enter the Time you arrived'></InputUnderline>
+                                </div>
+                            </Container>
                         </Col>
                     </Row>
                 </Container>
-            </section>
-            <Footer />
+                <Container fluid className='mt-5 d-flex justify-content-center column'>
+                    <Card xl={6} className=' shadow px-5 mx-5 radius'>
+                        <Row xs={1} md={2} className="text-left">
+                            <Col xl={3} md={12} className='text-justify mt-3 mb-3 px-3' >
+                                <Image src={coffee} alt="product-image" roundedCircle ></Image>
+                            </Col>
+                            <Col xl={5} md={12}>
+                                <Card.Body className='mx-4 md-auto'>
+                                    <Card.Title className='mt-2'>COLD BREW</Card.Title>
+                                    <Card.Text className='mt-3'>
+                                        x1 (Large) <br /> x1 (Regular)
+                                    </Card.Text>
+                                </Card.Body>
+                            </Col>
+                            <Col xl={4} md={12} className='d-flex flex-row justify-content-center'>
+                                <Button onClick={onDecrement} variant='pallet-3  radius mt-5'>
+                                    -
+                                </Button>
+                                <div className="flex-grow text-black font-medium text-md rounded-lg mx-5 mt-5 py-2 w-32 align-items-center radius">
+                                    {buttons.value}
+                                </div>
+                                <Button onClick={onIncrement} variant='pallet-3  radius mt-5' >
+                                    +
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Card>
+                    <Card xl={6} className='shadow radius mx-5 px-5 pt-4 text-align-center checkout' >
+                        <Button variant='pallet-2 text-center w-100 h-100 text-button'>Checkout</Button>
+                    </Card>
+                </Container>
+            </div>
+            <footer className='text-center'>
+                Footer
+            </footer>
         </>
     )
 }
+
+const mapStateToProps = state => ({ product: state.product })
+
+const mapDispatchToProps = { getProduct, deleteProduct }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductAdmin)

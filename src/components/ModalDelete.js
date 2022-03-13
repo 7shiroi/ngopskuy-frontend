@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import trashIcon from '../assets/images/trash-icon.png'
 
@@ -37,3 +38,4 @@ export const ModalDelete = ({img, product, price, status}) => {
 }
 
 export default ModalDelete;
+

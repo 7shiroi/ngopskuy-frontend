@@ -31,7 +31,7 @@ export const ForgotPassword = () => {
 	}
 	return (
 		<>{auth.token && <Navigate to='/' />}
-		<Helmets children={"Forgot Password"} />
+			<Helmets children={"Forgot Password"} />
 			<Card className="bg-dark text-white">
 				<Card.Img src={Background} alt="Backround Footer" className='bg-footer d-none d-md-block' />
 				<Card.ImgOverlay className='d-flex flex-column container'>
@@ -115,3 +115,4 @@ export const ForgotPassword = () => {
 		</>
 	)
 }
+export default ForgotPassword

@@ -5,15 +5,20 @@ import Login from './pages/Login'
 import Footer from './components/Footer';
 import Signup from './pages/Signup'
 import Profile from './pages/Profile'
+import ProductAdmin from './pages/ProductAdmin'
+import ProductCust from './pages/ProductCust'
+import EditProductAdmin from './pages/EditProductAdmin'
+import NewProduct from './pages/NewProduct'
+import NewPromo from './pages/NewPromo'
+import ProductAllAdmin from './pages/ProductAllAdmin'
 import React, { useEffect } from 'react'
+import ForgotPassword from './pages/ForgotPassword'
 import TestComponent2 from './pages/TestComponent2'
 import { useDispatch, useSelector } from 'react-redux'
-import { ForgotPassword } from './pages/ForgotPassword'
 import EditPassword from './pages/EditPassword'
 import VerifyEmail from './pages/VerifyEmail'
-import { ProductAdmin } from './pages/ProductAdmin'
+// import { ProductAdmin } from './pages/ProductAdmin'
 import EditPromo from './pages/EditPromo'
-
 
 export const App = () => {
   const auth = useSelector(state => state.auth)
@@ -45,8 +50,14 @@ export const App = () => {
         <Route path='/forgotpassword' element={<ForgotPassword />} />
         <Route path='/verifyemail' element={<VerifyEmail />} />
         <Route path='/profile/edit-password' element={<EditPassword />} />
-        <Route path='/product-admin' element={<ProductAdmin />} />
+        {/* <Route path='/product-admin' element={<ProductAdmin />} /> */}
         <Route path='/editPromo' element={<EditPromo />} />
+        <Route path='product-admin/:id' element={<ProductAdmin />} />
+        <Route path='product-customer/:id' element={<ProductCust />} />
+        <Route path='edit-product-admin/:id' element={<EditProductAdmin />} />
+        <Route path='new-product' element={<NewProduct />} />
+        <Route path='new-promo' element={<NewPromo />} />
+        <Route path='product' element={<ProductAllAdmin />} />
 
       </Routes>
     </BrowserRouter>

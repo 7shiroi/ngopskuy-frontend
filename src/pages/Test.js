@@ -11,15 +11,16 @@ import CardMenu from '../components/CardMenu'
 import Helmets from '../components/Helmets'
 import pic from "../assets/images/corndog-lezat.jpg"
 import ModalDelete from '../components/ModalDelete'
+import PromoCard from '../components/PromoCard'
 
 
 export const Test = () => {
-      const data = {
-        img: pic,
-        name: 'Corn dog',
-        price: 34000,
-        isDelivered: 'Delivered'
-    }
+	const data = {
+		img: pic,
+		name: 'Corn dog',
+		price: 34000,
+		isDelivered: 'Delivered'
+	}
 	return (
 		<>
 			<Helmets children={"Test"} />
@@ -43,12 +44,13 @@ export const Test = () => {
 				</div>
 				<CardMenu cardName={"Veggie Tomato Mix"} cardPrice={"IDR 34.000"} cardImage={hazelnut} cardDiscount={"10%"} />
 			</form>
-            <div className='row py-5' style={{backgroundColor: 'black'}}>
-                <div className='col-12 col-md-6 col-lg-4'>
-            <ModalDelete img={pic} product='Corn dog' price='40000' status='Delivered'></ModalDelete></div>
-            <div className='col-12 col-md-6 col-lg-3'>
-            </div>
-            </div>
+			<div className='row py-5' style={{ backgroundColor: 'black' }}>
+				<div className='col-12 col-md-6 col-lg-4'>
+					<ModalDelete img={pic} product='Corn dog' price='40000' status='Delivered'></ModalDelete></div>
+				<div className='col-12 col-md-6 col-lg-3'>
+				</div>
+			</div>
+			<PromoCard />
 		</>
 
 

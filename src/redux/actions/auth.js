@@ -42,16 +42,18 @@ export const getProfile = (token) => {
 }
 
 export const editProfile = (token, data) => {
-    const params = new URLSearchParams()
+    const params = new FormData()
     params.append('first_name', data.first_name)
     params.append('last_name', data.last_name)
     params.append('email', data.email)
     params.append('address', data.address)
     params.append('phone_number', data.phone_number)
     params.append('birth_date', data.birth_date)
+    params.append('image', data.image)
+    console.log(data.image)
     return ({
         type: 'EDIT_PROFILE',
-        payload: http(token).patch('profile', params)
+        payload: http(token, true).patch('profile', params)
     })
 }
 
