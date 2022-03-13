@@ -1,73 +1,41 @@
-import React from 'react'
-import { Modal, Button } from "react-bootstrap";
- 
-const ModalDelete = ({ showModal, hideModal, confirmModal, id, type, message }) => {
+
+import React, { useState } from 'react';
+import trashIcon from '../assets/images/trash-icon.png'
+
+export const ModalDelete = ({img, product, price, status}) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const onShow = () => {
+        setIsOpen(true)
+    }
+    const onHidden = () => {
+        setIsOpen(false)
+    }
     return (
-        <Modal show={showModal} onHide={hideModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Delete Confirmation</Modal.Title>
-        </Modal.Header>
-        <Modal.Body><div className="alert alert-danger">{message}</div></Modal.Body>
-        <Modal.Footer>
-          <Button variant="default" onClick={hideModal}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={() => confirmModal(type, id) }>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        <div className='block position-relative radius bg-white' style={{height: '100%'}}>
+            <div className='d-flex align-items-center p-3'>
+                <div className='img-fit'>
+                    <img src={img} alt='corndog' width='50' height='50'/>
+                </div>
+                <div className="about px-3 text-pallet-1" style={{fontSize: '15px'}}>
+                    <p className='fs-4 fw-bold py-0 my-0'>{product}</p>
+                    <p className='fs-5 py-0 my-0'>IDR {price}</p>
+                    <p className='fs-5  my-0'>{status}</p>
+                </div>
+            </div>
+            {!isOpen &&
+            <div className='clickDelete bg-transparent position-absolute top-0 start-0' onClick={onShow}></div>}
+            {isOpen &&
+            <div className='clickDelete bg-dark bg-opacity-10 position-absolute top-0 start-0' onClick={onHidden} ></div>}
+            {isOpen && <div className='position-absolute top-0 end-0 translate-middle-y d-flex'>
+                <div className="icon-trash bg-pallet-1 text-center me-3">
+                    <img src={trashIcon} alt='delete-icon'/>
+                </div>
+                <div className='icon-close text-pallet-1 text-center bg-warning p-0 m-0' onClick={onHidden}>X</div>
+            </div>
+            }
+        </div>
     )
 }
- 
+
 export default ModalDelete;
 
-
-// import React from "react";
-// import { Modal, Button } from "react-bootstrap";
-
-// export const ModalDelete = (props) => {
-//     return (
-//       <Modal
-//         {...props}
-//         size="lg"
-//         aria-labelledby="contained-modal-title-vcenter"
-//         centered
-//       >
-//         <Modal.Header closeButton>
-//           <Modal.Title id="contained-modal-title-vcenter">
-//             Modal heading
-//           </Modal.Title>
-//         </Modal.Header>
-//         <Modal.Body>
-//           <h4>Delete Confirmation</h4>
-//           <p>
-//             Are you sure want to delete this product ?
-//           </p>
-//         </Modal.Body>
-//         <Modal.Footer>
-//           <Button onClick={props.onHide}>Close</Button>
-//           <Button onClick={props.onHide}>Sure</Button>
-//         </Modal.Footer>
-//       </Modal>
-//     );
-//   }
-  
-//   function App() {
-//     const [modalShow, setModalShow] = React.useState(false);
-  
-//     return (
-//       <>
-//         <Button variant="primary" onClick={() => setModalShow(true)}>
-//           Launch vertically centered modal
-//         </Button>
-  
-//         <MyVerticallyCenteredModal
-//           show={modalShow}
-//           onHide={() => setModalShow(false)}
-//         />
-//       </>
-//     );
-//   }
-  
-//   render(<App />);

@@ -5,7 +5,8 @@ const initialState = {
     isLoading: false,
     isError: false,
     errorMsg: '',
-    errMsg: ''
+    errMsg: '',
+    successMsg: ''
 }
 
 const auth = (state = initialState, action) => {
@@ -50,17 +51,101 @@ const auth = (state = initialState, action) => {
             const { data } = action.payload
             state.isLoading = false
             state.message = data.message
+            state.successMsg = data.message
+            state.errorMsg = ""
+            state.errMsg = ""
             return { ...state }
         }
         case 'REQUEST_RESET_PASSWORD_REJECTED': {
             const { data } = action.payload.response
             state.isLoading = false
             state.error = true
-            state.errorMsg = data.message
+            state.errorMsg = data.error
+            state.errMsg = data.message
             return { ...state }
         }
         case 'SET_EMAIL': {
             state.email = action.payload.email
+            return { ...state }
+        }
+        case 'GET_PROFILE_PENDING': {
+            state.error = false
+            state.isLoading = true
+            return { ...state }
+        }
+        case 'GET_PROFILE_FULFILLED': {
+            const { data } = action.payload
+            state.isLoading = false
+            state.userData = data.result
+            return { ...state }
+        }
+        case 'GET_PROFILE_REJECTED': {
+            const { data } = action.payload.response
+            state.isLoading = false
+            state.error = true
+            state.errorMsg = data.message
+            return { ...state }
+        }
+        case 'EDIT_PROFILE_PENDING': {
+            state.error = false
+            state.isLoading = true
+            state.message = ''
+            return { ...state }
+        }
+        case 'EDIT_PROFILE_FULFILLED': {
+            const { data } = action.payload
+            state.isLoading = false
+            state.message = data.message
+            return { ...state }
+        }
+        case 'EDIT_PROFILE_REJECTED': {
+            const { data } = action.payload.response
+            state.isLoading = false
+            state.error = true
+            state.errorMsg = data.error
+            state.errMsg = data.message
+            return { ...state }
+        }
+        case 'EDIT_PASSWORD_PENDING': {
+            state.error = false
+            state.isLoading = true
+            state.message = ''
+            return { ...state }
+        }
+        case 'EDIT_PASSWORD_FULFILLED': {
+            const { data } = action.payload
+            state.isLoading = false
+            state.message = data.message
+            state.successMsg = data.message
+            return { ...state }
+        }
+        case 'EDIT_PASSWORD_REJECTED': {
+            const { data } = action.payload.response
+            state.isLoading = false
+            state.error = true
+            state.errorMsg = data.error
+            state.errMsg = data.message
+            return { ...state }
+        }
+        case 'REQUEST_VERIFY_PENDING': {
+            state.error = false
+            state.isLoading = true
+            state.message = ''
+            return { ...state }
+        }
+        case 'REQUEST_VERIFY_FULFILLED': {
+            const { data } = action.payload
+            state.isLoading = false
+            state.message = data.message
+            state.successMsg = data.message
+            return { ...state }
+        }
+        case 'REQUEST_VERIFY_REJECTED': {
+            const { data } = action.payload.response
+            state.isLoading = false
+            state.error = true
+            state.errorMsg = data.error
+            state.errMsg = data.message
             return { ...state }
         }
         default: {

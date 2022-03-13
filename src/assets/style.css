@@ -20,13 +20,16 @@ div {
 
 .background-login {
     background-image: url("/src/assets/images/login-image.png");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.bg-profile {
+
+.bg-profile{
     background-image: url("/src//assets/images/bg-profile.png");
 }
 
-.background-transparent {
+.background-transparent{
     color: black(255, 255, 255, 0.5);
     background-color: rgba(255, 255, 255, 0.5);
 }
@@ -39,7 +42,6 @@ div {
 .btn-forgot {
     text-align: center;
 }
-
 .shadow-new {
     box-shadow: 0 4rem 4rem rgba(black, .275)
 }
@@ -160,6 +162,23 @@ div {
 }
 
 ul {
+.shadow-new{
+    box-shadow: 0 4rem 4rem rgba(black, .275)
+}
+
+.rb{
+    font-family: 'Rubik', sans-serif;
+}
+.primary{
+    color: #483434;
+}
+.active{
+    color:#483434;
+}
+.pt-6{
+    padding-top: 8rem;
+}
+ul{
     list-style-type: none;
     padding-left: 0 !important;
     font-family: 'Rubik', sans-serif;
@@ -167,11 +186,10 @@ ul {
     line-height: 30px;
 }
 
-.fw-medium {
+.fw-medium{
     font-weight: 500;
 }
-
-.icon {
+.icon{
     width: 34px;
     height: 34px;
     border-radius: 50%;
@@ -181,11 +199,82 @@ ul {
     justify-content: center;
 }
 
-.bg-none {
+.bg-none{
     background-color: unset;
     border: unset;
+}   
+.pps{
+    font-family: 'Poppins', sans-serif;
 }
 
-.pps {
-    font-family: 'Popins', sans-serif;
+.promo-card {
+  border-radius: 2em;
+}
+
+.promo-image.container {
+    width: 50%
+}
+.circle-image {
+    border-radius: 50%;
+}
+
+.edit-icon-container {
+    width: 1.25em;
+    height: 1.25em;
+    border-radius: 50%;
+    background-color: #483434;
+    position: absolute;
+    bottom: 7.5%;
+    right: 7.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-icon{
+    width: 60% !important;
+    height: 60% !important;
+}
+
+div.dash-line{
+    height: 1px;
+    border: 1px dashed black;
+}
+
+div.no-image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7.5em;
+  height: 7.5em;
+  background-color: gray;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">";
+}
+  
+.img-promo{
+    width: 190px;
+    height: 190px;
+    object-position: center;
+    object-fit: fill;
+}
+.icon-edit-img{
+    width: 40px;
+    height: 40px;
+}
+.strip-line{
+    width: 100%;
+    border: 1px dashed #EED6C4;
+}
+.icon-size{
+    width: 70px;
+    height: 70px;
+}
+.shadow-dark{
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }

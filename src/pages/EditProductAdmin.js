@@ -12,7 +12,7 @@ import ButtonPlusMinus from '../components/ButtonPlusMinus'
 
 const EditProductAdmin = ({getProduct}) => {
 //   const [name, setName] = useState('');
-//   const [price, setPricet] = useState('');
+//   const [price, setPrice] = useState('');
 //   const [description, setDescription] = useState('');
   const {product} = useSelector(state => state)
   const {id} = useParams()
