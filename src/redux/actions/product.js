@@ -1,6 +1,13 @@
 import http from '../../helpers/http'
 
-export const getProduct = (id)=> {
+export const getProduct = (token) => {
+    return ({
+        type: 'GET_PRODUCT',
+        payload: http(token).get('product')
+    })
+}
+
+export const getProductById = (id)=> {
     return {
         type: 'GET_PRODUCT',
         payload: http().get(`/product/${id}`)
@@ -34,4 +41,3 @@ export const deleteProduct = (token, id) => {
     type: 'DELETE_PRODUCT',
     payload: http(token).patch(`/product/delete/${id}`)
   }
-}

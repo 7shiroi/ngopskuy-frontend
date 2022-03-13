@@ -3,7 +3,7 @@
 import React from 'react'
 import Input from '../components/Input'
 import Button from '../components/Button'
-import Navbar from '../components/NavbarHome'
+import NavbarLog from '../components/NavbarLog'
 import Footer from '../components/Footer'
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
@@ -31,28 +31,28 @@ export const Signup = () => {
 	}
 	return (
 		<><Helmets children={"Sign Up"} />
-			<Navbar />
 			<div className='container-fluid'>
-				<div className='row position-relative'>
-					<div className='col-6 background-login'></div>
-					<div className='col-6'>
+				<div className='row position-relative '>
+					<div className='col-6 background-login d-none d-md-block '></div>
+					<div className='col-12 col-md-6 bg-pallet-4 border-top border-bottom border-pallet-1'>
+						<NavbarLog />
 						{
 							user.errorMsg &&
-                            <div className="alert alert-warning fade show" role="alert">
-                            	<strong>{user.errorMsg[0]}</strong>
-                            </div>
+							<div className="alert alert-warning fade show" role="alert">
+								<strong>{user.errorMsg[0]}</strong>
+							</div>
 						}
 						{
 							user.errMsg &&
-                            <div className="alert alert-warning fade show" role="alert">
-                            	<strong>{user.errMsg}</strong>
-                            </div>
+							<div className="alert alert-warning fade show" role="alert">
+								<strong>{user.errMsg}</strong>
+							</div>
 						}
 						{
 							user.successMsg &&
-                            <div className="alert alert-success fade show" role="alert">
-                            	<strong>{user.successMsg}</strong>
-                            </div>
+							<div className="alert alert-success fade show" role="alert">
+								<strong>{user.successMsg}</strong>
+							</div>
 						}
 						<Form onSubmit={onSignUp} className='py-5'>
 							<Input name="first_name" label="First Name :" block placeholder="First Name"></Input>
@@ -66,13 +66,13 @@ export const Signup = () => {
 						</Form>
 					</div>
 					<div className='d-grid'>
-						<Card className='shadow position-absolute top-100 start-50 translate-middle radius'>
+						<Card className='shadow position-absolute top-100 start-50 translate-middle radius d-none d-md-block'>
 							<Row xs={1} md={2} className="g-4 ">
 								<Col>
 									<Card.Body>
 										<Card.Title>Get your member card now!</Card.Title>
 										<Card.Text>
-                                            Let's join with our member and enjoy the deals.
+											Let's join with our member and enjoy the deals.
 										</Card.Text>
 									</Card.Body>
 								</Col>

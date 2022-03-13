@@ -11,6 +11,7 @@ const rootReducer = combineReducers({
     product,
     productall,
     buttons,
+
 })
 
 export default rootReducer

@@ -1,5 +1,8 @@
 import React from 'react'
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'
+import Logo from '../assets/images/Logo.png'
+import Navbar from 'react-bootstrap/Navbar'
+
 
 export const Footer = () => {
 	return (
@@ -9,13 +12,19 @@ export const Footer = () => {
 					<div className='row justify-content-between'>
 						<div className='col-3'>
 							<div className='mb-4'>
-								<div className='rb text-pallet-1 fs-5 fw-bold'>
-										NgopSkuY
-								</div>
+								<Navbar.Brand href="/">
+									<img
+										src={Logo}
+										width="120"
+										height="120"
+										className="d-inline-block align-top"
+										alt="React Bootstrap logo"
+									/>
+								</Navbar.Brand>
 							</div>
 							<div className='mb-4'>
 								<div className='rb fw-medium fw-5 '>
-								Coffee Shop is a store that sells some good meals, and especially coffee. We provide high quality beans
+									Coffee Shop is a store that sells some good meals, and especially coffee. We provide high quality beans
 								</div>
 							</div>
 							<div className='mb-4'>
@@ -52,11 +61,10 @@ export const Footer = () => {
 									</ul>
 								</div>
 							</div>
-							
 						</div>
 					</div>
 				</div>
-			</div>  
+			</div>
 		</footer>
 	)
 }
