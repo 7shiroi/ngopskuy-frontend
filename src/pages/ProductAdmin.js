@@ -8,13 +8,14 @@ import NavbarHome from '../components/NavbarHome'
 import Footer from '../components/Footer'
 import { getProduct, deleteProduct } from '../redux/actions/product'
 import { connect, useDispatch, useSelector } from 'react-redux'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate, Navigate } from 'react-router-dom'
 import NumberFormat from 'react-number-format'
 import SizeCard from '../components/SizeCard'
 
 const ProductAdmin = ({getProduct, deleteProduct}) => {
     const {product} = useSelector(state => state)
     const [control,setControl] = useState(false)
+    const [show,setShow] = useState(-1)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -26,6 +27,16 @@ const ProductAdmin = ({getProduct, deleteProduct}) => {
     },[])
 
     useEffect(()=>{
+        if(control){
+           const token = window.localStorage.getItem("token")
+           dispatch(getProduct)
+           setControl(false)
+           setShow(false)
+           navigate('/product')
+        }
+    },[control])
+
+    useEffect(()=>{
         console.log(product)
       },[product])
 
@@ -33,13 +44,14 @@ const ProductAdmin = ({getProduct, deleteProduct}) => {
       window.history.back()
     }
 
-    const goEdit = (id)=> {
+    const goEdit = ()=> {
       navigate(`/edit-product-admin/${id}`)
     }
 
-    const handleDelete = (id)=>{
+    const handleDelete = ()=>{
         dispatch(deleteProduct(id))
         setControl(true)
+        navigate('/product')
     }
   return (
     <>
@@ -66,8 +78,8 @@ const ProductAdmin = ({getProduct, deleteProduct}) => {
                 </Col>
                 <Col xl={7} sm={12} className="px-5 d-flex flex-column justify-content-center">
                     <Container>
-                        <Card style={{fontSize:"30px", fontFamily:"Poppins"}} className='text-center position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom mx-5 px-5 radius'>
-                            <Card.Text >
+                        <Card style={{fontSize:"24px", fontFamily:"Poppins"}} className='text-center position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom mx-5 px-5 radius'>
+                            <Card.Text className='mt-5'>
                                 Delivery only on Monday to friday at {product.product?.delivery_hour_start} - {product.product?.delivery_hour_end} pm 
                             </Card.Text>
                             <br/>
@@ -100,27 +112,27 @@ const ProductAdmin = ({getProduct, deleteProduct}) => {
                         </div>
                         <div className="d-flex justify-content-md-center align-items-left">
                             <p className='mt-3'>Set Time: </p>
-                            <InputUnderline block version="input-underline px-5 underline" placeholder='Enter the Time you arrived'></InputUnderline>
+                            <InputUnderline block version="input-underline underline" placeholder='Enter the Time you arrived'></InputUnderline>
                         </div>
                     </Container>
                 </Col>
             </Row>
         </Container>
-        <Container className='mt-5 mb-5 d-flex justify-content-end'>
-            <Card className=' shadow px-5 mx-5 radius'>
-                <Row xs={1} md={2} >
-                    <Col xl={3} className='text-justify mt-3 mb-3 px-5' >
+        <Container fluid className='mt-5 mb-5 d-flex justify-content-center column'>
+            <Card xl={6} className=' shadow px-5 mx-5 radius'>
+                <Row xs={1} md={2} className="text-left">
+                    <Col xl={3} md={12} className='text-justify mt-3 mb-3 px-3' >
                         <Image src={coffee} alt="product-image" roundedCircle ></Image>
                     </Col>
-                    <Col xl={5}>
-                        <Card.Body className='mx-4'>
+                    <Col xl={5} md={12}>
+                        <Card.Body className='mx-4 md-auto'>
                             <Card.Title className='mt-2'>COLD BREW</Card.Title>
                             <Card.Text className='mt-3'>
                                 x1 (Large) <br/> x1 (Regular)
                             </Card.Text>
                         </Card.Body>
                     </Col>
-                    <Col xl={4} className='d-flex justify-content-start'>
+                    <Col xl={4} md={12} className='d-flex flex-row justify-content-center'>
                         <Button  variant='pallet-3  radius mt-5'>
                             -
                         </Button>
@@ -133,8 +145,8 @@ const ProductAdmin = ({getProduct, deleteProduct}) => {
                     </Col>
                 </Row>
             </Card>
-            <Card className=' shadow px-5 mx-5 text-center radius'>
-               <p className='text-center'> Checkout</p>
+            <Card xl={6} className='shadow radius mx-5 px-5 pt-4 text-align-center checkout' >
+               <Button variant='pallet-2 text-center w-100 h-100 text-button'>Checkout</Button>
             </Card>
         </Container>
      </div>
