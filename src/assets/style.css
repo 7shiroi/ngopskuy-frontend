@@ -128,3 +128,7 @@ div.no-image{
   font-size: 2em;
   font-weight: bold;
 }
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">";
+}

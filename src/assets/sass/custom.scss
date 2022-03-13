@@ -7,6 +7,7 @@ $theme-colors: (
     "pallet-3":#EED6C4,
     "pallet-4":#FFF3E4
 );
+$breadcrumb-divider: quote(">");
 // @import "pallete.scss";
 @import "~bootstrap/scss/bootstrap";
 @import "./homepage.scss";
@@ -45,3 +46,13 @@ $theme-colors: (
     width: 70%;
     height: 300px;
   }
+
+.breadcrumb-item.active{
+  color: #483434;
+  font-weight: bold;
+}
+
+.breadcrumb-item > a{
+  color: grey;
+  text-decoration: none;
+}
