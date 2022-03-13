@@ -3,13 +3,13 @@ import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'
 
 export const Footer = () => {
 	return (
-		<footer className="bg-warning container-fluid g-0">
+		<footer className="bg-pallet-4 container-fluid g-0">
 			<div className="container">
 				<div className="pt-6 pb-4">
 					<div className='row justify-content-between'>
 						<div className='col-3'>
 							<div className='mb-4'>
-								<div className='rb text-primary fs-5 fw-bold'>
+								<div className='rb text-pallet-1 fs-5 fw-bold'>
 										NgopSkuY
 								</div>
 							</div>
@@ -20,9 +20,9 @@ export const Footer = () => {
 							</div>
 							<div className='mb-4'>
 								<div className='d-flex'>
-									<div className='icon bg-primary me-3'><FaFacebookF /></div>
-									<div className='icon bg-primary mx-3'><FaTwitter /></div>
-									<div className='icon bg-primary fs-4 mx-3'><FaInstagram /></div>
+									<div className='icon bg-pallet-1 me-3'><FaFacebookF /></div>
+									<div className='icon bg-pallet-1 mx-3'><FaTwitter /></div>
+									<div className='icon bg-pallet-1 fs-4 mx-3'><FaInstagram /></div>
 								</div>
 							</div>
 							<div>
@@ -32,7 +32,7 @@ export const Footer = () => {
 						<div className='col-5'>
 							<div className='row'>
 								<div className='col '>
-									<div className='rb fw-bold text-primary fs-5'>Produk</div>
+									<div className='rb fw-bold text-pallet-1 fs-5'>Produk</div>
 									<ul>
 										<li className='py-1'>Download</li>
 										<li className='py-1'>Pricing</li>
@@ -42,7 +42,7 @@ export const Footer = () => {
 									</ul>
 								</div>
 								<div className='col '>
-									<div className='rb fw-bold text-primary fs-5'>Engane</div>
+									<div className='rb fw-bold text-pallet-1 fs-5'>Engane</div>
 									<ul>
 										<li className='py-1'>NgopSkuY ?</li>
 										<li className='py-1'>FAQ</li>
