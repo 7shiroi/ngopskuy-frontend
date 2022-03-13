@@ -9,6 +9,7 @@ import InputUnderline from "../components/InputUnderline"
 import { editProfile, getProfile } from '../redux/actions/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Helmets from '../components/Helmets'
 
 export const Profile = () => {
     const navigate = useNavigate()
@@ -50,7 +51,7 @@ export const Profile = () => {
         window.scrollTo(0, 0)
     }
     return (
-        <>
+        <><Helmets children={"My Profile"} />
             <NavbarHome />
             <div className='bg-profile py-5 shadow'>
                 <Container>

@@ -15,6 +15,7 @@ import { HiCheckCircle } from 'react-icons/hi'
 import Carousel from 'react-elastic-carousel'
 import NavbarHome from "../components/NavbarHome"
 import Footer from "../components/Footer"
+import Helmets from '../components/Helmets'
 
 export const Homepage = () => {
 	const breakPoints = [
@@ -25,7 +26,8 @@ export const Homepage = () => {
 	]
 
 	return (
-		<><NavbarHome />
+		<>
+		<Helmets children={"Home"} /><NavbarHome />
 			<header className='home-head'>
 				<div className='overlay'>
 					<Container>
