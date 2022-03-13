@@ -21,7 +21,7 @@ export const addProduct = (token, data) => {
   }
   return {
     type: 'ADD_PRODUCT',
-    payload: http(token, true).post('/product')
+    payload: http(token, true).post('/product', inputData)
   }
 }
 
@@ -32,7 +32,7 @@ export const editProduct = (token, id, data) => {
   }
   return {
     type: 'EDIT_PRODUCT',
-    payload: http(token, true).patch(`/product/${id}`)
+    payload: http(token, true).patch(`/product/${id}`, inputData)
   }
 }
 
