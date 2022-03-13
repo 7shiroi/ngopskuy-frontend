@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'
+
 import Logo from '../assets/images/Logo.png'
 import Navbar from 'react-bootstrap/Navbar'
 
@@ -60,7 +61,6 @@ export const Footer = () => {
 									</ul>
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>
