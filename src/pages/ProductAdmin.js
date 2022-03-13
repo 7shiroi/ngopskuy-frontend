@@ -145,5 +145,4 @@ export const ProductAdmin = (props) => {
         </>
     )
 }
-
 export default ProductAdmin
