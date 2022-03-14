@@ -6,6 +6,8 @@ import productall from './productall'
 import buttons from './buttons'
 import category from './category'
 import size from './size'
+import history from './history'
+import cart from './cart'
 
 const rootReducer = combineReducers({
     auth,
@@ -15,6 +17,8 @@ const rootReducer = combineReducers({
     productall,
     buttons,
     size,
+    history,
+    cart,
 })
 
 export default rootReducer

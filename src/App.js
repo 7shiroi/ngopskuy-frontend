@@ -22,6 +22,8 @@ import VerifyEmail from './pages/VerifyEmail'
 // import { ProductAdmin } from './pages/ProductAdmin'
 import EditPromo from './pages/EditPromo'
 import NavbarHome from './components/NavbarHome';
+import History from './pages/History';
+import Checkout from './pages/Checkout';
 
 export const App = () => {
   const auth = useSelector(state => state.auth)
@@ -64,6 +66,8 @@ export const App = () => {
         <Route path='product-admin' element={<ProductAllAdmin />} />
         <Route path='product-customer' element={<ProductAllCust />} />
         <Route path='payment' element={<Payment />} />
+        <Route path='history' element={<History />} />
+        <Route path='checkout' element={<Checkout />} />
       </Routes>
     </BrowserRouter>
   )
