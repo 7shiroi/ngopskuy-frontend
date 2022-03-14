@@ -26,7 +26,7 @@ export const History = ({getHistory, deleteHistory}) => {
                     {hist.history.map((data, idx) => {
                         return (
                             <div key={data.id} className='col-12 col-md-6 col-lg-4 my-2'>
-                                <ModalDelete id={data.id} img={data.image} product={data.name} price={'40000'} status={data.status}></ModalDelete>
+                                <ModalDelete id={data.id} img={data.image} product={data.name} price={data.total_price} status={data.status}></ModalDelete>
                             </div>
                         )
                     })}
