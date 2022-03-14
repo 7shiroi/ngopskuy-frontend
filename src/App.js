@@ -20,9 +20,11 @@ import TestComponent2 from './pages/TestComponent2'
 import { useDispatch, useSelector } from 'react-redux'
 import EditPassword from './pages/EditPassword'
 import VerifyEmail from './pages/VerifyEmail'
-// import { ProductAdmin } from './pages/ProductAdmin'
+import DashboardAdmin from './pages/DashboardAdmin';
 import EditPromo from './pages/EditPromo'
 import NavbarHome from './components/NavbarHome';
+import Search from './pages/Search';
+import SearchAdmin from './pages/SearchAdmin';
 
 export const App = () => {
   const auth = useSelector(state => state.auth)
@@ -55,8 +57,9 @@ export const App = () => {
         <Route path='/forgotpassword' element={<ForgotPassword />} />
         <Route path='/verifyemail' element={<VerifyEmail />} />
         <Route path='/profile/edit-password' element={<EditPassword />} />
-        {/* <Route path='/product-admin' element={<ProductAdmin />} /> */}
-        <Route path='/editPromo' element={<EditPromo />} />
+        <Route path='/edit-promo/:id' element={<EditPromo />} />
+        <Route path='/search' element={<Search />} />
+        <Route path='/search-admin' element={<SearchAdmin />} />
         <Route path='product-admin/:id' element={<ProductAdmin />} />
         <Route path='product-customer/:id' element={<ProductCust />} />
         <Route path='edit-product-admin/:id' element={<EditProductAdmin />} />
@@ -66,6 +69,7 @@ export const App = () => {
         <Route path='product-customer' element={<ProductAllCust />} />
         <Route path='manage-order' element={<ManageOrder />} />
         <Route path='payment' element={<Payment />} />
+        <Route path='dashboard' element={<DashboardAdmin />} />
       </Routes>
     </BrowserRouter>
   )

@@ -16,8 +16,19 @@ import Carousel from 'react-elastic-carousel'
 import NavbarHome from "../components/NavbarHome"
 import Footer from "../components/Footer"
 import Helmets from '../components/Helmets'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export const Homepage = () => {
+	const tokens = useSelector(state => state.auth.token)
+	const auth = useSelector(state => state.auth)
+	const navigate = useNavigate()
+	const goSearch = () => {
+		navigate('/search')
+	}
+	const goSearchAdmin = () => {
+		navigate('/search-admin')
+	}
 	const breakPoints = [
 		{ width: 1, itemsToShow: 1 },
 		{ width: 550, itemsToShow: 2 },
@@ -27,7 +38,7 @@ export const Homepage = () => {
 
 	return (
 		<>
-		<Helmets children={"Home"} /><NavbarHome />
+			<Helmets children={"Home"} /><NavbarHome />
 			<header className='home-head'>
 				<div className='overlay'>
 					<Container>
@@ -40,12 +51,38 @@ export const Homepage = () => {
 								</div>
 							</Col>
 							<Col className='d-flex justify-content-end' sm={12} md={6}>
-								<div>
-									<Form className='position-relative'>
-										<Form.Control name='search' placeholder='Search' className='bg-white rounded-pill px-3' />
-										<FaSearch className='position-absolute top-50 end-0 translate-middle-y me-3' color='#000' />
-									</Form>
-								</div>
+								{(tokens === null) &&
+									<div>
+										<Form onClick={goSearch} className='position-relative'>
+											<Form.Control name='search' placeholder='Search' className='bg-white rounded-pill px-3' />
+											<FaSearch className='position-absolute top-50 end-0 translate-middle-y me-3' color='#000' />
+										</Form>
+									</div>
+								}
+								{(auth.userData.id_role === 3) &&
+									<div>
+										<Form onClick={goSearch} className='position-relative'>
+											<Form.Control name='search' placeholder='Search' className='bg-white rounded-pill px-3' />
+											<FaSearch className='position-absolute top-50 end-0 translate-middle-y me-3' color='#000' />
+										</Form>
+									</div>
+								}
+								{(auth.userData.id_role === 1) &&
+									<div>
+										<Form onClick={goSearchAdmin} className='position-relative'>
+											<Form.Control name='search' placeholder='Search' className='bg-white rounded-pill px-3' />
+											<FaSearch className='position-absolute top-50 end-0 translate-middle-y me-3' color='#000' />
+										</Form>
+									</div>
+								}
+								{(auth.userData.id_role === 2) &&
+									<div>
+										<Form onClick={goSearchAdmin} className='position-relative'>
+											<Form.Control name='search' placeholder='Search' className='bg-white rounded-pill px-3' />
+											<FaSearch className='position-absolute top-50 end-0 translate-middle-y me-3' color='#000' />
+										</Form>
+									</div>
+								}
 							</Col>
 						</Row>
 					</Container>

@@ -17,6 +17,7 @@ import Modals from '../components/ModalsDelete'
 import Helmets from '../components/Helmets'
 
 const ProductAdmin = ({ getProduct, deleteProduct }) => {
+    const auth = useSelector(state => state.auth)
     const { product } = useSelector(state => state)
     const [control, setControl] = useState(false)
     const [show, setShow] = useState(-1)
@@ -50,7 +51,7 @@ const ProductAdmin = ({ getProduct, deleteProduct }) => {
     useEffect(() => {
         if (control) {
             dispatch(getProduct(id))
-        } 
+        }
     }, [control])
 
     // useEffect(()=>{
@@ -80,8 +81,10 @@ const ProductAdmin = ({ getProduct, deleteProduct }) => {
         dispatch(deleteProduct(token, id))
     }
     return (
-        <>  
+        <>
             <Helmets children={"Product Admin"} />
+            {auth?.userData.id_role === 3 && <Navigate to='/' />}
+            {auth.token == null && <Navigate to='/' />}
             <NavbarHome />
             <div className='bg-product bg-gray-100 h-full'>
                 <Container>
@@ -98,9 +101,9 @@ const ProductAdmin = ({ getProduct, deleteProduct }) => {
                             <div className="ml-20 mt-10 space-y-5">
                                 <Button block variant='pallet-2 radius'> Add to Cart </Button>
                                 <Button onClick={goEdit} block variant='pallet-3 my-2 radius'> Edit Product </Button>
-                                <Button onClick={()=>setModalShow(true)} block variant='pallet-1 radius'> Delete Menu </Button>
+                                <Button onClick={() => setModalShow(true)} block variant='pallet-1 radius'> Delete Menu </Button>
                                 <Modals show={modalShow} onClick={handleDelete} onHide={() => setModalShow(false)} />
-                                {product.product?.success===true && <Navigate to='/product-admin'/>}
+                                {product.product?.success === true && <Navigate to='/product-admin' />}
                             </div>
                         </Col>
                         <Col xl={7} sm={12} className="px-5 d-flex flex-column justify-content-center">
