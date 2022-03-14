@@ -4,7 +4,7 @@ import photo from '../assets/images/photo.png'
 import NavbarHome from "../components/NavbarHome"
 import Footer from "../components/Footer"
 import Button from "../components/Button"
-import { BiPencil } from "react-icons/bi"
+import { BiPencil, BiCheckCircle } from "react-icons/bi"
 import InputUnderline from "../components/InputUnderline"
 import { editProfile, getProfile } from '../redux/actions/auth'
 import { useDispatch, useSelector } from 'react-redux'
@@ -110,6 +110,13 @@ export const Profile = () => {
                                     <Card.Text as="h5" className='text-center'>
                                         {auth.email}
                                     </Card.Text>
+                                    {
+                                        auth?.is_verified === 1 &&
+                                        <div className="d-flex justify-content-center alert alert-success fade show" role="alert">
+                                            <strong>Verified Account  <BiCheckCircle size={25} />
+                                            </strong>
+                                        </div>
+                                    }
                                     <Button block variant='pallet-2 radius' onClick={(e) => uploadFile(e)}> Choose Photo </Button>
                                     <input type="file"
                                         ref={hiddenFileInput}
