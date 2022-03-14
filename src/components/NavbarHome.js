@@ -12,7 +12,6 @@ import { getProfile } from '../redux/actions/auth'
 export const NavbarHome = () => {
 	const auth = useSelector(state => state.auth)
 	const tokens = useSelector(state => state.auth.token)
-	console.log(auth.userData)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const goLogin = () => {
@@ -43,32 +42,58 @@ export const NavbarHome = () => {
 				</button>
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-						{auth.userData.id_role === 3 || tokens === null &&
+						{(tokens === null) &&
 							<li className="nav-item my-auto mx-auto ">
-								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' aria-currrent='page' to='/'>Home</Link>
+								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' aria-currrent='page' to='/'>Homes</Link>
 							</li>
 						}
-						{auth.userData.id_role === 1 || auth.userData.id_role === 2 &&
+						{(auth.userData.id_role === 3) &&
+							<li className="nav-item my-auto mx-auto ">
+								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' aria-currrent='page' to='/'>Homes</Link>
+							</li>
+						}
+						{(auth.userData.id_role === 1) &&
 							<li className="nav-item my-auto mx-auto ">
 								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' aria-currrent='page' to='/dashboard'>Home</Link>
 							</li>
 						}
-						{auth.userData.id_role === 3 || tokens === null &&
+						{(auth.userData.id_role === 2) &&
+							<li className="nav-item my-auto mx-auto ">
+								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' aria-currrent='page' to='/dashboard'>Home</Link>
+							</li>
+						}
+						{tokens === null &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' aria-currrent='page' to='/product'>Product</Link>
 							</li>
 						}
-						{auth.userData.id_role === 1 || auth.userData.id_role === 2 &&
+						{auth.userData.id_role === 3 &&
+							<li className="nav-item my-auto mx-auto">
+								<Link className='nav-link rb fs-5' aria-currrent='page' to='/product'>Product</Link>
+							</li>
+						}
+						{auth.userData.id_role === 1 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' aria-currrent='page' to='/product-admin'>Product Admin</Link>
 							</li>
 						}
+						{auth.userData.id_role === 2 &&
+							<li className="nav-item my-auto mx-auto">
+								<Link className='nav-link rb fs-5' aria-currrent='page' to='/product-admin'>Product Admin</Link>
+							</li>
+						}
+
 						{auth.userData.id_role === 3 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' aria-currrent='page' to='/my-cart'>My Cart</Link>
 							</li>
 						}
-						{auth.userData.id_role === 1 || auth.userData.id_role === 2 &&
+						{auth.userData.id_role === 2 &&
+							<li className="nav-item my-auto mx-auto">
+								<Link className='nav-link rb fs-5' aria-currrent='page' to='/cart'>Cart</Link>
+							</li>
+						}
+						{auth.userData.id_role === 1 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' aria-currrent='page' to='/cart'>Cart</Link>
 							</li>
@@ -78,7 +103,12 @@ export const NavbarHome = () => {
 								<Link className='nav-link rb fs-5' aria-currrent='page' to='/my-history'>My History</Link>
 							</li>
 						}
-						{auth.userData.id_role === 1 || auth.userData.id_role === 2 &&
+						{auth.userData.id_role === 2 &&
+							<li className="nav-item my-auto mx-auto">
+								<Link className='nav-link rb fs-5' aria-currrent='page' to='/history'>History</Link>
+							</li>
+						}
+						{auth.userData.id_role === 1 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' aria-currrent='page' to='/history'>History</Link>
 							</li>
