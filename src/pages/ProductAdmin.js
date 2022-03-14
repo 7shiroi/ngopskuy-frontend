@@ -13,12 +13,15 @@ import NumberFormat from 'react-number-format'
 import SizeCard from '../components/SizeCard'
 import { increment, decrement } from '../redux/actions/buttons'
 import hazelnut from '../assets/images/hazelnut.png'
+import Modals from '../components/ModalsDelete'
+import Helmets from '../components/Helmets'
 
 const ProductAdmin = ({ getProduct, deleteProduct }) => {
     const { product } = useSelector(state => state)
     const [control, setControl] = useState(false)
     const [show, setShow] = useState(-1)
     const buttons = useSelector(state => state.buttons)
+    const [modalShow, setModalShow] = React.useState(false);
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -47,11 +50,14 @@ const ProductAdmin = ({ getProduct, deleteProduct }) => {
     useEffect(() => {
         if (control) {
             dispatch(getProduct(id))
-            setControl(false)
-            setShow(false)
-            navigate('/product')
-        }
+        } 
     }, [control])
+
+    // useEffect(()=>{
+    //     if(()=>modalShow(false)){
+    //         navigate ('/product-admin')
+    //     }
+    // })
 
     useEffect(() => {
         console.log(product)
@@ -65,17 +71,18 @@ const ProductAdmin = ({ getProduct, deleteProduct }) => {
         navigate(`/edit-product-admin/${id}`)
     }
 
+    const goPay = () => {
+        navigate('/payment')
+    }
+
     const handleDelete = () => {
         const token = window.localStorage.getItem("token")
         dispatch(deleteProduct(token, id))
-        setControl(true)
-        navigate('/product')
     }
     return (
-        <>
-            <header className='text-center'>
-                Header
-            </header>
+        <>  
+            <Helmets children={"Product Admin"} />
+            <NavbarHome />
             <div className='bg-product bg-gray-100 h-full'>
                 <Container>
                     <div onClick={goBack} style={{ fontSize: "20px", fontFamily: "Rubik" }} className="p-10 ml-20 mx-5 py-5 nav-text">
@@ -91,7 +98,9 @@ const ProductAdmin = ({ getProduct, deleteProduct }) => {
                             <div className="ml-20 mt-10 space-y-5">
                                 <Button block variant='pallet-2 radius'> Add to Cart </Button>
                                 <Button onClick={goEdit} block variant='pallet-3 my-2 radius'> Edit Product </Button>
-                                <Button onClick={handleDelete} block variant='pallet-1 radius'> Delete Menu </Button>
+                                <Button onClick={()=>setModalShow(true)} block variant='pallet-1 radius'> Delete Menu </Button>
+                                <Modals show={modalShow} onClick={handleDelete} onHide={() => setModalShow(false)} />
+                                {product.product?.success===true && <Navigate to='/product-admin'/>}
                             </div>
                         </Col>
                         <Col xl={7} sm={12} className="px-5 d-flex flex-column justify-content-center">
@@ -140,17 +149,17 @@ const ProductAdmin = ({ getProduct, deleteProduct }) => {
                     <Card xl={6} className=' shadow px-5 mx-5 radius'>
                         <Row xs={1} md={2} className="text-left">
                             <Col xl={3} md={12} className='text-justify mt-3 mb-3 px-3' >
-                                <Image src={coffee} alt="product-image" roundedCircle ></Image>
+                                <Image src={product.product?.image} alt="product-image" roundedCircle style={{ width: '6em' }}></Image>
                             </Col>
                             <Col xl={5} md={12}>
                                 <Card.Body className='mx-4 md-auto'>
-                                    <Card.Title className='mt-2'>COLD BREW</Card.Title>
+                                    <Card.Title className='mt-2'>{product.product?.name}</Card.Title>
                                     <Card.Text className='mt-3'>
                                         x1 (Large) <br /> x1 (Regular)
                                     </Card.Text>
                                 </Card.Body>
                             </Col>
-                            <Col xl={4} md={12} className='d-flex flex-row justify-content-center'>
+                            <Col xl={4} md={12} className='d-flex flex-row justify-content-center py-4'>
                                 <Button onClick={onDecrement} variant='pallet-3  radius mt-5'>
                                     -
                                 </Button>
@@ -163,14 +172,12 @@ const ProductAdmin = ({ getProduct, deleteProduct }) => {
                             </Col>
                         </Row>
                     </Card>
-                    <Card xl={6} className='shadow radius mx-5 px-5 pt-4 text-align-center checkout' >
-                        <Button variant='pallet-2 text-center w-100 h-100 text-button'>Checkout</Button>
+                    <Card xl={6} className='shadow radius mx-5 px-5 pt-5 text-align-center checkout' >
+                        <Button onClick={goPay} variant='pallet-2 text-center w-100 h-100 text-button'>Checkout</Button>
                     </Card>
                 </Container>
             </div>
-            <footer className='text-center'>
-                Footer
-            </footer>
+            <Footer />
         </>
     )
 }
