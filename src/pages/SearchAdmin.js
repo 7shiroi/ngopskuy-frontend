@@ -6,13 +6,15 @@ import NavbarHome from '../components/NavbarHome'
 import Footer from '../components/Footer'
 import CardMenu from '../components/CardMenu'
 import { connect } from 'react-redux'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams, Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Button from '../components/Button'
 import { FaSearch, FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import http from '../helpers/http'
 
 const SearchAdmin = () => {
     const [product, setProduct] = useState([])
+    const auth = useSelector(state => state.auth)
     const [page, setPage] = useState({})
     // const dataa = Array.from(product)
     const [errorMsg, setErrorMsg] = useState(null)
@@ -72,6 +74,8 @@ const SearchAdmin = () => {
     }
     return (
         <>
+            {auth?.userData.id_role === 3 && <Navigate to='/' />}
+            {auth.token == null && <Navigate to='/' />}
             <Helmets children={"Search Admin"} />
             <NavbarHome />
             <section>
