@@ -50,7 +50,7 @@ export const editProfile = (token, data) => {
     params.append('phone_number', data.phone_number)
     params.append('birth_date', data.birth_date)
     params.append('image', data.image)
-    console.log(data.image)
+    params.append('display_name', data.display_name)
     return ({
         type: 'EDIT_PROFILE',
         payload: http(token, true).patch('profile', params)

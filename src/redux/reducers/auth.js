@@ -22,6 +22,8 @@ const auth = (state = initialState, action) => {
             state.isLoading = false
             state.isError = false
             state.token = data.result
+            state.errorMsg = ""
+            state.errMsg = ""
             if (!window.localStorage.getItem('token')) {
                 window.localStorage.setItem('token', state.token)
             }
@@ -78,6 +80,7 @@ const auth = (state = initialState, action) => {
             state.isLoading = false
             state.userData = data.result
             return { ...state }
+
         }
         case 'GET_PROFILE_REJECTED': {
             const { data } = action.payload.response
@@ -118,6 +121,7 @@ const auth = (state = initialState, action) => {
             state.message = data.message
             state.successMsg = data.message
             return { ...state }
+
         }
         case 'EDIT_PASSWORD_REJECTED': {
             const { data } = action.payload.response
