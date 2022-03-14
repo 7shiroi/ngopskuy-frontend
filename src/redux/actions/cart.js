@@ -17,6 +17,16 @@ export const checkoutCart = (data, token) => {
     }
 }
 
+export const addCart = (data, token) => {
+    const params = new URLSearchParams()
+    params.append('id_product', data.id_product)
+    params.append('quantity', data.quantity)
+    return{
+        type: 'ADD_USER_CART',
+        payload: http(token).post('/transaction', params)
+    }
+}
+
 // export const deleteHistory = (id) => {
 //     let url = `${REACT_APP_BACKEND_URL}/transaction/delete/${id}`
 //     return{

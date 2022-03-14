@@ -11,10 +11,9 @@ export const getHistory = (token) => {
     }
 }
 
-export const deleteHistory = (id) => {
-    let url = `${REACT_APP_BACKEND_URL}/transaction/delete/${id}`
+export const deleteHistory = (id, token) => {
     return{
         type: 'DELETE_HISTORY',
-        payload: axios.patch(url)
+        payload: http(token).patch(`/customer-history/delete/${id}`)
     }
 }
