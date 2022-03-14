@@ -13,6 +13,7 @@ import { getCategory } from '../redux/actions/category'
 import { addProduct } from '../redux/actions/product'
 import { getSize } from '../redux/actions/size'
 import http from '../helpers/http'
+import { Navigate } from 'react-router-dom'
 
 const NewProduct = () => {
   const hiddenFileInput = useRef(null)
@@ -175,6 +176,8 @@ const NewProduct = () => {
   }
   return (
     <>
+      {auth?.userData.id_role === 3 && <Navigate to='/' />}
+      {auth.token == null && <Navigate to='/' />}
       <header>
         Header
       </header>
