@@ -104,6 +104,11 @@ const SearchAdmin = () => {
                             >
                                 <Tab eventKey="home" title="Search">
                                     <Row class className="">
+                                        {errorMsg &&
+                                            <div className="alert alert-warning fade show" role="alert">
+                                                <strong>{errorMsg}</strong>
+                                            </div>
+                                        }
                                         <Col sm={12} className=' d-flex justify-content-end'>
                                             <div >
                                                 {page.prev !== null && <button onClick={() => getNextData(page.prev)} className='btn '><p><FaChevronLeft />View Prev </p></button>}
