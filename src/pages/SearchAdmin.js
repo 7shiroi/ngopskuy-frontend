@@ -11,7 +11,7 @@ import Button from '../components/Button'
 import { FaSearch, FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import http from '../helpers/http'
 
-const Search = () => {
+const SearchAdmin = () => {
     const [product, setProduct] = useState([])
     const [page, setPage] = useState({})
     // const dataa = Array.from(product)
@@ -64,7 +64,7 @@ const Search = () => {
         await getNextData(url(name, minPrice, maxPrice), true)
     }
     const goToDetail = (id) => {
-        navigate(`/product-customer/${id}`)
+        navigate(`/product-admin/${id}`)
     }
 
     const goToNewProduct = () => {
@@ -127,6 +127,9 @@ const Search = () => {
                             <div>
                                 *the price has been cutted by discount appears
                             </div>
+                            <div className='mb-5'>
+                                <Button onClick={() => goToNewProduct()} block variant='pallet-1 py-3 my-3 mb-5  radius' version={'input-normal'}> Add New Product </Button>
+                            </div>
                         </Col>
                     </Row>
                 </Container>
@@ -138,4 +141,4 @@ const Search = () => {
 
 const mapStateToProps = state => ({ productall: state.productall })
 
-export default connect(mapStateToProps)(Search)
+export default connect(mapStateToProps)(SearchAdmin)

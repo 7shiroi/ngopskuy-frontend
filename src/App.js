@@ -23,6 +23,7 @@ import VerifyEmail from './pages/VerifyEmail'
 import EditPromo from './pages/EditPromo'
 import NavbarHome from './components/NavbarHome';
 import Search from './pages/Search';
+import SearchAdmin from './pages/SearchAdmin';
 
 export const App = () => {
   const auth = useSelector(state => state.auth)
@@ -57,6 +58,7 @@ export const App = () => {
         <Route path='/profile/edit-password' element={<EditPassword />} />
         <Route path='/edit-promo/:id' element={<EditPromo />} />
         <Route path='/search' element={<Search />} />
+        <Route path='/search-admin' element={<SearchAdmin />} />
         <Route path='product-admin/:id' element={<ProductAdmin />} />
         <Route path='product-customer/:id' element={<ProductCust />} />
         <Route path='edit-product-admin/:id' element={<EditProductAdmin />} />
