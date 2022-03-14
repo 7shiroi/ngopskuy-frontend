@@ -78,6 +78,11 @@ const Search = () => {
                 <Container>
                     <Row>
                         <Col sm={12}>
+                            {errorMsg &&
+                                <div className="alert alert-warning fade show" role="alert">
+                                    <strong>{errorMsg}</strong>
+                                </div>
+                            }
                             <header>
                                 <div className="row">
                                     <div className="col-xl-12 d-flex for-margin-search ">
