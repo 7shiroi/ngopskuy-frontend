@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Helmets from '../components/Helmets'
-import { default as axios } from 'axios'
-import { Card, Container, Row, Col, Tabs, Tab } from 'react-bootstrap'
+import { Container, Row, Col, Tabs, Tab } from 'react-bootstrap'
 import hazelnut from '../assets/images/hazelnut.png'
 import NavbarHome from '../components/NavbarHome'
 import Footer from '../components/Footer'
 import CardMenu from '../components/CardMenu'
 import { getProductAll } from '../redux/actions/productall'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { connect} from 'react-redux'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Button from '../components/Button'
-import PromoCard from '../components/PromoCard'
 import { FaSearch, FaChevronRight, FaChevronLeft } from 'react-icons/fa'
-const { REACT_APP_BACKEND_URL } = process.env
-
+import http from '../helpers/http'
 
 const Search = ({ getProductAll }) => {
     const [product, setProduct] = useState([])
@@ -23,11 +20,11 @@ const Search = ({ getProductAll }) => {
     const navigate = useNavigate()
     let [searchParams, setSearchParams] = useSearchParams();
     useEffect(() => {
-        getProductSearch()
+        getProductSearch(`/product?limit=6`)
     }, [])
 
-    const getProductSearch = async () => {
-        const { data } = await axios.get(`${REACT_APP_BACKEND_URL}/product?limit=6`)
+    const getProductSearch = async (url) => {
+        const { data } = await http().get(url)
         setProduct(data?.result)
         setPage(data?.pageinfo)
     }
@@ -35,8 +32,11 @@ const Search = ({ getProductAll }) => {
     const getNextData = async (url, replace = false) => {
         try {
             setErrorMsg(null)
-            const { data } = await axios.get(url)
+            const { data } = await http().get(url)
             if (replace) {
+                if(!Array.isArray(data.result)){
+                  data.result = [data.result]
+                }
                 setProduct(data?.result)
             } else {
                 setProduct([
@@ -56,7 +56,7 @@ const Search = ({ getProductAll }) => {
     }
     const onSearch = async (event) => {
         event.preventDefault();
-        const url = () => `http://localhost:5000/product?name=${name}&minPrice=${minPrice}&maxPrice=${maxPrice}&limit=6`
+        const url = () => `/product?name=${name}&minPrice=${minPrice}&maxPrice=${maxPrice}&limit=6`
         const name = event.target.elements["name"].value
         const minPrice = event.target.elements["minPrice"].value
         const maxPrice = event.target.elements["maxPrice"].value
@@ -108,7 +108,7 @@ const Search = ({ getProductAll }) => {
                                         <Col sm={12} className=' d-flex justify-content-end'>
                                             <div >
                                                 {page.prev !== null && <button onClick={() => getNextData(page.prev)} className='btn '><p><FaChevronLeft />View Prev </p></button>}
-                                                {page.next !== null && <button onClick={() => getNextData(page.next)} className='btn '><p>View More <FaChevronRight /></p></button>}
+                                                {page.next !== null && <button onClick={() => getNextData(page.next)} className='btn '><p>View Next <FaChevronRight /></p></button>}
                                             </div>
                                         </Col>
                                         {product?.map((data, idx) => {
