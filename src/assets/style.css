@@ -286,3 +286,7 @@ input[type='checkbox']{
     visibility: hidden;
     appearance: none;
 }
+input[type='file']{
+    visibility: hidden;
+    appearance: none;
+}
