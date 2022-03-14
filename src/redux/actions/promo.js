@@ -21,13 +21,11 @@ export const addPromo = (token, data) => {
 export const editPromo = (token, id, data) => {
   const inputData = new FormData()
   for (const key in data) {
-    console.log(data[key])
     inputData.append(key, data[key]);
   }
-  console.log(inputData)
   return {
     type: 'EDIT_PROMO',
-    payload: http(token, false).patch(`/promo/${id}`, inputData)
+    payload: http(token, true).patch(`/promo/${id}`, inputData)
   }
 }
 
