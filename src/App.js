@@ -19,6 +19,7 @@ import EditPassword from './pages/EditPassword'
 import VerifyEmail from './pages/VerifyEmail'
 // import { ProductAdmin } from './pages/ProductAdmin'
 import EditPromo from './pages/EditPromo'
+import NavbarHome from './components/NavbarHome';
 
 export const App = () => {
   const auth = useSelector(state => state.auth)
@@ -44,6 +45,7 @@ export const App = () => {
         <Route path='/test' element={<Test />} />
         <Route path='/login' element={<Login />} />
         <Route path='/footer' element={<Footer />} />
+        <Route path='/navbar' element={<NavbarHome />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/test2' element={<TestComponent2 />} />
@@ -57,7 +59,7 @@ export const App = () => {
         <Route path='edit-product-admin/:id' element={<EditProductAdmin />} />
         <Route path='new-product' element={<NewProduct />} />
         <Route path='new-promo' element={<NewPromo />} />
-        <Route path='product' element={<ProductAllAdmin />} />
+        <Route path='product-admin' element={<ProductAllAdmin />} />
 
       </Routes>
     </BrowserRouter>

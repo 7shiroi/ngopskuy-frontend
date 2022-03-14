@@ -120,6 +120,8 @@ const auth = (state = initialState, action) => {
             state.isLoading = false
             state.message = data.message
             state.successMsg = data.message
+            state.errorMsg = ""
+            state.errMsg = ""
             return { ...state }
 
         }

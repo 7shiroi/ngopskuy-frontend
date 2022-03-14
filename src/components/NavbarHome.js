@@ -11,7 +11,7 @@ import { getProfile } from '../redux/actions/auth'
 
 export const NavbarHome = () => {
 	const auth = useSelector(state => state.auth)
-	const token = useSelector(state => state.auth.token)
+	const tokens = useSelector(state => state.auth.token)
 	console.log(auth.userData)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -43,18 +43,46 @@ export const NavbarHome = () => {
 				</button>
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-						<li className="nav-item my-auto mx-auto ">
-							<Link className='nav-link rb fw-bold text-pallet-1 fs-5' aria-currrent='page' to='/'>Home</Link>
-						</li>
-						<li className="nav-item my-auto mx-auto">
-							<Link className='nav-link rb fs-5' aria-currrent='page' to='/product'>Product</Link>
-						</li>
-						<li className="nav-item my-auto mx-auto">
-							<Link className='nav-link rb fs-5' aria-currrent='page' to='/cart'>Yourt Cart</Link>
-						</li>
-						<li className="nav-item my-auto mx-auto">
-							<Link className='nav-link rb fs-5' aria-currrent='page' to='/history'>History</Link>
-						</li>
+						{auth.userData.id_role === 3 &&
+							<li className="nav-item my-auto mx-auto ">
+								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' aria-currrent='page' to='/'>Home</Link>
+							</li>
+						}
+						{auth.userData.id_role === 1 || auth.userData.id_role === 2 &&
+							<li className="nav-item my-auto mx-auto ">
+								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' aria-currrent='page' to='/dashboard'>Home</Link>
+							</li>
+						}
+						{auth.userData.id_role === 3 &&
+							<li className="nav-item my-auto mx-auto">
+								<Link className='nav-link rb fs-5' aria-currrent='page' to='/product'>Product</Link>
+							</li>
+						}
+						{auth.userData.id_role === 1 || auth.userData.id_role === 2 &&
+							<li className="nav-item my-auto mx-auto">
+								<Link className='nav-link rb fs-5' aria-currrent='page' to='/product-admin'>Product Admin</Link>
+							</li>
+						}
+						{auth.userData.id_role === 3 &&
+							<li className="nav-item my-auto mx-auto">
+								<Link className='nav-link rb fs-5' aria-currrent='page' to='/my-cart'>My Cart</Link>
+							</li>
+						}
+						{auth.userData.id_role === 1 || auth.userData.id_role === 2 &&
+							<li className="nav-item my-auto mx-auto">
+								<Link className='nav-link rb fs-5' aria-currrent='page' to='/cart'>Cart</Link>
+							</li>
+						}
+						{auth.userData.id_role === 3 &&
+							<li className="nav-item my-auto mx-auto">
+								<Link className='nav-link rb fs-5' aria-currrent='page' to='/my-history'>My History</Link>
+							</li>
+						}
+						{auth.userData.id_role === 1 || auth.userData.id_role === 2 &&
+							<li className="nav-item my-auto mx-auto">
+								<Link className='nav-link rb fs-5' aria-currrent='page' to='/history'>History</Link>
+							</li>
+						}
 						{auth.token &&
 							<li className="nav-item dropdown mx-auto">
 								<div className="nav-link dropdown-toggle img-profile-login" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -76,7 +104,7 @@ export const NavbarHome = () => {
 										<hr className="dropdown-divider" />
 									</li>
 
-									<li onClick={() => dispatch({ type: 'AUTH_LOGOUT' })} style={{ cursor: 'pointer' }} className="dropdown-item" to="/login">Logout</li>
+									<li onClick={() => { dispatch({ type: 'AUTH_LOGOUT' }); navigate('/') }} style={{ cursor: 'pointer' }} className="dropdown-item" to="/login">Logout</li>
 
 								</ul>
 							</li>
@@ -93,8 +121,8 @@ export const NavbarHome = () => {
 						}
 					</ul>
 				</div>
-			</div>
-		</nav>
+			</div >
+		</nav >
 	)
 }
 
