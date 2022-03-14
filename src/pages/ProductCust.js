@@ -12,6 +12,7 @@ import { useParams, useNavigate, Navigate } from 'react-router-dom'
 import NumberFormat from 'react-number-format'
 import SizeCard from '../components/SizeCard'
 import { increment, decrement } from '../redux/actions/buttons'
+import Helmets from '../components/Helmets'
 
 const ProductCust = ({getProduct}) => {
     const {product} = useSelector(state => state)
@@ -61,12 +62,13 @@ const ProductCust = ({getProduct}) => {
       window.history.back()
     }
 
-    const goEdit = ()=> {
-      navigate(`/edit-product-admin/${id}`)
+    const goPay = () => {
+        navigate('/payment')
     }
 
   return (
     <>
+    <Helmets children={"Product Customer"} />
      <NavbarHome /> 
      <div className='bg-product bg-gray-100 h-full'>
         <Container>
@@ -131,11 +133,11 @@ const ProductCust = ({getProduct}) => {
             <Card xl={6} className=' shadow px-5 mx-5 radius'>
                 <Row xs={1} md={2} className="text-left">
                     <Col xl={3} md={12} className='text-justify mt-3 mb-3 px-3' >
-                        <Image src={coffee} alt="product-image" roundedCircle ></Image>
+                        <Image src={product.product?.image} alt="product-image" roundedCircle style={{ width: '6em' }}></Image>
                     </Col>
                     <Col xl={5} md={12}>
                         <Card.Body className='mx-4 md-auto'>
-                            <Card.Title className='mt-2'>COLD BREW</Card.Title>
+                            <Card.Title className='mt-2'>{product.product?.name}</Card.Title>
                             <Card.Text className='mt-3'>
                                 x1 (Large) <br/> x1 (Regular)
                             </Card.Text>
@@ -155,7 +157,7 @@ const ProductCust = ({getProduct}) => {
                 </Row>
             </Card>
             <Card xl={6} className='shadow radius mx-5 px-5 pt-4 text-align-center checkout' >
-               <Button variant='pallet-2 text-center w-100 h-100 text-button'>Checkout</Button>
+               <Button onClick={goPay} variant='pallet-2 text-center w-100 h-100 text-button'>Checkout</Button>
             </Card>
         </Container>
      </div>
