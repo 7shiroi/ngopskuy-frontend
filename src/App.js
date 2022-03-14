@@ -19,7 +19,7 @@ import TestComponent2 from './pages/TestComponent2'
 import { useDispatch, useSelector } from 'react-redux'
 import EditPassword from './pages/EditPassword'
 import VerifyEmail from './pages/VerifyEmail'
-// import { ProductAdmin } from './pages/ProductAdmin'
+import DashboardAdmin from './pages/DashboardAdmin';
 import EditPromo from './pages/EditPromo'
 import NavbarHome from './components/NavbarHome';
 import Search from './pages/Search';
@@ -67,6 +67,7 @@ export const App = () => {
         <Route path='product-admin' element={<ProductAllAdmin />} />
         <Route path='product-customer' element={<ProductAllCust />} />
         <Route path='payment' element={<Payment />} />
+        <Route path='dashboard' element={<DashboardAdmin />} />
       </Routes>
     </BrowserRouter>
   )

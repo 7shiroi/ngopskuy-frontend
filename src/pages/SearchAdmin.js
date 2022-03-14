@@ -72,7 +72,7 @@ const SearchAdmin = () => {
     }
     return (
         <>
-            <Helmets children={"Search"} />
+            <Helmets children={"Search Admin"} />
             <NavbarHome />
             <section>
                 <Container>

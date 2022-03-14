@@ -37,3 +37,5 @@ export const DashboardAdmin = () => {
         </>
     )
 }
+
+export default DashboardAdmin
