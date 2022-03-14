@@ -35,3 +35,12 @@ export const deletePromo = (token, id) => {
     payload: http(token).patch(`/promo/delete/${id}`)
   }
 }
+
+export const getPromoDeliveryType = (id)=>{
+  const data = new URLSearchParams(id)
+  data.append('id_promo', id)
+  return{
+    type: 'GET_PROMO_DELIVERY_TYPE',
+    payload: http().get('/promo_delivery_type/', data)
+  }
+}

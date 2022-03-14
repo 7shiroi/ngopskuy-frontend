@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useRef } from 'react'
 import { Card, Container, Row, Col, Image, Form } from 'react-bootstrap'
 import photo from '../assets/images/photo.png'
@@ -70,7 +71,7 @@ export const Profile = () => {
         const birth_date = e.target.elements['birth_date'].value
         const image = datas.image
         const display_name = e.target.elements['display_name'].value
-        // console.log(image)
+        console.log(image)
         const data = { email, address, phone_number, first_name, last_name, birth_date, image, display_name }
         dispatch(editProfile(tokens.token, data))
         window.scrollTo(0, 0)
