@@ -11,22 +11,27 @@ import SizeCard from '../components/SizeCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategory } from '../redux/actions/category'
 import { addProduct } from '../redux/actions/product'
+import { getSize } from '../redux/actions/size'
+import http from '../helpers/http'
 
 const NewProduct = () => {
   const hiddenFileInput = useRef(null)
   const category = useSelector(state => state.category)
+  const size = useSelector(state => state.size)
   const auth = useSelector(state => state.auth)
   const [data, setData] = useState({})
-  const [homeDelivery, setHomeDelivery] = useState(false)
-  const [dineIn, setDineIn] = useState(false)
-  const [takeAway, setTakeAway] = useState(false)
+  const [homeDelivery, setHomeDelivery] = useState({id:7, checked:false})
+  const [dineIn, setDineIn] = useState({id:9, checked:false})
+  const [takeAway, setTakeAway] = useState({id:8, checked:false})
   const [hourStart, setHourStart] = useState([])
   const [hourEnd, setHourEnd] = useState([])
   const [stock, setStock] = useState([])
   const dispatch = useDispatch()
+  const [sizeValue, setSizeValue] = useState([])
 
   useEffect(() => {
     dispatch(getCategory())
+    dispatch(getSize())
     setHourEnd([
       '00.00',
       '01.00',
@@ -82,6 +87,19 @@ const NewProduct = () => {
     setStock([1,2,3,4,5,6,7,8,9,10])
   }, [])
 
+  const handleSizeValueChange = (e)=> {
+    const elementValue = e.target.previousElementSibling.value
+    const tempArray = sizeValue
+    if(elementValue) {
+      if(sizeValue.indexOf(elementValue) >= 0){
+        tempArray.splice(sizeValue.indexOf(elementValue), 1)
+        setSizeValue(tempArray)
+      }else{
+        setSizeValue([...sizeValue, elementValue])
+      }
+    }
+  }
+
 
   const fileInputHandler = (e) => {
     const reader = new FileReader();
@@ -104,7 +122,7 @@ const NewProduct = () => {
     hiddenFileInput.current.click()
   }
   
-  const addProductData = (e) =>{
+  const addProductData = async (e) =>{
     e.preventDefault()
     const inputData = {}
     inputData.name = e.target.elements['name'].value
@@ -115,7 +133,45 @@ const NewProduct = () => {
     inputData.delivery_hour_end = e.target.elements['delivery_hour_end'].value
     inputData.id_category = e.target.elements['category'].value
     inputData.image = data.image
-    dispatch(addProduct(auth.token, inputData))
+    // dispatch(addProduct(auth.token, inputData))
+    const formData = new FormData()
+    for (const key in inputData) {
+      formData.append(key, inputData[key]);
+    }
+    const addProduct = await http(auth.token, true).post('/product', formData) //add product data
+
+    if(addProduct.status === 200) {
+      const insertedProduct = addProduct.data.result
+
+      // check if sizeValue
+      if(sizeValue.length>0){
+        sizeValue.forEach( async (obj) => {
+          const params = new URLSearchParams()
+          params.append('idProduct', insertedProduct.id)
+          params.append('idSize', obj)
+          await http(auth.token).post('/product_size',params) //add product_size data
+        })
+
+        if(homeDelivery){
+          const params = new URLSearchParams()
+          params.append('id_product', insertedProduct.id)
+          params.append('id_delivery_type', homeDelivery.id)
+          await http(auth.token).post('/product_delivery_type',params) //add product_delivery_type data
+        }
+        if(dineIn){
+          const params = new URLSearchParams()
+          params.append('id_product', insertedProduct.id)
+          params.append('id_delivery_type', dineIn.id)
+          await http(auth.token).post('/product_delivery_type',params) //add product_delivery_type data
+        }
+        if(takeAway){
+          const params = new URLSearchParams()
+          params.append('id_product', insertedProduct.id)
+          params.append('id_delivery_type', takeAway.id)
+          await http(auth.token).post('/product_delivery_type',params) //add product_delivery_type data
+        }
+      }
+    }
   }
   return (
     <>
@@ -196,25 +252,29 @@ const NewProduct = () => {
                                 <p className='mt-3 text-new-1'>Click size you want to use for this product</p>
                             </Col>
                             <Col xl={12} className="d-flex flex-row justify-content-md-between">
-                                <SizeCard radioName={"R"} value="R" />
-                                <SizeCard radioName={"L"} value="L" />
-                                <SizeCard radioName={"XL"} value="XL" />
-                                <SizeCard radioName={"250 gr"} value="250 gr" />
-                                <SizeCard radioName={"300 gr"} value="300 gr" />
-                                <SizeCard radioName={"500 gr"} value="500 gr" />
+                              {
+                                size.size.map((obj, idx)=> {
+                                  return (
+                                    <div key={idx} className='d-flex flex-column align-items-center' onClick={(e) => handleSizeValueChange(e)}>
+                                      <SizeCard className={sizeValue.includes(String(obj.id)) ? 'btn-pallet-1 text-pallet-4' : 'btn-outline-pallet-1'} radioName={obj.label} value={obj.id} />
+                                      <SizeCard className={sizeValue.includes(String(obj.id)) ? 'btn-pallet-1 text-pallet-4' : 'btn-outline-pallet-1'} radioName={obj.description} value={obj.id} />
+                                    </div>
+                                  )
+                                })
+                              }
                             </Col>
                             <Col xl={12}>
                                 <h6 className='mt-4 text-new'>Input Delivery Method: </h6>
                                 <p className='mt-3 text-new-1'>Click methods you want to use for this product</p>
                             </Col>
                             <Col xl={12} className="d-flex flex-row justify-content-md-between py-3 ml-20 mt-10 space-y-5">
-                                <Button variant={homeDelivery ? 'pallet-2' : 'pallet-4'} onClick={(e) => {e.preventDefault(); setHomeDelivery(!homeDelivery)}} >
+                                <Button variant={homeDelivery.checked ? 'pallet-2' : 'pallet-4'} onClick={(e) => {e.preventDefault(); setHomeDelivery({id:7, checked:!homeDelivery.checked})}} >
                                     Home Delivery
                                 </Button>
-                                <Button variant={dineIn ? 'pallet-2 mx-5' : 'pallet-4 mx-5'} onClick={(e) => {e.preventDefault(); setDineIn(!dineIn)}} >
+                                <Button variant={dineIn.checked ? 'pallet-2 mx-5' : 'pallet-4 mx-5'} onClick={(e) => {e.preventDefault(); setDineIn({id:9, checked:!dineIn.checked})}} >
                                     Dine in
                                 </Button>
-                                <Button variant={takeAway ? 'pallet-2' : 'pallet-4'} onClick={(e) => {e.preventDefault(); setTakeAway(!takeAway)}}>
+                                <Button variant={takeAway.checked ? 'pallet-2' : 'pallet-4'} onClick={(e) => {e.preventDefault(); setTakeAway({id:8, checked:!takeAway.checked})}}>
                                     Take Away
                                 </Button>
                             </Col>

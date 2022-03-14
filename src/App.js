@@ -11,6 +11,8 @@ import EditProductAdmin from './pages/EditProductAdmin'
 import NewProduct from './pages/NewProduct'
 import NewPromo from './pages/NewPromo'
 import ProductAllAdmin from './pages/ProductAllAdmin'
+import ProductAllCust from './pages/ProductAllCust';
+import Payment from './pages/Payment';
 import React, { useEffect } from 'react'
 import ForgotPassword from './pages/ForgotPassword'
 import TestComponent2 from './pages/TestComponent2'
@@ -60,7 +62,8 @@ export const App = () => {
         <Route path='new-product' element={<NewProduct />} />
         <Route path='new-promo' element={<NewPromo />} />
         <Route path='product-admin' element={<ProductAllAdmin />} />
-
+        <Route path='product-customer' element={<ProductAllCust />} />
+        <Route path='payment' element={<Payment />} />
       </Routes>
     </BrowserRouter>
   )
