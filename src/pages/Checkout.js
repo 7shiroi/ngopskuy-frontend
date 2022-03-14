@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import { connect, useSelector } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import ModalCheckout from '../components/ModalCheckout'
@@ -14,14 +14,11 @@ export const Checkout = ({getCart, checkoutCart}) => {
     const {cart} = useSelector(state => state)
     const [transactiontId, setTransactionId] = useState([])
     const token = window.localStorage.getItem('token')
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     useEffect (() => {
-        if(token){
-            getCart(token)
-        }else{
-            navigate('/login')
-        }
-    }, [])
+        getCart(token)
+    }, [token])
     const onCO = () => {
         cart.cart.map((data) => {
             return setTransactionId(transactiontId.push(data.id))
@@ -32,7 +29,7 @@ export const Checkout = ({getCart, checkoutCart}) => {
             data.status = 2
             checkoutCart(data, token)
         })
-        navigate('/history')
+        navigate('/my-history')
     }
     return (
         <Layout>

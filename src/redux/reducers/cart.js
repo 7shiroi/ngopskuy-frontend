@@ -1,13 +1,13 @@
 const initialState = {
     // token: null,
-    useCart: {},
+    cart: {},
     isLoading: true,
     isError: false,
     message: '',
     errorMsg: ''
 }
 
-const userCart = (state=initialState, action) => {
+const cart = (state=initialState, action) => {
     switch(action.type) {
         case 'GET_USER_CART_PENDING': {
             state.isLoading = true
@@ -59,6 +59,7 @@ const userCart = (state=initialState, action) => {
             state.isLoading = false
             state.isError = false
             state.cart = data.result
+            state.message = data.message
             return state
         }
         case 'ADD_USER_CART_REJECTED': {
@@ -95,4 +96,4 @@ const userCart = (state=initialState, action) => {
     }
 }
 
-export default userCart
+export default cart

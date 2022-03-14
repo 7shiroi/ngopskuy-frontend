@@ -69,7 +69,7 @@ export const NavbarHome = () => {
 						}
 						{auth.userData.id_role === 3 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' aria-currrent='page' to='/product'>Product</Link>
+								<Link className='nav-link rb fs-5' aria-currrent='page' to='/product-customer'>Product</Link>
 							</li>
 						}
 						{auth.userData.id_role === 1 &&

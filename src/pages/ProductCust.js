@@ -15,8 +15,10 @@ import { increment, decrement } from '../redux/actions/buttons'
 import Helmets from '../components/Helmets'
 import { addCart, getCart } from '../redux/actions/cart'
 
-const ProductCust = ({getProduct}) => {
+const ProductCust = ({getProduct, getCart}) => {
     const {product} = useSelector(state => state)
+    const {cart} = useSelector(state => state)
+    const [openMessage, setOpenMessage] = useState(true)
     const [control,setControl] = useState(false)
     const [show,setShow] = useState(-1)
     const buttons = useSelector(state=>state.buttons)
@@ -46,6 +48,7 @@ const ProductCust = ({getProduct}) => {
     }
 
     const goPay = () => {
+        getCart(tokenA)
         navigate('/checkout')
     }
     const addNewCart = () => {
@@ -74,6 +77,7 @@ const ProductCust = ({getProduct}) => {
                         <p className="text-center text-4xl font-bold">{product.product?.name}</p>
                         <p className="text-center text-xl font-medium"><NumberFormat value={product.product?.price} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} prefix={'IDR '} ></NumberFormat></p>
                     </div>
+                    {cart.message && <div className='alert alert-danger mb-5'>{cart.message}</div>}
                     <div className="ml-20 mt-10 space-y-5">
                         <Button block variant='pallet-2 radius' onClick={addNewCart}> Add to Cart </Button>
                         <Button block variant='pallet-3 my-2 radius'> Ask a Staff </Button>
@@ -158,8 +162,8 @@ const ProductCust = ({getProduct}) => {
   )
 }
 
-const mapStateToProps = state => ({product: state.product})
+const mapStateToProps = state => ({product: state.product, cart:state.cart})
 
-const mapDispatchToProps = {getProduct}
+const mapDispatchToProps = {getProduct, getCart}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCust)

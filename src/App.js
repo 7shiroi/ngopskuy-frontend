@@ -66,8 +66,9 @@ export const App = () => {
         <Route path='product-admin' element={<ProductAllAdmin />} />
         <Route path='product-customer' element={<ProductAllCust />} />
         <Route path='payment' element={<Payment />} />
-        <Route path='history' element={<History />} />
+        <Route path='my-history' element={<History />} />
         <Route path='checkout' element={<Checkout />} />
+        <Route path='my-cart' element={<Checkout />} />
       </Routes>
     </BrowserRouter>
   )
