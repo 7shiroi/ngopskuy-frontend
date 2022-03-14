@@ -1,23 +1,23 @@
-const categoryState = {
-  category: [],
+const sizeState = {
+  size: [],
   isLoading: false,
   isError: false,
 }
 
-const category = (state=categoryState, action)=>{
+const size = (state=sizeState, action)=>{
   switch(action.type){
-    case 'GET_CATEGORY_PENDING': {
+    case 'GET_SIZE_PENDING': {
       state.isLoading = true
       state.isError = false
       return {...state}
     }
-    case 'GET_CATEGORY_FULFILLED': {
+    case 'GET_SIZE_FULFILLED': {
       const {data} = action.payload
-      state.category = data.result
+      state.size = data.result
       state.isLoading = false
       return {...state}
     }
-    case 'GET_CATEGORY_REJECTED': {
+    case 'GET_SIZE_REJECTED': {
       state.isLoading = false
       state.isError = true
       return {...state}
@@ -28,4 +28,4 @@ const category = (state=categoryState, action)=>{
   }
 }
 
-export default category
+export default size

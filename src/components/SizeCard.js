@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 
-export const SizeCard = ({ radioName, value }) => {
+export const SizeCard = ({ className, radioName, value }) => {
 	const [checked, setChecked] = useState(false)
 	const [radioValue, setRadioValue] = useState('1')
 
@@ -10,7 +10,7 @@ export const SizeCard = ({ radioName, value }) => {
 		<>
 			<ButtonGroup className='px-2 py-2'>
 				<ToggleButton
-					className='rounded-circle'
+					className={`rounded-circle ${className}`}
 					id={''}
 					type="radio"
 					variant={'dark' ? 'outline-pallet-1' : 'outline-pallet-3'}
