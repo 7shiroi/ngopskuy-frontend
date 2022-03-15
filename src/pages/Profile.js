@@ -63,6 +63,7 @@ export const Profile = () => {
     }, [])
     const onEditProfile = (e) => {
         e.preventDefault()
+        dispatch({type: "CLEAR_MESSAGE"})
         const email = e.target.elements['email'].value
         const address = e.target.elements['address'].value
         const phone_number = e.target.elements['phone_number'].value

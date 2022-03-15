@@ -14,7 +14,6 @@ import { getProfile } from '../redux/actions/auth'
 export const NavbarLog = () => {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.auth.token)
-    console.log(auth.userData)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const goLogin = () => {
@@ -24,8 +23,9 @@ export const NavbarLog = () => {
         navigate(`/signup`)
     }
     useEffect(() => {
-        const token = window.localStorage.getItem('token')
+      if(auth.token) {
         dispatch(getProfile(token))
+      }
     }, [])
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-pallet-4">

@@ -90,6 +90,12 @@ const productState = {
         state.isError = true
         return {...state}
       }
+      case 'CLEAR_MESSAGE': {
+        state.errorMsg = ""
+        state.errMsg = ""
+        state.message = ""
+        return { ...state }
+      }
       default: {
           return {...state}
       }

@@ -154,6 +154,12 @@ const auth = (state = initialState, action) => {
             state.errMsg = data.message
             return { ...state }
         }
+        case 'CLEAR_MESSAGE': {
+          state.errorMsg = ""
+          state.errMsg = ""
+          state.message = ""
+          return { ...state }
+        }
         default: {
             return { ...state }
         }

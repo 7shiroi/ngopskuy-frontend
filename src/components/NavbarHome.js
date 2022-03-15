@@ -22,8 +22,9 @@ export const NavbarHome = () => {
 	}
 
 	useEffect(() => {
-		const token = window.localStorage.getItem('token')
-		dispatch(getProfile(token))
+    if(auth.token) {
+      dispatch(getProfile(auth.token))
+    }
 	}, [])
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-pallet-4">
@@ -144,7 +145,12 @@ export const NavbarHome = () => {
 										<hr className="dropdown-divider" />
 									</li>
 
-									<li onClick={() => { dispatch({ type: 'AUTH_LOGOUT' }); navigate('/') }} style={{ cursor: 'pointer' }} className="dropdown-item" to="/login">Logout</li>
+									<li 
+                    onClick={() => { dispatch({ type: 'AUTH_LOGOUT' }); dispatch({type: 'CLEAR_MESSAGE'}); navigate('/') }} 
+                    style={{ cursor: 'pointer' }} 
+                    className="dropdown-item" 
+                    to="/login">Logout
+                  </li>
 
 								</ul>
 							</li>
