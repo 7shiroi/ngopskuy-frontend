@@ -7,20 +7,11 @@ import { useNavigate } from 'react-router-dom'
 
 export const History = ({ getHistory, deleteHistory }) => {
     const { history: hist } = useSelector(state => state)
-    const tokens = useSelector(state => state.auth)
     const token = window.localStorage.getItem('token')
     const dispatch = useDispatch()
     const navigate = useNavigate()
     useEffect(() => {
-        if (!tokens.token) {
-            const token = window.localStorage.getItem('token')
-            if (token) {
-                dispatch(getHistory(token))
-            } else {
-                window.alert('Please login first')
-                navigate('/login')
-            }
-        }
+        getHistory(token)
     }, [getHistory, token])
     return (
         <Layout>
@@ -33,7 +24,7 @@ export const History = ({ getHistory, deleteHistory }) => {
                     {hist.isError &&
                         <div className='text-center text-light fs-3'>{hist.errorMsg}</div>}
                     {!hist.isLoading && !hist.isError && <div className='row my-auto'>
-                        {console.log(!hist.history)}
+                        {console.log(hist.history)}
                         {hist.history.map((data, idx) => {
                             return (
                                 <div key={data.id} className='col-12 col-md-6 col-lg-4 my-2'>

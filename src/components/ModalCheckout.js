@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import CurrencyFormat from 'react-currency-format'
+import { useDispatch } from 'react-redux';
+import trashIcon from '../assets/images/trash-icon.png'
+import { deleteCart } from '../redux/actions/cart';
 
 export const ModalCheckout = ({ data }) => {
+    const token = window.localStorage.getItem('token')
     let totalPrice = 0
-    // useEffect(() => {
-    //     data.map((evData, idx)=>{
-    //         return setTotalPrice(totalPrice.value = evData.price)
-    //     })
-    // })
+    const dispatch = useDispatch()
+    const [price, setPrice] = useState([])
+    useEffect(() => {
+        // data.map((evData, idx)=>{
+        //     return setPrice(price.push(evData.total_price))
+        // })
+        // price.forEach(x=>{
+        //     totalPrice += x
+        // })
+    })
+    const onDelete = (id) => {
+    }
     return (
         <div className="co-card bg-white p-5 text-dark">
             <h1 className='fs-3 my-4 text-center'>Order Summary</h1>
@@ -15,17 +26,20 @@ export const ModalCheckout = ({ data }) => {
                 <div className="data-order">
                     {data?.map((has, idx) => {
                         return (
-                            <div className='row my-3'>
+                            <div className='row py-3'>
                                 <div className='img-fit col-2'>
                                     <img src={has.image} alt='corndog' width='50' height='50' className='rounded' />
                                 </div>
                                 <div className='detail col-10 position-relative ps-3'>
                                     <p className='py-0 my-0'>{has.name}</p>
                                     <p className='py-0 my-0'>X {has.quantity}</p>
-                                    <p className='py-0 my-0'>{has.size}</p>
-                                    <p className='d-flex position-absolute top-100 end-0 translate-middle'>IDR <CurrencyFormat value={has.total_price} displayType={'text'} thousandSeparator={true} prefix={''} /></p>
+                                    <div className="icon-trash bg-pallet-1 text-center position-absolute top-0 end-0 translate-middle-x">
+                                    <div onClick={() => {
+                                        dispatch(deleteCart(has.id, token))
+                                        }}><img src={trashIcon} alt='delete-icon'/></div>
+                                    </div>
+                                    <p className='d-flex position-absolute top-100 end-0 translate-middle-x'>IDR <CurrencyFormat value={has.total_price} displayType={'text'} thousandSeparator={true} prefix={''} /></p>
                                 </div>
-                                {totalPrice += has.total_price}
                             </div>
                         )
                     })}

@@ -19,7 +19,6 @@ const history = (state = initialState, action) => {
             state.isLoading = false
             state.isError = false
             state.history = data.result
-            window.localStorage.setItem('userHistory', JSON.stringify(state.userHistory))
             return { ...state }
         }
         case 'GET_HISTORY_REJECTED': {
