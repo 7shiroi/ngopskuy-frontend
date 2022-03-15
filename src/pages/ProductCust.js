@@ -35,8 +35,10 @@ const ProductCust = ({getProduct, getCart}) => {
       }
     
       const onDecrement = (e)=>{
-        e.preventDefault()
-        dispatch(decrement())
+        if(buttons.value > 1) {
+            e.preventDefault()
+            dispatch(decrement())
+        }
       }
 
     useEffect(()=>{
