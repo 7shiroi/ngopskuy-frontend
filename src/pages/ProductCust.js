@@ -18,7 +18,7 @@ import { addCart, getCart } from '../redux/actions/cart'
 const ProductCust = ({getProduct, getCart}) => {
     const {product} = useSelector(state => state)
     const {cart} = useSelector(state => state)
-    const [openMessage, setOpenMessage] = useState(true)
+    const [message, setMessage] = useState()
     const [control,setControl] = useState(false)
     const [show,setShow] = useState(-1)
     const buttons = useSelector(state=>state.buttons)
@@ -58,6 +58,7 @@ const ProductCust = ({getProduct, getCart}) => {
         }
         // console.log(addCart(data, tokenA))
         dispatch(addCart(data, tokenA))
+        setMessage('Added to cart')
         dispatch(getCart(tokenA))
     }
 
@@ -77,7 +78,7 @@ const ProductCust = ({getProduct, getCart}) => {
                         <p className="text-center text-4xl font-bold">{product.product?.name}</p>
                         <p className="text-center text-xl font-medium"><NumberFormat value={product.product?.price} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} prefix={'IDR '} ></NumberFormat></p>
                     </div>
-                    {cart.message && <div className='alert alert-danger mb-5'>{cart.message}</div>}
+                    {message && <div className='alert alert-danger mb-5'>{message}</div>}
                     <div className="ml-20 mt-10 space-y-5">
                         <Button block variant='pallet-2 radius' onClick={addNewCart}> Add to Cart </Button>
                         <Button block variant='pallet-3 my-2 radius'> Ask a Staff </Button>

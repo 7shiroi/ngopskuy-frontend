@@ -37,7 +37,7 @@ export const Checkout = ({getCart, checkoutCart}) => {
                 <div className='container text-light'>
                     <h1 className='c-out fw-bold fs-1 py-5'>Checkout your item now!</h1>
                     {cart.isError && <h>{cart.errorMsg}</h>}
-                    {!cart.isLoading && !cart.isError &&
+                    {cart.cart &&
                     <div className='row py-5 order-detail'>
                         <div className='cart col-12 col-md-6'>
                             <ModalCheckout data={cart.cart}></ModalCheckout>
