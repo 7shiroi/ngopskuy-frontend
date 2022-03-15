@@ -13,8 +13,6 @@ export const NavbarHome = () => {
 	const auth = useSelector(state => state.auth)
 	const tokens = useSelector(state => state.auth.token)
 	const dispatch = useDispatch()
-	console.log(tokens)
-	console.log(auth?.userData.id_role)
 	const navigate = useNavigate()
 	const goLogin = () => {
 		navigate(`/login`)
@@ -119,12 +117,12 @@ export const NavbarHome = () => {
 						}
 						{auth?.userData.id_role === 2 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' to='/history'>History</Link>
+								<Link className='nav-link rb fs-5' to='/history-admin'>History</Link>
 							</li>
 						}
 						{auth?.userData.id_role === 1 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' to='/history'>History</Link>
+								<Link className='nav-link rb fs-5' to='/history-admin'>History</Link>
 							</li>
 						}
 						{auth?.token &&

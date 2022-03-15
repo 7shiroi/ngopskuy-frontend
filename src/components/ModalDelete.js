@@ -5,7 +5,7 @@ import trashIcon from '../assets/images/trash-icon.png'
 import { deleteHistory, getHistory } from '../redux/actions/history';
 import loadingGif from '../assets/images/Ajux_loader.gif'
 
-export const ModalDelete = ({ id, img, product, price, status, deleteHistory, getHistory }) => {
+export const ModalDelete = ({ id, img, product, price, status, userName, variant = "bg-white", deleteHistory, getHistory }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [onLoad, setOnload] = useState(false)
     const { history: hist } = useSelector(state => state)
@@ -35,13 +35,14 @@ export const ModalDelete = ({ id, img, product, price, status, deleteHistory, ge
         }
     }
     return (
-        <div className='block position-relative radius bg-white' style={{ height: '100%' }}>
+        <div className={`block position-relative radius ${variant}`} style={{ height: '100%' }}>
             {onLoad && navigate('/my-history')}
             <div className='d-flex align-items-center p-3'>
                 <div className='img-fit'>
                     <img src={img} alt='corndog' width='50' height='50' className='rounded-circle' />
                 </div>
                 <div className="about px-3 text-pallet-1" style={{ fontSize: '15px' }}>
+                    <p className='py-0 my-0'>{userName}</p>
                     <p className='fs-6 fw-bold py-0 my-0'>{product}</p>
                     <p className='py-0 my-0'>IDR {price}</p>
                     <p className='py-0 my-0'>{status}</p>
