@@ -23,6 +23,8 @@ import VerifyEmail from './pages/VerifyEmail'
 import DashboardAdmin from './pages/DashboardAdmin';
 import EditPromo from './pages/EditPromo'
 import NavbarHome from './components/NavbarHome';
+import History from './pages/History';
+import Checkout from './pages/Checkout';
 import Search from './pages/Search';
 import SearchAdmin from './pages/SearchAdmin';
 
@@ -69,6 +71,9 @@ export const App = () => {
         <Route path='product-customer' element={<ProductAllCust />} />
         <Route path='manage-order' element={<ManageOrder />} />
         <Route path='payment' element={<Payment />} />
+        <Route path='my-history' element={<History />} />
+        <Route path='checkout' element={<Checkout />} />
+        <Route path='my-cart' element={<Checkout />} />
         <Route path='dashboard' element={<DashboardAdmin />} />
       </Routes>
     </BrowserRouter>
