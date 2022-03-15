@@ -27,6 +27,8 @@ import History from './pages/History';
 import Checkout from './pages/Checkout';
 import Search from './pages/Search';
 import SearchAdmin from './pages/SearchAdmin';
+import HistoryAdmin from './pages/HistoryAdmin';
+import SearchHistory from './pages/SearchHistory';
 
 export const App = () => {
   const auth = useSelector(state => state.auth)
@@ -71,6 +73,8 @@ export const App = () => {
         <Route path='manage-order' element={<ManageOrder />} />
         <Route path='payment' element={<Payment />} />
         <Route path='my-history' element={<History />} />
+        <Route path='history-admin' element={<HistoryAdmin />} />
+        <Route path='search-history' element={<SearchHistory />} />
         <Route path='checkout' element={<Checkout />} />
         <Route path='my-cart' element={<Checkout />} />
         <Route path='dashboard' element={<DashboardAdmin />} />
