@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useRef } from 'react'
 import { Card, Container, Row, Col, Image, Form } from 'react-bootstrap'
@@ -13,6 +14,8 @@ import { useNavigate } from 'react-router-dom'
 import Helmets from '../components/Helmets'
 import { Navigate } from "react-router-dom"
 import ModalLoading from '../components/ModalLoading'
+import ModalNotifSuccess from '../components/ModalNotifSuccess'
+import ModalNotifError from '../components/ModalNotifError'
 // import LoadingBar from 'react-top-loading-bar'
 
 export const Profile = () => {
@@ -81,6 +84,8 @@ export const Profile = () => {
         <><Helmets children={"My Profile"} />
             {auth?.token && <Navigate to='/' />}
             <ModalLoading isLoading={tokens.isLoading} />
+            <ModalNotifSuccess message={tokens.message}/>
+            <ModalNotifError message={tokens.errorMsg} />
             <NavbarHome />
                 <div className='bg-profile py-5 shadow'>
                     <Container>
