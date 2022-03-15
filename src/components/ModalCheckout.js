@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import CurrencyFormat from 'react-currency-format'
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import trashIcon from '../assets/images/trash-icon.png'
-import { deleteCart } from '../redux/actions/cart';
+import { deleteCart, getCart } from '../redux/actions/cart';
 
 export const ModalCheckout = ({ data }) => {
     const token = window.localStorage.getItem('token')
     let totalPrice = 0
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [price, setPrice] = useState([])
     useEffect(() => {
         // data.map((evData, idx)=>{
@@ -36,6 +38,8 @@ export const ModalCheckout = ({ data }) => {
                                     <div className="icon-trash bg-pallet-1 text-center position-absolute top-0 end-0 translate-middle-x">
                                     <div onClick={() => {
                                         dispatch(deleteCart(has.id, token))
+                                        dispatch(getCart(token))
+                                        navigate('/checkout')
                                         }}><img src={trashIcon} alt='delete-icon'/></div>
                                     </div>
                                     <p className='d-flex position-absolute top-100 end-0 translate-middle-x'>IDR <CurrencyFormat value={has.total_price} displayType={'text'} thousandSeparator={true} prefix={''} /></p>
