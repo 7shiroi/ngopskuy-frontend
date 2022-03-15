@@ -1,26 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Layout from '../components/Layout';
 import ModalDelete from '../components/ModalDelete';
 import { getHistory, deleteHistory } from '../redux/actions/history';
-import { useNavigate } from 'react-router-dom'
 
 export const History = ({ getHistory, deleteHistory }) => {
     const { history: hist } = useSelector(state => state)
-    const tokens = useSelector(state => state.auth)
     const token = window.localStorage.getItem('token')
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
     useEffect(() => {
-        if (!tokens.token) {
-            const token = window.localStorage.getItem('token')
-            if (token) {
-                dispatch(getHistory(token))
-            } else {
-                window.alert('Please login first')
-                navigate('/login')
-            }
-        }
+        getHistory(token)
     }, [getHistory, token])
     return (
         <Layout>

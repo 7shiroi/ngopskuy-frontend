@@ -12,8 +12,6 @@ import { GrDeliver } from "react-icons/gr";
 
 export const Checkout = ({ getCart, checkoutCart }) => {
     const { cart } = useSelector(state => state)
-    const carts = Array.from(cart)
-    console.log(carts)
     const [transactiontId, setTransactionId] = useState([])
     const token = window.localStorage.getItem('token')
     const tokens = useSelector(state => state.auth)
