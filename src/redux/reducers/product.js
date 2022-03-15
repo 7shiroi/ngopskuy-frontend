@@ -4,6 +4,9 @@ const productState = {
     pageInfo: {},
     isLoading: false,
     isError: false,
+    errorMsg: '',
+    errMsg: '',
+    successMsg: ''
   }
   
   const product = (state=productState, action)=>{
@@ -29,6 +32,7 @@ const productState = {
       case 'EDIT_PRODUCT_PENDING': {
         state.isLoading = true
         state.isError = false
+        state.message = ''
         return {...state}
       }
       case 'EDIT_PRODUCT_FULFILLED': {
@@ -37,11 +41,17 @@ const productState = {
         state.product = data.result
         state.pageInfo = data.info
         state.isLoading = false
+        state.isError = false
+        state.errorMsg = ""
+        state.message = data.message
         return {...state}
       }
       case 'EDIT_PRODUCT_REJECTED': {
+        const { data } = action.payload.response
         state.isLoading = false
-        state.isError = true
+        state.error = true
+        state.errorMsg = data.error
+        state.errMsg = data.message
         return {...state}
       }
       case 'DELETE_PRODUCT_PENDING': {

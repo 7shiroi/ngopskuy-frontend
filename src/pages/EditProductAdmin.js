@@ -79,6 +79,15 @@ const EditProductAdmin = () => {
         </div>
         <Container>
           <form onSubmit={(e) => editedProduct(e)}>
+            {product.errorMsg &&
+              <div className="alert alert-warning fade show" role="alert" aria-label="Close">
+                <strong>{product.errorMsg}</strong>
+              </div>
+            }
+            {
+              !product.errorMsg && 
+                <Modals show={modalShow} onHide={() => setModalShow(false)} />
+            }                          
             <Row className='px-3 justify-content-md-between'>
                 <Col xl={6} sm={12} className="px-5 d-flex flex-column justify-content-md-center">
                     <div className='position-relative m-auto'>
@@ -104,6 +113,7 @@ const EditProductAdmin = () => {
                     </Col>
                     <Col xl={12} sm={12}>
                       <InputUnderline block version="input-underline underline-1 px-0 py-2 " name='price' placeholder='input product price' defaultValue={product.product?.price} style={{fontSize:"24px", fontFamily:"Poppins", fontWeight:"500", backgroundColor:"#FAF8F6"}}/>
+                      
                     </Col>
                     <Col xl={12} sm={12}>
                       <InputUnderline block version="input-underline underline-1 px-0 py-2 text-wrap mt-3 " name='description' placeholder='input product desc' defaultValue={product.product?.description}  style={{fontSize:"16px", fontFamily:"Poppins", fontWeight:"400", backgroundColor:"#FAF8F6"}}/>
@@ -131,8 +141,8 @@ const EditProductAdmin = () => {
                             </Col>
                         </Row>
                         <div className='text-center'>
-                            <Button onClick={()=>setModalShow(true)} type="submit" block variant='pallet-1 radius my-5 py-3'>Save change</Button>
-                          <Modals show={modalShow} onHide={() => setModalShow(false)} />
+                          <Button onClick={()=>setModalShow(true)} type="submit" block variant='pallet-1 radius my-5 py-3'>Save change</Button>
+                          
                         </div>
                     </Container>
                 </Col>
