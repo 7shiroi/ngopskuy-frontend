@@ -12,6 +12,7 @@ import NewProduct from './pages/NewProduct'
 import NewPromo from './pages/NewPromo'
 import ProductAllAdmin from './pages/ProductAllAdmin'
 import ProductAllCust from './pages/ProductAllCust';
+import ManageOrder from './pages/ManageOrder';
 import Payment from './pages/Payment';
 import React, { useEffect } from 'react'
 import ForgotPassword from './pages/ForgotPassword'
@@ -19,11 +20,13 @@ import TestComponent2 from './pages/TestComponent2'
 import { useDispatch, useSelector } from 'react-redux'
 import EditPassword from './pages/EditPassword'
 import VerifyEmail from './pages/VerifyEmail'
-// import { ProductAdmin } from './pages/ProductAdmin'
+import DashboardAdmin from './pages/DashboardAdmin';
 import EditPromo from './pages/EditPromo'
 import NavbarHome from './components/NavbarHome';
 import History from './pages/History';
 import Checkout from './pages/Checkout';
+import Search from './pages/Search';
+import SearchAdmin from './pages/SearchAdmin';
 
 export const App = () => {
   const auth = useSelector(state => state.auth)
@@ -56,8 +59,9 @@ export const App = () => {
         <Route path='/forgotpassword' element={<ForgotPassword />} />
         <Route path='/verifyemail' element={<VerifyEmail />} />
         <Route path='/profile/edit-password' element={<EditPassword />} />
-        {/* <Route path='/product-admin' element={<ProductAdmin />} /> */}
-        <Route path='/editPromo' element={<EditPromo />} />
+        <Route path='/edit-promo/:id' element={<EditPromo />} />
+        <Route path='/search' element={<Search />} />
+        <Route path='/search-admin' element={<SearchAdmin />} />
         <Route path='product-admin/:id' element={<ProductAdmin />} />
         <Route path='product-customer/:id' element={<ProductCust />} />
         <Route path='edit-product-admin/:id' element={<EditProductAdmin />} />
@@ -65,10 +69,12 @@ export const App = () => {
         <Route path='new-promo' element={<NewPromo />} />
         <Route path='product-admin' element={<ProductAllAdmin />} />
         <Route path='product-customer' element={<ProductAllCust />} />
+        <Route path='manage-order' element={<ManageOrder />} />
         <Route path='payment' element={<Payment />} />
         <Route path='my-history' element={<History />} />
         <Route path='checkout' element={<Checkout />} />
         <Route path='my-cart' element={<Checkout />} />
+        <Route path='dashboard' element={<DashboardAdmin />} />
       </Routes>
     </BrowserRouter>
   )

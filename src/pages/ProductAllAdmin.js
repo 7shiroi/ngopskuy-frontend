@@ -7,14 +7,14 @@ import Footer from '../components/Footer'
 import CardMenu from '../components/CardMenu'
 import { getProductAll } from '../redux/actions/productall'
 import { connect, useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
 import Button from '../components/Button'
 import PromoCard from '../components/PromoCard'
 
 
 const ProductAllAdmin = ({ getProductAll }) => {
     const navigate = useNavigate()
-    const auth = useSelector(state => state.auth.userData)
+    const auth = useSelector(state => state.auth)
     const { productall } = useSelector(state => state)
     const token = useSelector(state => state.auth)
 
@@ -37,6 +37,8 @@ const ProductAllAdmin = ({ getProductAll }) => {
     return (
         <>
             <Helmets children={"Product Admin"} />
+            {auth?.userData.id_role === 3 && <Navigate to='/' />}
+            {auth.token == null && <Navigate to='/' />}
             <NavbarHome />
             <section>
                 <Container>
