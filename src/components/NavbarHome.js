@@ -85,7 +85,7 @@ export const NavbarHome = () => {
 
 						{auth.userData.id_role === 3 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' to='/my-cart'>My Cart</Link>
+								<Link className='nav-link rb fs-5' to='/checkout'>My Cart</Link>
 							</li>
 						}
 						{auth.userData.id_role === 2 &&

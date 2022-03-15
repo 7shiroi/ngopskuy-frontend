@@ -128,7 +128,7 @@ const NewProduct = () => {
     const inputData = {}
     inputData.name = e.target.elements['name'].value
     inputData.price = e.target.elements['price'].value
-    // inputData.description = e.target.elements['description'].value
+    inputData.description = e.target.elements['description'].value
     inputData.stock = e.target.elements['stock'].value
     inputData.delivery_hour_start = e.target.elements['delivery_hour_start'].value
     inputData.delivery_hour_end = e.target.elements['delivery_hour_end'].value

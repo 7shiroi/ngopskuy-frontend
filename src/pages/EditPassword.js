@@ -88,13 +88,13 @@ export const EditPassword = () => {
                                                     Edit Password
                                                 </Card.Text>
                                                 <Col sm={12}>
-                                                    <InputUnderline label="Last Password :" name="password" block version="input-underline px-0 py-4" ></InputUnderline>
+                                                    <InputUnderline type="password" label="Last Password :" name="password" block version="input-underline px-0 py-4" ></InputUnderline>
                                                 </Col>
                                                 <Col sm={12}>
-                                                    <InputUnderline label="New Password :" name="new_password" block version="input-underline px-0 py-4"  ></InputUnderline>
+                                                    <InputUnderline type="password" label="New Password :" name="new_password" block version="input-underline px-0 py-4"  ></InputUnderline>
                                                 </Col>
                                                 <Col sm={12}>
-                                                    <InputUnderline label="Repeat New Password :" name="repeat_password" block version="input-underline px-0 py-4" ></InputUnderline>
+                                                    <InputUnderline type="password" label="Repeat New Password :" name="repeat_password" block version="input-underline px-0 py-4" ></InputUnderline>
                                                 </Col>
                                                 <Col sm={12} className="px-5 py-5">
                                                 </Col>
