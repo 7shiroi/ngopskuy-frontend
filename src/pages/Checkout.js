@@ -12,12 +12,9 @@ import { GrDeliver } from "react-icons/gr";
 
 export const Checkout = ({ getCart, checkoutCart }) => {
     const { cart } = useSelector(state => state)
-    const carts = Array.from(cart)
-    console.log(carts)
     const [transactiontId, setTransactionId] = useState([])
     const token = window.localStorage.getItem('token')
     const tokens = useSelector(state => state.auth)
-    console.log(tokens?.token)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     useEffect(() => {
@@ -37,12 +34,12 @@ export const Checkout = ({ getCart, checkoutCart }) => {
     }
     return (
         <Layout>
-            {tokens?.token == null && <Navigate to='/login' />}
+            {token == null && <Navigate to='/login' />}
             <div className='checkout-bg pb-5'>
                 <div className='container text-light'>
                     <h1 className='c-out fw-bold fs-1 py-5'>Checkout your item now!</h1>
                     {cart.isError && <h>{cart?.errorMsg}</h>}
-                    {cart.cart &&
+                    {cart.isError === false &&
                         <div className='row py-5 order-detail'>
                             <div className='cart col-12 col-md-6'>
                                 <ModalCheckout data={cart?.cart}></ModalCheckout>

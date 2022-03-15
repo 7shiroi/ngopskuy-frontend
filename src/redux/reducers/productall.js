@@ -31,6 +31,11 @@ const productall = (state = initialState, action) => {
 
             return { ...state }
         }
+        case 'CLEAR_MESSAGE': {
+          state.errorMsg = ""
+          state.successMsg = ""
+          return { ...state }
+        }
         default: {
             return { ...state }
         }

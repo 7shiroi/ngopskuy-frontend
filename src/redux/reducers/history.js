@@ -1,6 +1,6 @@
 const initialState = {
     // token: null,
-    history: {},
+    history: [],
     isLoading: true,
     isError: false,
     message: '',
@@ -48,6 +48,11 @@ const history = (state = initialState, action) => {
             state.isError = true
             state.errorMsg = error
             return { ...state }
+        }
+        case 'CLEAR_MESSAGE': {
+          state.errorMsg = ""
+          state.message = ""
+          return { ...state }
         }
         default: {
             return { ...state }

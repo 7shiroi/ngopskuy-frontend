@@ -29,6 +29,11 @@ const user = (state = initialState, action) => {
 
 			return { ...state }
 		}
+    case 'CLEAR_MESSAGE': {
+      state.errorMsg = ""
+      state.message = ""
+      return { ...state }
+    }
 		default: {
 			return { ...state }
 		}
