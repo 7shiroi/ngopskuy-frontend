@@ -26,9 +26,9 @@ const ProductAllCust = () => {
     const navigate = useNavigate()
     useEffect(() => {
         getProductSearch(`/product?limit=6`)
-        getProductCoffee('/product?idCategory=1&limit=6')
-        getProductNonCoffee('/product?idCategory=2&limit=6')
-        getProductFood('/product?idCategory=3&limit=6')
+        getProductCoffee('/product?id_category=1&limit=6')
+        getProductNonCoffee('/product?id_category=2&limit=6')
+        getProductFood('/product?id_category=3&limit=6')
     }, [])
 
     const getProductSearch = async (url) => {
@@ -38,6 +38,7 @@ const ProductAllCust = () => {
     }
     const getProductCoffee = async (url) => {
         const { data } = await http().get(url)
+        console.log(data)
         setProductCoffee(data?.result)
         setPageCoffee(data?.pageinfo)
     }
@@ -65,7 +66,7 @@ const ProductAllCust = () => {
                     ...data.result
                 ])
             }
-            setPage(data.pageinfo)
+            setPageFood(data.pageinfo)
         } catch (e) {
             if (e.message.includes('404')) {
                 setErrorMsg('Data not found!')
@@ -90,7 +91,7 @@ const ProductAllCust = () => {
                     ...data.result
                 ])
             }
-            setPage(data.pageinfo)
+            setPageNonCoffee(data.pageinfo)
         } catch (e) {
             if (e.message.includes('404')) {
                 setErrorMsg('Data not found!')
@@ -115,7 +116,7 @@ const ProductAllCust = () => {
                     ...data.result
                 ])
             }
-            setPage(data.pageinfo)
+            setPageCoffee(data.pageinfo)
         } catch (e) {
             if (e.message.includes('404')) {
                 setErrorMsg('Data not found!')
@@ -220,12 +221,12 @@ const ProductAllCust = () => {
                                 </Tab>
                                 <Tab eventKey="coffee" title="Coffeee">
                                     <Row class className="">
-                                        {/* <Col sm={12} className=' d-flex justify-content-end'>
+                                        <Col sm={12} className=' d-flex justify-content-end'>
                                             <div >
                                                 {pageCoffee.prev !== null && <button onClick={() => getNextDataCoffee(pageCoffee.prev)} className='btn '><p><FaChevronLeft />View Prev </p></button>}
                                                 {pageCoffee.next !== null && <button onClick={() => getNextDataCoffee(pageCoffee.next)} className='btn '><p>View Next <FaChevronRight /></p></button>}
                                             </div>
-                                        </Col> */}
+                                        </Col>
                                         {productCoffee?.map((data, idx) => (
                                             <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
@@ -239,12 +240,12 @@ const ProductAllCust = () => {
                                 </Tab>
                                 <Tab eventKey="noncoffee" title="Non Coffee">
                                     <Row class className="">
-                                        {/* <Col sm={12} className=' d-flex justify-content-end'>
+                                        <Col sm={12} className=' d-flex justify-content-end'>
                                             <div >
                                                 {pageNonCoffee.prev !== null && <button onClick={() => getNextDataNonCoffee(pageNonCoffee.prev)} className='btn '><p><FaChevronLeft />View Prev </p></button>}
                                                 {pageNonCoffee.next !== null && <button onClick={() => getNextDataNonCoffee(pageNonCoffee.next)} className='btn '><p>View Next <FaChevronRight /></p></button>}
                                             </div>
-                                        </Col> */}
+                                        </Col>
                                         {productNonCoffee?.map((data, idx) => (
                                             <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
@@ -258,12 +259,12 @@ const ProductAllCust = () => {
                                 </Tab>
                                 <Tab eventKey="foods" title="Foods">
                                     <Row class className="">
-                                        {/* <Col sm={12} className=' d-flex justify-content-end'>
+                                        <Col sm={12} className=' d-flex justify-content-end'>
                                             <div >
                                                 {pageFood.prev !== null && <button onClick={() => getNextDataFood(pageFood.prev)} className='btn '><p><FaChevronLeft />View Prev </p></button>}
                                                 {pageFood.next !== null && <button onClick={() => getNextDataFood(pageFood.next)} className='btn '><p>View Next <FaChevronRight /></p></button>}
                                             </div>
-                                        </Col> */}
+                                        </Col>
                                         {productFood?.map((data, idx) => (
                                             <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
