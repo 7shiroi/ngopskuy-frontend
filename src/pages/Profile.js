@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useRef } from 'react'
 import { Card, Container, Row, Col, Image, Form } from 'react-bootstrap'
 import photo from '../assets/images/photo.png'
 import NavbarHome from "../components/NavbarHome"
 import Footer from "../components/Footer"
 import Button from "../components/Button"
-import { BiPencil } from "react-icons/bi"
+import { BiPencil, BiCheckCircle } from "react-icons/bi"
 import InputUnderline from "../components/InputUnderline"
 import { editProfile, getProfile } from '../redux/actions/auth'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,13 +14,17 @@ import Helmets from '../components/Helmets'
 import { Navigate } from "react-router-dom"
 
 export const Profile = () => {
+    window.scrollTo(0, 0)
     const hiddenFileInput = useRef(null)
     const navigate = useNavigate()
-    const auth = useSelector(state => state.auth.userData)
+    const auth = useSelector(state => state.auth?.userData)
     const tokens = useSelector(state => state.auth)
     const [datas, setDatas] = useState({})
     const goEditPass = () => {
         navigate(`/profile/edit-password`)
+    }
+    const goVerify = () => {
+        navigate(`/verifyemail`)
     }
 
     const fileInputHandler = (e) => {
@@ -48,9 +53,7 @@ export const Profile = () => {
     useEffect(() => {
         if (!auth.token) {
             const token = window.localStorage.getItem('token')
-            console.log(token)
             if (token) {
-                console.log(auth?.gender === 'male')
                 dispatch(getProfile(token))
             } else {
                 window.alert('Please login first')
@@ -68,27 +71,27 @@ export const Profile = () => {
         const birth_date = e.target.elements['birth_date'].value
         const image = datas.image
         const display_name = e.target.elements['display_name'].value
-        // console.log(image)
+        console.log(image)
         const data = { email, address, phone_number, first_name, last_name, birth_date, image, display_name }
         dispatch(editProfile(tokens.token, data))
         window.scrollTo(0, 0)
     }
     return (
         <><Helmets children={"My Profile"} />
-            {auth.token && <Navigate to='/' />}
+            {auth?.token && <Navigate to='/' />}
             <NavbarHome />
             <div className='bg-profile py-5 shadow'>
                 <Container>
                     <Form onSubmit={(e) => onEditProfile(e)}>
                         <Card>
                             {
-                                tokens.errorMsg &&
+                                tokens?.errorMsg &&
                                 <div className="alert alert-warning fade show" role="alert">
                                     <strong>{tokens.errorMsg}</strong>
                                 </div>
                             }
                             {
-                                tokens.errMsg &&
+                                tokens?.errMsg &&
                                 <div className="alert alert-warning fade show" role="alert">
                                     <strong>{tokens.errMsg}</strong>
                                 </div>
@@ -108,6 +111,13 @@ export const Profile = () => {
                                     <Card.Text as="h5" className='text-center'>
                                         {auth.email}
                                     </Card.Text>
+                                    {
+                                        auth?.is_verified === 1 &&
+                                        <div className="d-flex justify-content-center alert alert-success fade show" role="alert">
+                                            <strong>Verified Account  <BiCheckCircle size={25} />
+                                            </strong>
+                                        </div>
+                                    }
                                     <Button block variant='pallet-2 radius' onClick={(e) => uploadFile(e)}> Choose Photo </Button>
                                     <input type="file"
                                         ref={hiddenFileInput}
@@ -127,6 +137,14 @@ export const Profile = () => {
                                 </Col>
                                 <Col xl={9}>
                                     <Container>
+                                        {
+                                            auth?.is_verified === 0 &&
+                                            <div className="d-flex justify-content-center alert alert-warning fade show" role="alert">
+                                                <strong>Please Verify Your Account
+                                                    <Button block variant='pallet-2 radius' onClick={goVerify}> Verify Acount </Button>
+                                                </strong>
+                                            </div>
+                                        }
                                         <Card className='position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom border-pallet-2'>
                                             <Row className='mx-2 my-2'>
                                                 <Card.Text as="h3" className=' my-3'>

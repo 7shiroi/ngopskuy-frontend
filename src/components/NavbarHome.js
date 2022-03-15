@@ -44,73 +44,73 @@ export const NavbarHome = () => {
 					<ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 						{(tokens === null) &&
 							<li className="nav-item my-auto mx-auto ">
-								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' aria-currrent='page' to='/'>Homes</Link>
+								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' to='/'>Homes</Link>
 							</li>
 						}
 						{(auth.userData.id_role === 3) &&
 							<li className="nav-item my-auto mx-auto ">
-								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' aria-currrent='page' to='/'>Homes</Link>
+								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' to='/'>Homes</Link>
 							</li>
 						}
 						{(auth.userData.id_role === 1) &&
 							<li className="nav-item my-auto mx-auto ">
-								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' aria-currrent='page' to='/dashboard'>Home</Link>
+								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' to='/dashboard'>Home</Link>
 							</li>
 						}
 						{(auth.userData.id_role === 2) &&
 							<li className="nav-item my-auto mx-auto ">
-								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' aria-currrent='page' to='/dashboard'>Home</Link>
+								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' to='/dashboard'>Home</Link>
 							</li>
 						}
 						{tokens === null &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' aria-currrent='page' to='/product'>Product</Link>
+								<Link className='nav-link rb fs-5' to='/product-customer'>Product</Link>
 							</li>
 						}
 						{auth.userData.id_role === 3 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' aria-currrent='page' to='/product'>Product</Link>
+								<Link className='nav-link rb fs-5' to='/product-customer'>Product</Link>
 							</li>
 						}
 						{auth.userData.id_role === 1 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' aria-currrent='page' to='/product-admin'>Product Admin</Link>
+								<Link className='nav-link rb fs-5' to='/product-admin'>Product Admin</Link>
 							</li>
 						}
 						{auth.userData.id_role === 2 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' aria-currrent='page' to='/product-admin'>Product Admin</Link>
+								<Link className='nav-link rb fs-5' to='/product-admin'>Product Admin</Link>
 							</li>
 						}
 
 						{auth.userData.id_role === 3 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' aria-currrent='page' to='/my-cart'>My Cart</Link>
+								<Link className='nav-link rb fs-5' to='/checkout'>My Cart</Link>
 							</li>
 						}
 						{auth.userData.id_role === 2 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' aria-currrent='page' to='/cart'>Cart</Link>
+								<Link className='nav-link rb fs-5' to='/cart'>Cart</Link>
 							</li>
 						}
 						{auth.userData.id_role === 1 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' aria-currrent='page' to='/cart'>Cart</Link>
+								<Link className='nav-link rb fs-5' to='/cart'>Cart</Link>
 							</li>
 						}
 						{auth.userData.id_role === 3 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' aria-currrent='page' to='/my-history'>My History</Link>
+								<Link className='nav-link rb fs-5' to='/my-history'>My History</Link>
 							</li>
 						}
 						{auth.userData.id_role === 2 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' aria-currrent='page' to='/history'>History</Link>
+								<Link className='nav-link rb fs-5' to='/history'>History</Link>
 							</li>
 						}
 						{auth.userData.id_role === 1 &&
 							<li className="nav-item my-auto mx-auto">
-								<Link className='nav-link rb fs-5' aria-currrent='page' to='/history'>History</Link>
+								<Link className='nav-link rb fs-5' to='/history'>History</Link>
 							</li>
 						}
 						{auth.token &&

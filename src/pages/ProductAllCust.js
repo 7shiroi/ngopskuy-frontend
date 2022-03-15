@@ -1,39 +1,162 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import http from '../helpers/http'
 import Helmets from '../components/Helmets'
 import { Card, Container, Row, Col, Tabs, Tab } from 'react-bootstrap'
 import hazelnut from '../assets/images/hazelnut.png'
 import NavbarHome from '../components/NavbarHome'
 import Footer from '../components/Footer'
 import CardMenu from '../components/CardMenu'
-import { getProductAll } from '../redux/actions/productall'
 import { connect, useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
 import PromoCard from '../components/PromoCard'
+import { useNavigate } from 'react-router-dom'
+import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 
 
-const ProductAllCust = ({ getProductAll }) => {
+const ProductAllCust = () => {
+    const [product, setProduct] = useState([])
+    const [page, setPage] = useState({})
+    const [productCoffee, setProductCoffee] = useState([])
+    const [pageCoffee, setPageCoffee] = useState({})
+    const [productNonCoffee, setProductNonCoffee] = useState([])
+    const [pageNonCoffee, setPageNonCoffee] = useState({})
+    const [productFood, setProductFood] = useState([])
+    const [pageFood, setPageFood] = useState({})
+    const [errorMsg, setErrorMsg] = useState(null)
     const navigate = useNavigate()
-    const auth = useSelector(state => state.auth.userData)
-    const { productall } = useSelector(state => state)
-    const token = useSelector(state => state.auth)
-
-    const dispatch = useDispatch()
     useEffect(() => {
-        (getProductAll(token))
+        getProductSearch(`/product?limit=6`)
+        getProductCoffee('/product?idCategory=1&limit=6')
+        getProductNonCoffee('/product?idCategory=2&limit=6')
+        getProductFood('/product?idCategory=3&limit=6')
     }, [])
+
+    const getProductSearch = async (url) => {
+        const { data } = await http().get(url)
+        setProduct(data?.result)
+        setPage(data?.pageinfo)
+    }
+    const getProductCoffee = async (url) => {
+        const { data } = await http().get(url)
+        setProductCoffee(data?.result)
+        setPageCoffee(data?.pageinfo)
+    }
+    const getProductNonCoffee = async (url) => {
+        const { data } = await http().get(url)
+        setProductNonCoffee(data?.result)
+        setPageNonCoffee(data?.pageinfo)
+    }
+    const getProductFood = async (url) => {
+        const { data } = await http().get(url)
+        setProductFood(data?.result)
+        setPageFood(data?.pageinfo)
+    }
+    const getNextDataFood = async (url, replace = false) => {
+        try {
+            setErrorMsg(null)
+            const { data } = await http().get(url)
+            if (replace) {
+                if (!Array.isArray(data.result)) {
+                    data.result = [data.result]
+                }
+                setProductFood(data?.result)
+            } else {
+                setProductFood([
+                    ...data.result
+                ])
+            }
+            setPage(data.pageinfo)
+        } catch (e) {
+            if (e.message.includes('404')) {
+                setErrorMsg('Data not found!')
+                setProductFood([])
+                setPageFood({
+                    next: null
+                })
+            }
+        }
+    }
+    const getNextDataNonCoffee = async (url, replace = false) => {
+        try {
+            setErrorMsg(null)
+            const { data } = await http().get(url)
+            if (replace) {
+                if (!Array.isArray(data.result)) {
+                    data.result = [data.result]
+                }
+                setProductNonCoffee(data?.result)
+            } else {
+                setProductNonCoffee([
+                    ...data.result
+                ])
+            }
+            setPage(data.pageinfo)
+        } catch (e) {
+            if (e.message.includes('404')) {
+                setErrorMsg('Data not found!')
+                setProductNonCoffee([])
+                setPageNonCoffee({
+                    next: null
+                })
+            }
+        }
+    }
+    const getNextDataCoffee = async (url, replace = false) => {
+        try {
+            setErrorMsg(null)
+            const { data } = await http().get(url)
+            if (replace) {
+                if (!Array.isArray(data.result)) {
+                    data.result = [data.result]
+                }
+                setProductCoffee(data?.result)
+            } else {
+                setProductCoffee([
+                    ...data.result
+                ])
+            }
+            setPage(data.pageinfo)
+        } catch (e) {
+            if (e.message.includes('404')) {
+                setErrorMsg('Data not found!')
+                setProductCoffee([])
+                setPageCoffee({
+                    next: null
+                })
+            }
+        }
+    }
+    const getNextData = async (url, replace = false) => {
+        try {
+            setErrorMsg(null)
+            const { data } = await http().get(url)
+            if (replace) {
+                if (!Array.isArray(data.result)) {
+                    data.result = [data.result]
+                }
+                setProduct(data?.result)
+            } else {
+                setProduct([
+                    ...data.result
+                ])
+            }
+            setPage(data.pageinfo)
+        } catch (e) {
+            if (e.message.includes('404')) {
+                setErrorMsg('Data not found!')
+                setProduct([])
+                setPage({
+                    next: null
+                })
+            }
+        }
+    }
+
 
     const goToDetail = (id) => {
         navigate(`/product-customer/${id}`)
     }
 
-    const goToNewProduct = () => {
-        navigate('/new-product')
-    }
-
-    const goToNewPromo = () => {
-        navigate('/new-promo')
-    }
     return (
         <>
             <Helmets children={"Product Customer"} />
@@ -73,11 +196,16 @@ const ProductAllCust = ({ getProductAll }) => {
                                 transition={false}
                                 id="noanim-tab-example"
                                 className="mb-3 bg-white text-pallet-1"
-                                rounded
                             >
                                 <Tab eventKey="home" title="Favorite And Promo">
                                     <Row class className="">
-                                        {productall.product?.map((data, idx) => {
+                                        <Col sm={12} className=' d-flex justify-content-end'>
+                                            <div >
+                                                {page.prev !== null && <button onClick={() => getNextData(page.prev)} className='btn '><p><FaChevronLeft />View Prev </p></button>}
+                                                {page.next !== null && <button onClick={() => getNextData(page.next)} className='btn '><p>View Next <FaChevronRight /></p></button>}
+                                            </div>
+                                        </Col>
+                                        {product?.map((data, idx) => {
                                             return (
                                                 <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
                                                     <CardMenu key={idx} newClass={"mx-5 my-5"}
@@ -92,7 +220,13 @@ const ProductAllCust = ({ getProductAll }) => {
                                 </Tab>
                                 <Tab eventKey="coffee" title="Coffeee">
                                     <Row class className="">
-                                        {productall.product?.map((data, idx) => (
+                                        {/* <Col sm={12} className=' d-flex justify-content-end'>
+                                            <div >
+                                                {pageCoffee.prev !== null && <button onClick={() => getNextDataCoffee(pageCoffee.prev)} className='btn '><p><FaChevronLeft />View Prev </p></button>}
+                                                {pageCoffee.next !== null && <button onClick={() => getNextDataCoffee(pageCoffee.next)} className='btn '><p>View Next <FaChevronRight /></p></button>}
+                                            </div>
+                                        </Col> */}
+                                        {productCoffee?.map((data, idx) => (
                                             <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
@@ -105,7 +239,13 @@ const ProductAllCust = ({ getProductAll }) => {
                                 </Tab>
                                 <Tab eventKey="noncoffee" title="Non Coffee">
                                     <Row class className="">
-                                        {productall.product?.map((data, idx) => (
+                                        {/* <Col sm={12} className=' d-flex justify-content-end'>
+                                            <div >
+                                                {pageNonCoffee.prev !== null && <button onClick={() => getNextDataNonCoffee(pageNonCoffee.prev)} className='btn '><p><FaChevronLeft />View Prev </p></button>}
+                                                {pageNonCoffee.next !== null && <button onClick={() => getNextDataNonCoffee(pageNonCoffee.next)} className='btn '><p>View Next <FaChevronRight /></p></button>}
+                                            </div>
+                                        </Col> */}
+                                        {productNonCoffee?.map((data, idx) => (
                                             <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
@@ -118,7 +258,13 @@ const ProductAllCust = ({ getProductAll }) => {
                                 </Tab>
                                 <Tab eventKey="foods" title="Foods">
                                     <Row class className="">
-                                        {productall.product?.map((data, idx) => (
+                                        {/* <Col sm={12} className=' d-flex justify-content-end'>
+                                            <div >
+                                                {pageFood.prev !== null && <button onClick={() => getNextDataFood(pageFood.prev)} className='btn '><p><FaChevronLeft />View Prev </p></button>}
+                                                {pageFood.next !== null && <button onClick={() => getNextDataFood(pageFood.next)} className='btn '><p>View Next <FaChevronRight /></p></button>}
+                                            </div>
+                                        </Col> */}
+                                        {productFood?.map((data, idx) => (
                                             <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
@@ -131,7 +277,7 @@ const ProductAllCust = ({ getProductAll }) => {
                                 </Tab>
                                 <Tab eventKey="addon" title="Add-On">
                                     <Row class className="">
-                                        {productall.product?.map((data, idx) => (
+                                        {product?.map((data, idx) => (
                                             <Col key={String(data.id)} sm={12} md={4} onClick={() => goToDetail(data.id)} style={{ cursor: 'pointer' }}>
                                                 <CardMenu key={idx} newClass={"mx-5 my-5"}
                                                     cardName={data?.name}
@@ -157,6 +303,5 @@ const ProductAllCust = ({ getProductAll }) => {
 
 const mapStateToProps = state => ({ productall: state.productall })
 
-const mapDispatchToProps = { getProductAll }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductAllCust)
+export default connect(mapStateToProps)(ProductAllCust)

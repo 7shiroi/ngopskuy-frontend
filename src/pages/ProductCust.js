@@ -8,27 +8,26 @@ import NavbarHome from '../components/NavbarHome'
 import Footer from '../components/Footer'
 import { getProduct } from '../redux/actions/product'
 import { connect, useDispatch, useSelector } from 'react-redux'
-import { useParams, useNavigate, Navigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import NumberFormat from 'react-number-format'
 import SizeCard from '../components/SizeCard'
 import { increment, decrement } from '../redux/actions/buttons'
 import Helmets from '../components/Helmets'
+import { addCart, getCart } from '../redux/actions/cart'
 
-const ProductCust = ({getProduct}) => {
+const ProductCust = ({getProduct, getCart}) => {
     const {product} = useSelector(state => state)
+    const {cart} = useSelector(state => state)
+    const [message, setMessage] = useState()
     const [control,setControl] = useState(false)
     const [show,setShow] = useState(-1)
     const buttons = useSelector(state=>state.buttons)
+    const tokenA = window.localStorage.getItem('token')
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {id} = useParams()
     console.log({id})
-
-
-    useEffect(()=>{
-        console.log(buttons);
-    }, [buttons])
     
     const onIncrement = (e)=>{
         e.preventDefault()
@@ -42,28 +41,25 @@ const ProductCust = ({getProduct}) => {
 
     useEffect(()=>{
         getProduct(id)
-    },[])
-
-    useEffect(()=>{
-        if(control){
-           const token = window.localStorage.getItem("token")
-           dispatch(getProduct)
-           setControl(false)
-           setShow(false)
-           navigate('/product')
-        }
-    },[control])
-
-    useEffect(()=>{
-        console.log(product)
-      },[product])
+    },[getProduct, id])
 
     const goBack = () => {
       window.history.back()
     }
 
     const goPay = () => {
-        navigate('/payment')
+        getCart(tokenA)
+        navigate('/checkout')
+    }
+    const addNewCart = () => {
+        const data = {
+            id_product: product.product.id,
+            quantity: buttons.value
+        }
+        // console.log(addCart(data, tokenA))
+        dispatch(addCart(data, tokenA))
+        setMessage('Added to cart')
+        dispatch(getCart(tokenA))
     }
 
   return (
@@ -82,8 +78,9 @@ const ProductCust = ({getProduct}) => {
                         <p className="text-center text-4xl font-bold">{product.product?.name}</p>
                         <p className="text-center text-xl font-medium"><NumberFormat value={product.product?.price} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} prefix={'IDR '} ></NumberFormat></p>
                     </div>
+                    {message && <div className='alert alert-danger mb-5'>{message}</div>}
                     <div className="ml-20 mt-10 space-y-5">
-                        <Button block variant='pallet-2 radius'> Add to Cart </Button>
+                        <Button block variant='pallet-2 radius' onClick={addNewCart}> Add to Cart </Button>
                         <Button block variant='pallet-3 my-2 radius'> Ask a Staff </Button>
                     </div>
                 </Col>
@@ -166,8 +163,8 @@ const ProductCust = ({getProduct}) => {
   )
 }
 
-const mapStateToProps = state => ({product: state.product})
+const mapStateToProps = state => ({product: state.product, cart:state.cart})
 
-const mapDispatchToProps = {getProduct}
+const mapDispatchToProps = {getProduct, getCart}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCust)
