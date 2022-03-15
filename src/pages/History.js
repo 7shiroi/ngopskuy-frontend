@@ -3,6 +3,7 @@ import { connect, useSelector } from 'react-redux';
 import Layout from '../components/Layout';
 import ModalDelete from '../components/ModalDelete';
 import { getHistory, deleteHistory } from '../redux/actions/history';
+import { Navigate } from 'react-router-dom'
 
 export const History = ({ getHistory, deleteHistory }) => {
     const { history: hist } = useSelector(state => state)
@@ -12,6 +13,7 @@ export const History = ({ getHistory, deleteHistory }) => {
     }, [getHistory, token])
     return (
         <Layout>
+            {token == null && <Navigate to='/login' />}
             <div className='history-bg'>
                 <div className='container py-5'>
                     <div className='title-section text-center py-5 text-light'>
