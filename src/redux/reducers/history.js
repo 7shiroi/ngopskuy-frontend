@@ -1,6 +1,6 @@
 const initialState = {
     // token: null,
-    history: {},
+    history: [],
     isLoading: true,
     isError: false,
     message: '',
