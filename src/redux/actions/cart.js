@@ -27,10 +27,9 @@ export const addCart = (data, token) => {
     }
 }
 
-// export const deleteHistory = (id) => {
-//     let url = `${REACT_APP_BACKEND_URL}/transaction/delete/${id}`
-//     return{
-//         type: 'DELETE_HISTORY',
-//         payload: axios.patch(url)
-//     }
-// }
+export const deleteCart = (id, token) => {
+    return{
+        type: 'DELETE_CART',
+        payload: http(token).patch(`/customer-history/cart/delete/${id}`)
+    }
+}
