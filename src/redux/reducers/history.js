@@ -50,6 +50,11 @@ const history = (state = initialState, action) => {
             state.errorMsg = error
             return { ...state }
         }
+        case 'CLEAR_MESSAGE': {
+          state.errorMsg = ""
+          state.message = ""
+          return { ...state }
+        }
         default: {
             return { ...state }
         }

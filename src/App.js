@@ -43,7 +43,6 @@ export const App = () => {
         }
       })
     }
-
   }, [dispatch, auth.token])
   return (
     <BrowserRouter>

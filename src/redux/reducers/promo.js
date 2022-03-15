@@ -104,6 +104,11 @@ const promoState = {
         state.isError = true
         return {...state}
       }
+      case 'CLEAR_MESSAGE': {
+        state.errorMsg = ""
+        state.successMsg = ""
+        return { ...state }
+      }
       default: {
           return {...state}
       }
