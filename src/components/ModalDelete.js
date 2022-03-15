@@ -8,7 +8,7 @@ import loadingGif from '../assets/images/Ajux_loader.gif'
 export const ModalDelete = ({ id, img, product, price, status, deleteHistory, getHistory }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [onLoad, setOnload] = useState(false)
-    const {history: hist} = useSelector(state => state)
+    const { history: hist } = useSelector(state => state)
     const token = window.localStorage.getItem('token')
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -22,13 +22,13 @@ export const ModalDelete = ({ id, img, product, price, status, deleteHistory, ge
         setIsOpen(false)
     }
     const onDelete = () => {
-        try{
+        try {
             deleteHistory(id, token)
-        }catch(e){
+        } catch (e) {
             console.log(e)
-        }finally{
+        } finally {
             getHistory(token)
-            if(!hist.isLoading){
+            if (!hist.isLoading) {
                 console.log(hist.history)
                 navigate('/my-history')
             }
@@ -55,10 +55,10 @@ export const ModalDelete = ({ id, img, product, price, status, deleteHistory, ge
                 <div className="icon-trash bg-pallet-1 text-center me-3">
                     <div onClick={onDelete}>
                         <img src={trashIcon} alt='delete-icon'
-                            // onClick={ () => {
-                            //     dispatch(deleteHistory(id, token))
-                            //     navigate('/my-history')
-                            //     }}
+                        // onClick={ () => {
+                        //     dispatch(deleteHistory(id, token))
+                        //     navigate('/my-history')
+                        //     }}
                         />
                     </div>
                 </div>

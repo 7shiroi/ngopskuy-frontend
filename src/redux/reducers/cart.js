@@ -76,23 +76,24 @@ const cart = (state = initialState, action) => {
             return state
         }
         case 'DELETE_CART_FULFILLED': {
-            const {data} = action.payload
+            const { data } = action.payload
             state.isLoading = false
             state.isError = false
             state.message = data.message
             return state
         }
         case 'DELETE_CART_REJECTED': {
-          const {error} = action.payload.response.data
-          console.log(error)
-          state.isLoading = false
-          state.isError = true
-          state.errorMsg = error
-          return state
-        case 'CLEAR_MESSAGE': {
-          state.errorMsg = ""
-          state.message = ""
-          return { ...state }
+            const { error } = action.payload.response.data
+            console.log(error)
+            state.isLoading = false
+            state.isError = true
+            state.errorMsg = error
+            return state
+            // case 'CLEAR_MESSAGE': {
+            //   state.errorMsg = ""
+            //   state.message = ""
+            //   return { ...state }
+            //}
         }
         default: {
             return { ...state }

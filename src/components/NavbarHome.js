@@ -13,6 +13,8 @@ export const NavbarHome = () => {
 	const auth = useSelector(state => state.auth)
 	const tokens = useSelector(state => state.auth.token)
 	const dispatch = useDispatch()
+	console.log(tokens)
+	console.log(auth?.userData.id_role)
 	const navigate = useNavigate()
 	const goLogin = () => {
 		navigate(`/login`)
@@ -22,9 +24,10 @@ export const NavbarHome = () => {
 	}
 
 	useEffect(() => {
-    if(auth.token) {
-      dispatch(getProfile(auth.token))
-    }
+		const token = window.localStorage.getItem('token')
+		if (token) {
+			dispatch(getProfile(token))
+		}
 	}, [])
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-pallet-4">
@@ -48,17 +51,17 @@ export const NavbarHome = () => {
 								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' to='/'>Homes</Link>
 							</li>
 						}
-						{(auth.userData.id_role === 3) &&
+						{(auth?.userData.id_role === 3) &&
 							<li className="nav-item my-auto mx-auto ">
 								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' to='/'>Homes</Link>
 							</li>
 						}
-						{(auth.userData.id_role === 1) &&
+						{(auth?.userData.id_role === 1) &&
 							<li className="nav-item my-auto mx-auto ">
 								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' to='/dashboard'>Home</Link>
 							</li>
 						}
-						{(auth.userData.id_role === 2) &&
+						{(auth?.userData.id_role === 2) &&
 							<li className="nav-item my-auto mx-auto ">
 								<Link className='nav-link rb fw-bold text-pallet-1 fs-5' to='/dashboard'>Home</Link>
 							</li>
@@ -68,23 +71,23 @@ export const NavbarHome = () => {
 								<Link className='nav-link rb fs-5' to='/product-customer'>Product</Link>
 							</li>
 						}
-						{auth.userData.id_role === 3 &&
+						{auth?.userData.id_role === 3 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' to='/product-customer'>Product</Link>
 							</li>
 						}
-						{auth.userData.id_role === 1 &&
+						{auth?.userData.id_role === 1 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' to='/product-admin'>Product Admin</Link>
 							</li>
 						}
-						{auth.userData.id_role === 2 &&
+						{auth?.userData.id_role === 2 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' to='/product-admin'>Product Admin</Link>
 							</li>
 						}
 
-						{auth.userData.id_role === 3 &&
+						{auth?.userData.id_role === 3 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' to='/checkout'>My Cart</Link>
 							</li>
@@ -94,17 +97,17 @@ export const NavbarHome = () => {
 								<Link className='nav-link rb fs-5' to='/checkout'>My Cart</Link>
 							</li>
 						}
-						{auth.userData.id_role === 2 &&
+						{auth?.userData.id_role === 2 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' to='/cart'>Cart</Link>
 							</li>
 						}
-						{auth.userData.id_role === 1 &&
+						{auth?.userData.id_role === 1 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' to='/cart'>Cart</Link>
 							</li>
 						}
-						{auth.userData.id_role === 3 &&
+						{auth?.userData.id_role === 3 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' to='/my-history'>My History</Link>
 							</li>
@@ -114,17 +117,17 @@ export const NavbarHome = () => {
 								<Link className='nav-link rb fs-5' to='/my-history'>My History</Link>
 							</li>
 						}
-						{auth.userData.id_role === 2 &&
+						{auth?.userData.id_role === 2 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' to='/history'>History</Link>
 							</li>
 						}
-						{auth.userData.id_role === 1 &&
+						{auth?.userData.id_role === 1 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' to='/history'>History</Link>
 							</li>
 						}
-						{auth.token &&
+						{auth?.token &&
 							<li className="nav-item dropdown mx-auto">
 								<div className="nav-link dropdown-toggle img-profile-login" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
 									aria-expanded="false">
@@ -145,12 +148,12 @@ export const NavbarHome = () => {
 										<hr className="dropdown-divider" />
 									</li>
 
-									<li 
-                    onClick={() => { dispatch({ type: 'AUTH_LOGOUT' }); dispatch({type: 'CLEAR_MESSAGE'}); navigate('/') }} 
-                    style={{ cursor: 'pointer' }} 
-                    className="dropdown-item" 
-                    to="/login">Logout
-                  </li>
+									<li
+										onClick={() => { dispatch({ type: 'AUTH_LOGOUT' }); dispatch({ type: 'CLEAR_MESSAGE' }); navigate('/') }}
+										style={{ cursor: 'pointer' }}
+										className="dropdown-item"
+										to="/login">Logout
+									</li>
 
 								</ul>
 							</li>
