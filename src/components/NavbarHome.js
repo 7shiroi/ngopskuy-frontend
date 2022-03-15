@@ -88,6 +88,11 @@ export const NavbarHome = () => {
 								<Link className='nav-link rb fs-5' to='/checkout'>My Cart</Link>
 							</li>
 						}
+						{tokens === null &&
+							<li className="nav-item my-auto mx-auto">
+								<Link className='nav-link rb fs-5' to='/checkout'>My Cart</Link>
+							</li>
+						}
 						{auth.userData.id_role === 2 &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' to='/cart'>Cart</Link>
@@ -99,6 +104,11 @@ export const NavbarHome = () => {
 							</li>
 						}
 						{auth.userData.id_role === 3 &&
+							<li className="nav-item my-auto mx-auto">
+								<Link className='nav-link rb fs-5' to='/my-history'>My History</Link>
+							</li>
+						}
+						{tokens === null &&
 							<li className="nav-item my-auto mx-auto">
 								<Link className='nav-link rb fs-5' to='/my-history'>My History</Link>
 							</li>

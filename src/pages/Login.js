@@ -48,7 +48,7 @@ export const Login = () => {
 						<Form onSubmit={onLogin} className='py-5'>
 							<Input name="email" label="Email :" block placeholder="Email"></Input>
 							<Input name="password" type="password" label="Password :" block placeholder="Password"></Input>
-							<Link className='text-decoration-none text-pallet-1 px-5' to="/forgptpassword"> Forgot Password?</Link>
+							<Link className='text-decoration-none text-pallet-1 px-5' to="/forgotpassword"> Forgot Password?</Link>
 							<Button type="submit" block variant='pallet-1 radius my-5 py-3' > Login </Button>
 							<Button block variant='pallet-1 radius mb-5 py-3'><FcGoogle size={30} />  Login With Google</Button>
 						</Form>

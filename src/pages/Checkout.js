@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { connect, useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import ModalCheckout from '../components/ModalCheckout'
 import ModalCo from '../components/ModalCo'
@@ -16,6 +16,8 @@ export const Checkout = ({ getCart, checkoutCart }) => {
     console.log(carts)
     const [transactiontId, setTransactionId] = useState([])
     const token = window.localStorage.getItem('token')
+    const tokens = useSelector(state => state.auth)
+    console.log(tokens?.token)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     useEffect(() => {
@@ -35,6 +37,7 @@ export const Checkout = ({ getCart, checkoutCart }) => {
     }
     return (
         <Layout>
+            {tokens?.token == null && <Navigate to='/login' />}
             <div className='checkout-bg pb-5'>
                 <div className='container text-light'>
                     <h1 className='c-out fw-bold fs-1 py-5'>Checkout your item now!</h1>

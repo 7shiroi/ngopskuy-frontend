@@ -58,9 +58,9 @@ export const Signup = () => {
 							<Input name="first_name" label="First Name :" block placeholder="First Name"></Input>
 							<Input name="last_name" label="Last Name :" block placeholder="Last Name"></Input>
 							<Input name="email" label="Email :" block placeholder="Email"></Input>
-							<Input type="password" name="password" label="Confirm Password :" block placeholder="Password"></Input>
-							<Input type="password" name="confirm_password" label="Password :" block placeholder="Confirm Password"></Input>
-							<Link className='text-decoration-none text-pallet-1 px-5' to="/forgptpassword"> Forgot Password?</Link>
+							<Input type="password" name="password" label="Password :" block placeholder="Password"></Input>
+							<Input type="password" name="confirm_password" label="Confirm  Password :" block placeholder="Confirm Password"></Input>
+							<Link className='text-decoration-none text-pallet-1 px-5' to="/forgotpassword"> Forgot Password?</Link>
 							<Button type="submit" block variant='pallet-1 radius my-5 py-3' > Sign Up </Button>
 							<Button block variant='pallet-1 radius mb-5 py-3'><FcGoogle size={30} />  Sign Up With Google</Button>
 						</Form>
