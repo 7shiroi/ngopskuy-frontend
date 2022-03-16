@@ -14,6 +14,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../redux/actions/auth'
 import Helmets from '../components/Helmets'
 import NavbarSign from '../components/NavbarSign'
+import ModalLoading from '../components/ModalLoading'
+import ModalNotifSuccess from '../components/ModalNotifSuccess'
+import ModalNotifError from '../components/ModalNotifError'
 
 export const Login = () => {
 	const auth = useSelector(state => state.auth)
@@ -28,23 +31,15 @@ export const Login = () => {
 	return (
 		<> {auth.token && <Navigate to="/" />}
 			<Helmets children={"Login"} />
+			<ModalLoading isLoading={auth.isLoading} />
+			<ModalNotifSuccess message={auth.message} />
+			<ModalNotifError message={auth.errorMsg} />
+			<ModalNotifError message={auth.errMsg} />
 			<div className='container-fluid'>
 				<div className='row position-relative'>
 					<div className='col-6 background-login'></div>
 					<div className='col-6 border-top border-bottom border-pallet-1 bg-pallet-4'>
 						<NavbarSign />
-						{
-							auth.errorMsg &&
-							<div className="alert alert-warning fade show" role="alert">
-								<strong>{auth.errorMsg}</strong>
-							</div>
-						}
-						{
-							auth.errMsg &&
-							<div className="alert alert-warning fade show" role="alert">
-								<strong>{auth.errMsg}</strong>
-							</div>
-						}
 						<Form onSubmit={onLogin} className='py-5'>
 							<Input name="email" label="Email :" block placeholder="Email"></Input>
 							<Input name="password" type="password" label="Password :" block placeholder="Password"></Input>
