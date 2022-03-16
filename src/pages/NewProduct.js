@@ -14,11 +14,13 @@ import { addProduct } from '../redux/actions/product'
 import { getSize } from '../redux/actions/size'
 import http from '../helpers/http'
 import { Navigate } from 'react-router-dom'
+import Modals from '../components/ModalsNewProduct'
 
-const NewProduct = () => {
+const NewProduct = () => {  
   const hiddenFileInput = useRef(null)
   const category = useSelector(state => state.category)
   const size = useSelector(state => state.size)
+  const {product} = useSelector(state => state)
   const auth = useSelector(state => state.auth)
   const [data, setData] = useState({})
   const [homeDelivery, setHomeDelivery] = useState({ id: 7, checked: false })
@@ -29,6 +31,7 @@ const NewProduct = () => {
   const [stock, setStock] = useState([])
   const dispatch = useDispatch()
   const [sizeValue, setSizeValue] = useState([])
+  const [modalShow, setModalShow] = React.useState(false);
 
   useEffect(() => {
     dispatch(getCategory())
@@ -134,12 +137,13 @@ const NewProduct = () => {
     inputData.delivery_hour_end = e.target.elements['delivery_hour_end'].value
     inputData.id_category = e.target.elements['category'].value
     inputData.image = data.image
-    // dispatch(addProduct(auth.token, inputData))
-    const formData = new FormData()
-    for (const key in inputData) {
-      formData.append(key, inputData[key]);
-    }
-    const addProduct = await http(auth.token, true).post('/product', formData) //add product data
+    dispatch(addProduct(auth.token, inputData))    
+    window.scrollTo(0, 0)
+    // const formData = new FormData()
+    // for (const key in inputData) {
+    //   formData.append(key, inputData[key]);
+    // }
+    // const addProduct = await http(auth.token, true).post('/product', formData) //add product data
 
     if (addProduct.status === 200) {
       const insertedProduct = addProduct.data.result
@@ -178,15 +182,21 @@ const NewProduct = () => {
     <>
       {auth?.userData.id_role === 3 && <Navigate to='/' />}
       {auth.token == null && <Navigate to='/' />}
-      <header>
-        Header
-      </header>
+      <NavbarHome/>
       <div className='bg-product bg-gray-100 h-full'>
         <div style={{ fontSize: "20px", fontFamily: "Rubik" }} className="text-justify p-auto px-5 mx-5 py-5 nav-text">
           <span >Favorite & Promo {""}</span><span className="text-yellow-800"> {">"} Cold Brew</span>
         </div>
         <Container>
           <form onSubmit={(e) => addProductData(e)}>
+          {product.errorMsg &&
+              <div className="alert alert-warning fade show" role="alert" aria-label="Close">
+                <strong>{product.errorMsg}</strong>
+              </div>
+            }           
+            {!product.errorMsg &&
+              <Modals show={modalShow} onHide={() => setModalShow(false)} />
+            } 
             <Row className='py-3'>
               <Col xl={6} className="px-5 d-flex flex-column justify-content-center">
 
@@ -282,7 +292,8 @@ const NewProduct = () => {
                       </Button>
                     </Col>
                     <Col xl={12} className="ml-20 mt-10 space-y-5">
-                      <Button type='submit' block variant='pallet-2 my-4 radius save-1'> Save Product </Button>
+                      <Button onClick={() => setModalShow(true)} type='submit' block variant='pallet-2 my-4 radius save-1'> Save Product </Button>
+                      
                       <Button block variant='pallet-3 my-2 radius save-1'> Cancel </Button>
                     </Col>
                   </Row>

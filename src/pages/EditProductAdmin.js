@@ -148,7 +148,6 @@ const EditProductAdmin = () => {
                   </Row>
                   <div className='text-center'>
                     <Button onClick={() => setModalShow(true)} type="submit" block variant='pallet-1 radius my-5 py-3'>Save change</Button>
-
                   </div>
                 </Container>
               </Col>

@@ -7,15 +7,23 @@ import InputUnderline from '../components/InputUnderline'
 import NavbarHome from '../components/NavbarHome'
 import Footer from '../components/Footer'
 import { connect, useDispatch, useSelector } from 'react-redux'
-// import { useParams, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 // import NumberFormat from 'react-number-format'
 import SizeCard from '../components/SizeCard'
 import EmptyInputImage from "../assets/images/empty-input-image.png"
 import { addPromo } from '../redux/actions/promo'
 import Input from '../components/Input'
+import { Navigate } from 'react-router-dom'
+import Modals from '../components/ModalsNewPromo'
+import http from '../helpers/http'
+import { getSize } from '../redux/actions/size'
+import Helmets from '../components/Helmets'
 
 const NewPromo = () => {
   const auth = useSelector(state => state.auth)
+  const size = useSelector(state => state.size)
+  const promo  = useSelector(state => state.promo)
+  const tokens = useSelector(state => state.auth)
   const hiddenFileInput = useRef(null)
   const [hourStart, setHourStart] = useState([])
   const [hourEnd, setHourEnd] = useState([])
@@ -25,8 +33,12 @@ const NewPromo = () => {
   const [takeAway, setTakeAway] = useState(false)
   const [stock, setStock] = useState([])
   const dispatch = useDispatch()
+  const [sizeValue, setSizeValue] = useState([]) 
+  const navigate = useNavigate() 
+  const [modalShow, setModalShow] = React.useState(false);
 
   useEffect(() => {
+    dispatch(getSize())
     setHourEnd([
       '2022-03-21',
       '2022-03-22',
@@ -44,7 +56,25 @@ const NewPromo = () => {
       '2022-03-20',
     ])
     setStock([10,15,20,25,30,40,50,70,90,100])
+    
   }, [])
+
+  const Back = () => {
+    navigate(`/product-admin`)
+  }
+
+  const handleSizeValueChange = (e) => {
+    const elementValue = e.target.previousElementSibling.value
+    const tempArray = sizeValue
+    if (elementValue) {
+      if (sizeValue.indexOf(elementValue) >= 0) {
+        tempArray.splice(sizeValue.indexOf(elementValue), 1)
+        setSizeValue(tempArray)
+      } else {
+        setSizeValue([...sizeValue, elementValue])
+      }
+    }
+  }
 
   const fileInputHandler = (e) => {
     const reader = new FileReader();
@@ -69,9 +99,8 @@ const NewPromo = () => {
         hiddenFileInput.current.click()
       }
       
-      const addPromoData = (e) =>{
+      const addPromoData = async (e) =>{
         e.preventDefault()
-        const token = window.localStorage.getItem("token")
         const inputData = {}
         inputData.name = e.target.elements['name'].value
         inputData.normalPrice = e.target.elements['normalPrice'].value
@@ -81,10 +110,54 @@ const NewPromo = () => {
         inputData.dateEnd = e.target.elements['dateEnd'].value
         inputData.discountValue = e.target.elements['discountValue'].value
         inputData.image = data.image
-        dispatch(addPromo(token, inputData))
+        dispatch(addPromo(auth.token, inputData))
+        // const formData = new FormData()
+        // for (const key in inputData) {
+        //   formData.append(key, inputData[key]);
+        // }
+        // const addPromo = await http(auth.token, true).post('/promo', formData) //add promo data    
+        
+        console.log(addPromo)
+        if (addPromo.status === 200) {
+          const insertedPromo = addPromo.data.result 
+          console.log(insertedPromo.id)     
+
+          // check if sizeValue
+          if (sizeValue.length > 0) {
+            sizeValue.forEach(async (obj) => {
+              const params = new URLSearchParams()
+              params.append('idPromo', insertedPromo.id)
+              params.append('idSize', obj)
+              await http(auth.token).post('/promo_size', params) //add product_size data
+            })
+
+            if (homeDelivery) {
+              const params = new URLSearchParams()
+              params.append('id_promo', insertedPromo.id)
+              params.append('id_delivery_type', homeDelivery.id)
+              await http(auth.token).post('/promo_delivery_type', params) //add product_delivery_type data
+            }
+            if (dineIn) {
+              const params = new URLSearchParams()
+              params.append('id_promo', insertedPromo.id)
+              params.append('id_delivery_type', dineIn.id)
+              await http(auth.token).post('/promo_delivery_type', params) //add product_delivery_type data
+            }
+            if (takeAway) {
+              const params = new URLSearchParams()
+              params.append('id_promo', insertedPromo.id)
+              params.append('id_delivery_type', takeAway.id)
+              await http(auth.token).post('/promo_delivery_type', params) //add product_delivery_type data
+            }
+          }
+        }
+        window.scrollTo(0, 0)
       }
   return (
-    <>
+    <>  
+        <Helmets children={"New Promo"} />
+        {auth?.id_role === 3 && <Navigate to='/' />}
+        {tokens == null && <Navigate to='/' />}
         <NavbarHome/>
         <div className='bg-product bg-gray-100 h-full'>
         <div style={{fontSize:"20px", fontFamily:"Rubik"}} className="text-justify p-auto px-5 mx-5 py-5 nav-text">
@@ -92,6 +165,11 @@ const NewPromo = () => {
         </div>
         <Container>
             <Form onSubmit={(e) => addPromoData(e)}>
+            {promo.errorMsg &&
+              <div className="alert alert-warning fade show" role="alert" aria-label="Close">
+                <strong>{promo.errorMsg}</strong>
+              </div>
+            }
             <Row className='py-3'>
                 <Col xl={6} className="px-5 d-flex flex-column justify-content-center">
                     <div className="d-flex flex-column align-items-center">
@@ -108,7 +186,7 @@ const NewPromo = () => {
                     />
                     <p className='mt-3'>Enter the Discount : </p>
                     <Form.Select name='discountValue' aria-label="Default select example" className='mt-3 form-control radius'>
-                        <option className='d-none'>Select Stock</option>
+                        <option className='d-none'>Select Discount</option>
                         { stock.map((obj, idx) => {
                           return (
                             <option key={idx} value={obj}>{obj}</option>
@@ -138,31 +216,39 @@ const NewPromo = () => {
                                 <p className='mt-3 text-new-1'>Click size you want to use for this product</p>
                             </Col>
                             <Col xl={12} className="d-flex flex-row justify-content-md-between">
-					            <SizeCard radioName={"R"} value="R" />
-					            <SizeCard radioName={"L"} value="L" />
-					            <SizeCard radioName={"XL"} value="XL" />
-                                <SizeCard radioName={"250 gr"} value="250 gr" />
-                                <SizeCard radioName={"300 gr"} value="300 gr" />
-                                <SizeCard radioName={"500 gr"} value="500 gr" />
+                            {
+                              size.size.map((obj, idx) => {
+                                return (
+                                  <div key={idx} className='d-flex flex-column align-items-center' onClick={(e) => handleSizeValueChange(e)}>
+                                    <SizeCard className={sizeValue.includes(String(obj.id)) ? 'btn-pallet-1 text-pallet-4' : 'btn-outline-pallet-1'} radioName={obj.label} value={obj.id} />
+                                    <SizeCard className={sizeValue.includes(String(obj.id)) ? 'btn-pallet-1 text-pallet-4' : 'btn-outline-pallet-1'} radioName={obj.description} value={obj.id} />
+                                  </div>
+                                )
+                              })
+                            }
                             </Col>
                             <Col xl={12}>
                                 <h6 className='mt-4 text-new'>Input Delivery Method: </h6>
                                 <p className='mt-3 text-new-1'>Click methods you want to use for this product</p>
                             </Col>
                             <Col xl={12} className="d-flex flex-row justify-content-md-between py-3 ml-20 mt-10 space-y-5">
-                                <Button variant={homeDelivery ? 'pallet-2' : 'pallet-4'} onClick={(e) => {e.preventDefault(); setHomeDelivery(!homeDelivery)}}  >
-                                    Home Delivery
-                                </Button>
-                                <Button variant={dineIn ? 'pallet-2 mx-5' : 'pallet-4 mx-5'} onClick={(e) => {e.preventDefault(); setDineIn(!dineIn)}} >
-                                    Dine in
-                                </Button>
-                                <Button variant={takeAway ? 'pallet-2' : 'pallet-4'} onClick={(e) => {e.preventDefault(); setTakeAway(!takeAway)}}>
-                                    Take Away
-                                </Button>
+                            <Button variant={homeDelivery.checked ? 'pallet-2' : 'pallet-4'} onClick={(e) => { e.preventDefault(); setHomeDelivery({ id: 7, checked: !homeDelivery.checked }) }} >
+                              Home Delivery
+                            </Button>
+                            <Button variant={dineIn.checked ? 'pallet-2 mx-5' : 'pallet-4 mx-5'} onClick={(e) => { e.preventDefault(); setDineIn({ id: 9, checked: !dineIn.checked }) }} >
+                              Dine in
+                            </Button>
+                            <Button variant={takeAway.checked ? 'pallet-2' : 'pallet-4'} onClick={(e) => { e.preventDefault(); setTakeAway({ id: 8, checked: !takeAway.checked }) }}>
+                              Take Away
+                            </Button>
                             </Col>
                             <Col xl={12} className="ml-20 mt-5 space-y-5">
-                                <Button type='submit' block variant='pallet-2 my-4 radius save-1'> Save Promo </Button>
-                                <Button block variant='pallet-3 my-2 radius save-1'> Cancel </Button>
+                                <Button onClick={() => setModalShow(true)} type='submit' block variant='pallet-2 my-4 radius save-1'> Save Promo </Button>
+                                {
+                                  !promo.errorMsg &&
+                                    <Modals show={modalShow} onHide={() => setModalShow(false)} />
+                                }
+                                <Button onClick={Back} block variant='pallet-3 my-2 radius save-1'> Cancel </Button>
                             </Col>
                         </Row>
                     </Container>

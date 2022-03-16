@@ -7,7 +7,7 @@ const promoState = {
     isError: false,
     errorMsg : '',
     successMsg: '',
-    
+    errMsg: ''
   }
   
   const promo = (state=promoState, action)=>{
@@ -89,19 +89,26 @@ const promoState = {
       case 'POST_PROMO_PENDING': {
         state.isLoading = true
         state.isError = false
+        state.message = ''
         return {...state}
       }
       case 'POST_PROMO_FULFILLED': {
         const {data} = action.payload
         console.log(data)
-        state.promo = data
+        state.promo = data.result
         state.pageInfo = data.info
-        state.isLoading = false
+        state.isLoading = false    
+        state.isError = false    
+        state.errorMsg = ""
+        state.message = data.message
         return {...state}
       }
       case 'POST_PROMO_REJECTED': {
+        const { data } = action.payload.response
         state.isLoading = false
         state.isError = true
+        state.errorMsg = data.error
+        state.errMsg = data.message
         return {...state}
       }
       default: {

@@ -20,7 +20,7 @@ export const addProduct = (token, data) => {
     inputData.append(key, data[key]);
   }
   return {
-    type: 'ADD_PRODUCT',
+    type: 'POST_PRODUCT',
     payload: http(token, true).post('/product', inputData)
   }
 }

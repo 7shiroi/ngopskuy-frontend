@@ -75,19 +75,26 @@ const productState = {
       case 'POST_PRODUCT_PENDING': {
         state.isLoading = true
         state.isError = false
+        state.message = ''
         return {...state}
       }
       case 'POST_PRODUCT_FULFILLED': {
         const {data} = action.payload
-        console.log(data)
-        state.product = data
+        console.log(data)        
+        state.errorMsg = ""
+        state.product = data.result
         state.pageInfo = data.info
         state.isLoading = false
+        state.isError = false
+        state.message = data.message
         return {...state}
       }
       case 'POST_PRODUCT_REJECTED': {
+        const { data } = action.payload.response
         state.isLoading = false
-        state.isError = true
+        state.error = true
+        state.errorMsg = data.error
+        state.errMsg = data.message
         return {...state}
       }
       default: {
