@@ -1,6 +1,33 @@
-# Getting Started with Create React App
+# NGOPSKUY COFFEE SHOP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![image](https://user-images.githubusercontent.com/97431455/158500220-8cf0fc11-9110-4aa1-82af-e7dee169167d.png)
+
+Aplikasi ini adalah FrontEnd aplikasi Cafe Coffee online dimana para penggunanya bisa memesan kopi melalui aplikasi ini dimanapun mereka berada (dine in, delivery , dll )
+untuk BackEnd nya bisa ke (https://github.com/7shiroi/ngopskuy-backend)
+
+Aplikasi ini menggunakan Teknologi dari React JS dengan menggunakan depedencies yang tertera dibawah ini :
+
+    "axios": "^0.26.1",
+    "bootstrap": "^5.1.3",
+    "eslint-config-airbnb": "^19.0.4",
+    "node-sass": "^7.0.1",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.2.0",
+    "react-currency-format": "^1.1.0",
+    "react-dom": "^17.0.2",
+    "react-elastic-carousel": "^0.11.5",
+    "react-fontawesome": "^1.7.1",
+    "react-helmet": "^6.1.0",
+    "react-icons": "^4.3.1",
+    "react-loading-skeleton": "^3.0.3",
+    "react-number-format": "^4.9.1",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
+    "react-top-loading-bar": "^2.1.0",
+    "redux": "^4.1.2",
+    "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^6.1.2",
 
 ## Available Scripts
 
