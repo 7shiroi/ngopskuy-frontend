@@ -25,7 +25,7 @@ export const ModalDelete = ({ id, img, product, price, status, userName, variant
         deleteHistory(id, token)
         setTimeout(()=>{
             getHistory(token)
-        }, 1000)
+        }, 200)
     }
     return (
         <div className={`block position-relative radius ${variant}`} style={{ height: '100%' }}>
