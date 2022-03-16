@@ -10,6 +10,9 @@ import InputUnderline from "../components/InputUnderline"
 import { editPassword, getProfile } from '../redux/actions/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import ModalLoading from '../components/ModalLoading'
+import ModalNotifSuccess from '../components/ModalNotifSuccess'
+import ModalNotifError from '../components/ModalNotifError'
 
 export const EditPassword = () => {
     const navigate = useNavigate()
@@ -22,6 +25,7 @@ export const EditPassword = () => {
             const token = window.localStorage.getItem('token')
             if (token) {
                 dispatch(getProfile(token))
+                dispatch({ type: 'CLEAR_MESSAGE' });
             } else {
                 window.alert('Please login first')
                 navigate('/login')
@@ -38,33 +42,19 @@ export const EditPassword = () => {
         window.scrollTo(0, 0)
     }
     const goCancel = () => {
-        window.history.back()
+        navigate('/profile')
     }
     return (
         <><Helmets children={"Edit Password"} />
+            <ModalLoading isLoading={token.isLoading} />
+            <ModalNotifSuccess message={token.message} />
+            <ModalNotifError message={token.errorMsg} />
+            <ModalNotifError message={token.errMsg} />
             <NavbarHome />
             <div className='bg-profile py-5 shadow'>
                 <Container>
-                    <Form onSubmit={(e) => onEditPassword(e)}>
+                    <Form onSubmit={onEditPassword}>
                         <Card>
-                            {
-                                token.errorMsg &&
-                                <div className="alert alert-warning fade show" role="alert">
-                                    <strong>{token.errorMsg}</strong>
-                                </div>
-                            }
-                            {
-                                token.errMsg &&
-                                <div className="alert alert-warning fade show" role="alert">
-                                    <strong>{token.errMsg}</strong>
-                                </div>
-                            }
-                            {
-                                token.successMsg &&
-                                <div className="alert alert-success fade show" role="alert">
-                                    <strong>{token.successMsg}</strong>
-                                </div>
-                            }
                             <Row className='py-5'>
                                 <Col xl={3} className="px-5 d-flex flex-column justify-content-center">
                                     <Image src={auth.image ? auth.image : photo} roundedCircle ></Image>

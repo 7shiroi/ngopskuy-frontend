@@ -11,6 +11,9 @@ import InputUnderline from '../components/InputUnderline'
 import { requestResetPassword } from '../redux/actions/auth'
 import { Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import ModalLoading from '../components/ModalLoading'
+import ModalNotifSuccess from '../components/ModalNotifSuccess'
+import ModalNotifError from '../components/ModalNotifError'
 
 export const ForgotPassword = () => {
 	const auth = useSelector(state => state.auth)
@@ -32,6 +35,10 @@ export const ForgotPassword = () => {
 	return (
 		<>{auth.token && <Navigate to='/' />}
 			<Helmets children={"Forgot Password"} />
+			<ModalLoading isLoading={auth.isLoading} />
+			<ModalNotifSuccess message={auth.message} />
+			<ModalNotifError message={auth.errorMsg} />
+			<ModalNotifError message={auth.errMsg} />
 			<Card className="bg-dark text-white">
 				<Card.Img src={Background} alt="Backround Footer" className='bg-footer d-none d-md-block' />
 				<Card.ImgOverlay className='d-flex flex-column container'>
@@ -47,24 +54,6 @@ export const ForgotPassword = () => {
 							</Card.Text>
 
 						</div>
-						{
-							auth.errorMsg &&
-							<div className="alert alert-warning fade show" role="alert">
-								<strong>{auth.errorMsg}</strong>
-							</div>
-						}
-						{
-							auth.errMsg &&
-							<div className="alert alert-warning fade show" role="alert">
-								<strong>{auth.errMsg}</strong>
-							</div>
-						}
-						{
-							auth.successMsg &&
-							<div className="alert alert-success fade show" role="alert">
-								<strong>{auth.successMsg}</strong>
-							</div>
-						}
 						<form onSubmit={(e) => onRequestOTP(e)}>
 							<div className='col-12 d-none d-md-block'>
 								<Input name="email" defaultValue={auth.email} version="background-transparent py-4 bg-pallet-4 outline-0 border-0"

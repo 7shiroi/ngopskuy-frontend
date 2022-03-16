@@ -58,6 +58,7 @@ export const Profile = () => {
             const token = window.localStorage.getItem('token')
             if (token) {
                 dispatch(getProfile(token))
+                dispatch({ type: 'CLEAR_MESSAGE' });
             } else {
                 window.alert('Please login first')
                 navigate('/login')

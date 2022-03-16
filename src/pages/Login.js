@@ -32,7 +32,7 @@ export const Login = () => {
 		<> {auth.token && <Navigate to="/" />}
 			<Helmets children={"Login"} />
 			<ModalLoading isLoading={auth.isLoading} />
-			<ModalNotifSuccess message={auth.message} />
+			<ModalNotifSuccess message={auth.successMsg} />
 			<ModalNotifError message={auth.errorMsg} />
 			<ModalNotifError message={auth.errMsg} />
 			<div className='container-fluid'>
