@@ -14,6 +14,9 @@ import Col from 'react-bootstrap/Col'
 import { useDispatch, useSelector } from 'react-redux'
 import { userSignUp } from '../redux/actions/user'
 import Helmets from '../components/Helmets'
+import ModalLoading from '../components/ModalLoading'
+import ModalNotifSuccess from '../components/ModalNotifSuccess'
+import ModalNotifError from '../components/ModalNotifError'
 
 export const Signup = () => {
 	const dispatch = useDispatch()
@@ -31,29 +34,15 @@ export const Signup = () => {
 	}
 	return (
 		<><Helmets children={"Sign Up"} />
+			<ModalLoading isLoading={user.isLoading} />
+			<ModalNotifSuccess message={user.successMsg} />
+			<ModalNotifError message={user.errorMsg[0]} />
+			<ModalNotifError message={user.errMsg} />
 			<div className='container-fluid'>
 				<div className='row position-relative '>
 					<div className='col-6 background-login d-none d-md-block '></div>
 					<div className='col-12 col-md-6 bg-pallet-4 border-top border-bottom border-pallet-1'>
 						<NavbarLog />
-						{
-							user.errorMsg &&
-							<div className="alert alert-warning fade show" role="alert">
-								<strong>{user.errorMsg[0]}</strong>
-							</div>
-						}
-						{
-							user.errMsg &&
-							<div className="alert alert-warning fade show" role="alert">
-								<strong>{user.errMsg}</strong>
-							</div>
-						}
-						{
-							user.successMsg &&
-							<div className="alert alert-success fade show" role="alert">
-								<strong>{user.successMsg}</strong>
-							</div>
-						}
 						<Form onSubmit={onSignUp} className='py-5'>
 							<Input name="first_name" label="First Name :" block placeholder="First Name"></Input>
 							<Input name="last_name" label="Last Name :" block placeholder="Last Name"></Input>

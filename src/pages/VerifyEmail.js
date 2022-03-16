@@ -12,6 +12,9 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import NavbarHome from "../components/NavbarHome"
 import Helmets from '../components/Helmets'
+import ModalLoading from '../components/ModalLoading'
+import ModalNotifSuccess from '../components/ModalNotifSuccess'
+import ModalNotifError from '../components/ModalNotifError'
 
 export const VerifyEmail = () => {
     const auth = useSelector(state => state.auth)
@@ -22,6 +25,7 @@ export const VerifyEmail = () => {
         if (!auth.token) {
             const token = window.localStorage.getItem('token')
             if (token) {
+                dispatch({ type: 'CLEAR_MESSAGE' });
             } else {
                 window.alert('Please login first')
                 navigate('/login')
@@ -39,6 +43,10 @@ export const VerifyEmail = () => {
     return (
         <>
             <Helmets children={"Verify Email"} /><NavbarHome />
+            <ModalLoading isLoading={auth.isLoading} />
+            <ModalNotifSuccess message={auth.message} />
+            <ModalNotifError message={auth.errorMsg} />
+            <ModalNotifError message={auth.errMsg} />
             <Card className="bg-dark text-white">
                 <Card.Img src={Background} alt="Backround Footer" className='bg-footer d-none d-md-block' />
                 <Card.ImgOverlay className='d-flex flex-column container'>
@@ -54,24 +62,6 @@ export const VerifyEmail = () => {
                             </Card.Text>
 
                         </div>
-                        {
-                            auth.errorMsg &&
-                            <div className="alert alert-warning fade show" role="alert">
-                                <strong>{auth.errorMsg[0]}</strong>
-                            </div>
-                        }
-                        {
-                            auth.errMsg &&
-                            <div className="alert alert-warning fade show" role="alert">
-                                <strong>{auth.errMsg}</strong>
-                            </div>
-                        }
-                        {
-                            auth.successMsg &&
-                            <div className="alert alert-success fade show" role="alert">
-                                <strong>{auth.successMsg}</strong>
-                            </div>
-                        }
                         <form onSubmit={(e) => onVerify(e)}>
                             <div className='col-12 d-md-none'>
                                 <InputUnderline version="input-underline background-transparent py-4 "
